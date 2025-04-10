@@ -1,0 +1,13 @@
+<div>
+    <button id="check"><mat-icon>check_box_outline_blank</mat-icon></button>    
+    <button id="copy"><mat-icon class="icon-warn">content_copy</mat-icon></button>
+    <button id="edit" (click)="toggleEditMode()">Edit</button>
+    <div *ngIf="isEditMode">
+        <input id="inputLote" type="text" [(ngModel)]="inputLote">
+        <input id="inputDataValidade" type="text" [(ngModel)]="inputDataValidade">
+    </div>
+    <div *ngIf="!isEditMode">
+        <div>{{ inputLote }}</div>
+        <div>{{ inputDataValidade }}</div>
+    </div>
+</div>
