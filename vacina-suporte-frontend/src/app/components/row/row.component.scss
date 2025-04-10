@@ -1,0 +1,30 @@
+button {
+    border-radius: 10px;
+}
+
+input {
+    width: 25%;
+}
+
+.copyable {
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s;
+
+    &:hover {
+        color: #007bff;
+    }
+}
+  
+.copied-message {
+    margin-top: 8px;
+    color: green;
+    font-size: 0.9rem;
+    animation: fadeOut 2s forwards;
+}
+  
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}

@@ -7,26 +7,32 @@ import { Component, Input } from '@angular/core';
   styleUrl: './row.component.scss'
 })
 export class RowComponent {
-  @Input() data: string[] = [];  
-  isEditMode: boolean = false;
-  inputLote: string = '';
-  inputDataValidade: string = '';
+  iconCheck: string = 'check_box_outline_blank';
+  isEditMode: boolean = true;
+  txtNomeVacina: string = '';
+  txtLote: string = '';
+  txtDataValidade: string = '';
 
-  updateCell(index: number, newValue: string) {
-    if (!this.isEditMode) {
-      if (index >= 0 && index < this.data.length) {
-        this.data[index] = newValue;
-      }
-    }
-  }
+  copiedMessage: string = '';
 
   toggleEditMode() {
-    console.log( "edi")
     this.isEditMode = !this.isEditMode;
-    if (!this.isEditMode && this.data) {
-      if(this.data.length > 3) this.data[3] = this.inputLote;
-      if(this.data.length > 4) this.data[4] = this.inputDataValidade;
-    }
+  }
+
+  toggleCheck() {
+    this.iconCheck =  'check_box' === this.iconCheck  ? 'check_box_outline_blank' : 'check_box';
+
+  }
+
+  copyToClipboard(text: string) {
+    navigator.clipboard.writeText(text).then(() => {
+      this.copiedMessage = `Copiado: ${text}`;
+      setTimeout(() => {
+        this.copiedMessage = '';
+      }, 2000); // Esconde após 2 segundos
+    }).catch(err => {
+      console.error('Erro ao copiar!', err);
+    });
   }
 
 }
