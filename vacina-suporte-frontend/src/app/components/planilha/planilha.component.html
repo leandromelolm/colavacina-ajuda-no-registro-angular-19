@@ -1,2 +1,29 @@
-<p>planilha works!</p>
-<app-row ngSkipHydration></app-row>
+<div class="container">
+    <button class="btn btn-primary" (click)="updateRows()">atualizar</button>
+    <button class="btn btn-secondary" (click)="clearAllChecks()">Limpar Checks</button>
+    <app-row  (dataChanged)="handleRowChange($event, 0)" ngSkipHydration></app-row>
+    
+    <p></p>
+    <div class="copied-message" *ngIf="copiedMessage">{{ copiedMessage }}</div>
+    <div *ngFor="let row of rows; let i = index">
+        <div class="d-flex">
+            <button (click)="toggleCheck(i)">
+                <mat-icon>{{ row.checked ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
+            </button>
+            <!-- <button id="copy"><mat-icon class="icon-warn">content_copy</mat-icon></button> -->
+            @if (isEditMode) {
+                <input type="text" [(ngModel)]="row.nomeVacina" placeholder="Nome da Vacina">
+                <input type="text" [(ngModel)]="row.lote" placeholder="Lote">
+                <input type="text" [(ngModel)]="row.validade" placeholder="Validade">
+            } @else {
+                <div class="div__text mx-1" (click)="copyToClipboard(row.nomeVacina)">{{ row.nomeVacina }}</div>
+                <div class="div__text me-1" (click)="copyToClipboard(row.lote)">{{ row.lote }}</div>
+                <div class="div__text" (click)="copyToClipboard(row.validade)">{{ row.validade }}</div>
+            }
+            <button id="edit" (click)="toggleEditMode()">
+                <mat-icon class="icon-warn">edit</mat-icon>
+            </button>
+            
+        </div>
+    </div>      
+</div>

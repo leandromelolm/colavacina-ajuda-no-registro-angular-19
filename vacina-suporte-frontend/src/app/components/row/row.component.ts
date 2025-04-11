@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { log } from 'console';
+
 
 @Component({
   selector: 'app-row',
@@ -7,16 +9,62 @@ import { Component, Input } from '@angular/core';
   styleUrl: './row.component.scss'
 })
 export class RowComponent {
+
+  @Input() index!: number;
+  @Output() dataChanged = new EventEmitter<any>();
+
+  @Input() rowData: any = {};
+  @Input() isEditMode: boolean = true;
+
   iconCheck: string = 'check_box_outline_blank';
-  isEditMode: boolean = true;
   txtNomeVacina: string = '';
   txtLote: string = '';
   txtDataValidade: string = '';
+  add: boolean = false;
 
   copiedMessage: string = '';
 
+  // ngOnInit() {
+  //   if (this.rowData) {
+  //     console.log(this.rowData)
+  //     this.txtNomeVacina = this.rowData.nomeVacina || '';
+  //     this.txtLote = this.rowData.lote || '';
+  //     this.txtDataValidade = this.rowData.validade || '';
+  //   }
+  // }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
+    if (changes['rowData'] && this.rowData) {
+      this.txtNomeVacina = this.rowData.nomeVacina || '';
+      this.txtLote = this.rowData.lote || '';
+      this.txtDataValidade = this.rowData.validade || '';
+    }
+  }
+
+  emitData() {
+    this.dataChanged.emit({
+      nomeVacina: this.txtNomeVacina,
+      lote: this.txtLote,
+      validade: this.txtDataValidade,
+      checked: false,
+      isEditMode: false
+    });
+
+  }
+
+  cleanInput() {
+    this.txtNomeVacina = '';
+    this.txtLote = '';
+    this.txtDataValidade = '';
+  }
+
   toggleEditMode() {
-    this.isEditMode = !this.isEditMode;
+    this.add = !this.add;
+    this.emitData();
+    this.cleanInput();
+    // this.isEditMode = !this.isEditMode;
+    // if (!this.isEditMode) { }
   }
 
   toggleCheck() {
@@ -29,7 +77,7 @@ export class RowComponent {
       this.copiedMessage = `Copiado: ${text}`;
       setTimeout(() => {
         this.copiedMessage = '';
-      }, 2000); // Esconde após 2 segundos
+      }, 2000);
     }).catch(err => {
       console.error('Erro ao copiar!', err);
     });

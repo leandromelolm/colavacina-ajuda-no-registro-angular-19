@@ -1,16 +1,20 @@
 <div class="d-flex">
-    <button id="check" (click)="toggleCheck()"><mat-icon>{{iconCheck}}</mat-icon></button>  
+    <!-- <button id="check" (click)="toggleCheck()"><mat-icon>{{iconCheck}}</mat-icon></button>  -->
     <!-- <button id="copy"><mat-icon class="icon-warn">content_copy</mat-icon></button> -->
     @if (isEditMode) {
         <input type="text" [(ngModel)]="txtNomeVacina" placeholder="Nome da Vacina">
         <input type="text" [(ngModel)]="txtLote" placeholder="Lote">
-        <input type="text" [(ngModel)]="txtDataValidade" placeholder="Data de Validade">
+        <input type="text" [(ngModel)]="txtDataValidade" placeholder="Validade">
     } @else {
-        <div class="me-1" (click)="copyToClipboard(txtNomeVacina)">{{ txtNomeVacina }}</div>
+        <div class="mx-1" (click)="copyToClipboard(txtNomeVacina)">{{ txtNomeVacina }}</div>
         <div class="me-1" (click)="copyToClipboard(txtLote)">{{ txtLote }}</div>
         <div (click)="copyToClipboard(txtDataValidade)">{{ txtDataValidade }}</div>
     }
-    <button id="edit" (click)="toggleEditMode()"><mat-icon class="icon-warn">edit</mat-icon></button>
+    <!-- <button id="edit" (click)="toggleEditMode()"><mat-icon class="icon-warn">edit</mat-icon></button> -->
+    <button id="edit" (click)="toggleEditMode()">
+        <!-- <mat-icon class="icon-warn">{{ add ? 'vaccines' : 'add' }}</mat-icon> -->
+        <mat-icon class="icon-warn">add</mat-icon>
+    </button>
     
 </div>
 
