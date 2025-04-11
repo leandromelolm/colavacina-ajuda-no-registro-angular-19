@@ -1,6 +1,15 @@
 <div class="container">
-    <button class="btn btn-primary" (click)="updateRows()">atualizar</button>
-    <button class="btn btn-secondary" (click)="clearAllChecks()">Limpar Checks</button>
+    <div class="my-1 btn_config">
+        <button class="btn btn-outline-primary" (click)="updateRows()">
+            <mat-icon>refresh</mat-icon>
+        </button>
+        <button class="btn btn-outline-danger  mx-1" (click)="clearAllChecks()">
+            <mat-icon>clear</mat-icon>
+        </button>
+        <button class="btn btn-outline-secondary" id="edit" (click)="toggleEditMode()">
+            <mat-icon>edit</mat-icon>
+        </button>
+    </div>
     <app-row  (dataChanged)="handleRowChange($event, 0)" ngSkipHydration></app-row>
     
     <p></p>
@@ -20,9 +29,9 @@
                 <div class="div__text me-1" (click)="copyToClipboard(row.lote)">{{ row.lote }}</div>
                 <div class="div__text" (click)="copyToClipboard(row.validade)">{{ row.validade }}</div>
             }
-            <button id="edit" (click)="toggleEditMode()">
+            <!-- <button id="edit" (click)="toggleEditMode()">
                 <mat-icon class="icon-warn">edit</mat-icon>
-            </button>
+            </button> -->
             
         </div>
     </div>      

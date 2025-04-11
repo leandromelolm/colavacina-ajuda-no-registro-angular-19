@@ -6,14 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
-import { IndexComponent } from './pages/index/index.component';
+import { HomeComponent } from './pages/home/homecomponent';
 import { PlanilhaComponent } from './components/planilha/planilha.component';
 import { RowComponent } from './components/row/row.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent,
+    HomeComponent,
     PlanilhaComponent,
     RowComponent
   ],

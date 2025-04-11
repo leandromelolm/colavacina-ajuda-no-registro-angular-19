@@ -2,6 +2,77 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
 
+
+
+## Deploy firebase
+
+
+```bash
+npm install firebase
+```
+
+```bash
+npm install -g firebase-tools
+```
+
+```bash
+firebase login
+```
+
+```bash
+firebase logout
+```
+
+```bash
+firebase init
+```
+selecionar as opções
+```bash
+App Hosting
+```
+copiar codigo para firebase.json
+```bash
+{
+    "hosting": {
+      "site": "colavacina",
+      "public": "dist/vacina-suporte-frontend/browser",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  }
+
+```
+executar build
+```bash
+ng build
+```
+fazer o deploy no firebase
+```bash
+firebase deploy --only hosting
+```
+
+```bash
+
+```
+
+```bash
+
+```
+
+```bash
+
+```
+
+
 ## Development server
 
 To start a local development server, run:
@@ -57,3 +128,4 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
