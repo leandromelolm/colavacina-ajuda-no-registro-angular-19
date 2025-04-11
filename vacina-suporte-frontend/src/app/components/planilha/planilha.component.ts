@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { log } from 'console';
 
 interface RowData {
   nomeVacina: string;
@@ -6,6 +7,7 @@ interface RowData {
   validade: string;
   checked: boolean;
   isEditMode: boolean;
+  opcaoSelecionada?: string;
 }
 
 @Component({
@@ -23,12 +25,26 @@ export class PlanilhaComponent {
   txtNomeVacina: string = '';
   txtLote: string = '';
   txtDataValidade: string = '';
+  txtId: string = '';
   isEditMode: boolean = false;
+
+  opcoes = [
+    { id: '1', nome: 'D E' },
+    { id: '2', nome: 'D D' },
+    { id: '2', nome: 'F D' },
+    { id: '2', nome: 'F E' },
+    { id: '3', nome: 'V E' },
+    { id: '4', nome: 'V D' },
+  ];
+
+  // opcaoSelecionada: string = 'E';
 
   copiedMessage: string = '';
 
   updateRows() {
     const saved = localStorage.getItem('planilhaData');
+    console.log(saved);
+    
     const rawRows = saved ? JSON.parse(saved) : [];
   
     // Garante que cada item tenha todas as propriedades esperadas
@@ -37,7 +53,8 @@ export class PlanilhaComponent {
       lote: row.lote || '',
       validade: row.validade || '',
       checked: row.checked || false,
-      isEditMode: false
+      isEditMode: false,
+      opcaoSelecionada: row.opcaoSelecionada || ''
     }));
   }
   
@@ -79,6 +96,23 @@ export class PlanilhaComponent {
   clearAllChecks() {
     this.rows.forEach(row => row.checked = false);
     localStorage.setItem('planilhaData', JSON.stringify(this.rows));
+    this.resetTodosSelects();
+  }
+
+  resetTodosSelects() {
+    this.rows.forEach(row => {
+      row.opcaoSelecionada = "";
+    });
+  }
+
+  async getList(id: string) {
+    const url = `https://script.google.com/macros/s/AKfycbxMjZhJ8AWQzprcHV81K3Zp8WLfrz35odWb4QnS4cZ4uK4PREo4bfER26s1xx3Epndm/exec?action=list&id=${id}`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+    localStorage.setItem('planilhaData', JSON.stringify(data.content.vacinas));
+    this.updateRows()
+    console.log('Resposta:', data.content);
   }
 
 }

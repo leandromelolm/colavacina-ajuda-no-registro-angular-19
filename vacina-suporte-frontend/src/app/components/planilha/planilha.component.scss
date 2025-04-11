@@ -51,3 +51,14 @@ input {
     align-content: center;
     min-width:  20%;
 }
+
+.div_download {
+    justify-content: center;
+    text-align: center;
+    box-sizing: content-box;
+    display: flex;
+}
+
+select{
+    border-radius: 20px;
+}

@@ -1,6 +1,12 @@
 <div class="container">
+    <div  class="my-1 div_download">
+        <input type="text" [(ngModel)]="txtId" placeholder="id">
+        <button class="btn btn-outline-primary" (click)="getList(txtId)">
+            <mat-icon>download</mat-icon>
+        </button>
+    </div>
     <div class="my-1 btn_config">
-        <button class="btn btn-outline-primary" (click)="updateRows()">
+        <button class="btn btn-outline-primary mx-1" (click)="updateRows()">
             <mat-icon>refresh</mat-icon>
         </button>
         <button class="btn btn-outline-danger  mx-1" (click)="clearAllChecks()">
@@ -25,9 +31,16 @@
                 <input type="text" [(ngModel)]="row.lote" placeholder="Lote">
                 <input type="text" [(ngModel)]="row.validade" placeholder="Validade">
             } @else {
-                <div class="div__text mx-1" (click)="copyToClipboard(row.nomeVacina)">{{ row.nomeVacina }}</div>
-                <div class="div__text me-1" (click)="copyToClipboard(row.lote)">{{ row.lote }}</div>
-                <div class="div__text" (click)="copyToClipboard(row.validade)">{{ row.validade }}</div>
+                <div class="div__text mx-1 text-body-emphasis" (click)="copyToClipboard(row.nomeVacina)">{{ row.nomeVacina }}</div>
+                <div class="div__text me-1 fw-medium" (click)="copyToClipboard(row.lote)">{{ row.lote }}</div>
+                <div class="div__text text-body-secondary" (click)="copyToClipboard(row.validade)">{{ row.validade }}</div>
+                <div>
+                    <select [(ngModel)]="row.opcaoSelecionada">
+                        <option *ngFor="let opcao of opcoes" [value]="opcao.id">
+                          {{ opcao.nome }}
+                        </option>
+                    </select>
+                </div>
             }
             <!-- <button id="edit" (click)="toggleEditMode()">
                 <mat-icon class="icon-warn">edit</mat-icon>
