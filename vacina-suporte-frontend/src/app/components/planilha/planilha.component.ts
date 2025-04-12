@@ -40,6 +40,7 @@ export class PlanilhaComponent {
   // opcaoSelecionada: string = 'E';
 
   copiedMessage: string = '';
+  toastMessage: string = '';
 
   updateRows() {
     const saved = localStorage.getItem('planilhaData');
@@ -113,6 +114,52 @@ export class PlanilhaComponent {
     localStorage.setItem('planilhaData', JSON.stringify(data.content.vacinas));
     this.updateRows()
     console.log('Resposta:', data.content);
+  }
+
+  async saveList() {
+
+    const lista = localStorage.getItem('planilhaData');
+    
+    if(this.txtId === '') {
+      this.messageToast('Preencha o campo id')
+      return 
+    }
+
+    const data = {
+      lista: lista,
+      id: this.txtId,
+      action: 'saveList'
+    }
+
+    this.send(data);
+  }
+
+  async send(data : any) {
+
+    const url = `https://script.google.com/macros/s/AKfycbxMjZhJ8AWQzprcHV81K3Zp8WLfrz35odWb4QnS4cZ4uK4PREo4bfER26s1xx3Epndm/exec`;
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data)
+      });
+      
+      const res = await response.json();
+      console.log(res);
+      if (res.success) {
+        this.messageToast(res.message)
+      } else {
+        this.messageToast(`Falha ao salvar. mensagem de erro: ${res.error}`);
+      }
+    } catch (error) {
+      this.messageToast(`Erro: ${error}`);
+    }
+  }
+
+  messageToast(textMessage: string) {
+    this.toastMessage = `${textMessage}`;
+      setTimeout(() => {
+        this.toastMessage = '';
+      }, 5000);
   }
 
 }

@@ -1,15 +1,18 @@
 <div class="container">
     <div  class="my-1 div_download">
-        <input type="text" [(ngModel)]="txtId" placeholder="id">
-        <button class="btn btn-outline-primary" (click)="getList(txtId)">
+        <input class="me-1" type="text" [(ngModel)]="txtId" placeholder="id">
+        <button class="btn btn-outline-primary me-1" (click)="getList(txtId)">
             <mat-icon>download</mat-icon>
+        </button>
+        <button class="btn btn-outline-primary me-1" (click)="saveList()">
+            <mat-icon>upload</mat-icon>
         </button>
     </div>
     <div class="my-1 btn_config">
-        <button class="btn btn-outline-primary mx-1" (click)="updateRows()">
+        <button class="btn btn-outline-primary me-1" (click)="updateRows()">
             <mat-icon>refresh</mat-icon>
         </button>
-        <button class="btn btn-outline-danger  mx-1" (click)="clearAllChecks()">
+        <button class="btn btn-outline-danger me-1" (click)="clearAllChecks()">
             <mat-icon>clear</mat-icon>
         </button>
         <button class="btn btn-outline-secondary" id="edit" (click)="toggleEditMode()">
@@ -20,6 +23,7 @@
     
     <p></p>
     <div class="copied-message" *ngIf="copiedMessage">{{ copiedMessage }}</div>
+    <div class="copied-message" *ngIf="toastMessage">{{ toastMessage }}</div>
     <div *ngFor="let row of rows; let i = index">
         <div class="d-flex">
             <button (click)="toggleCheck(i)">
