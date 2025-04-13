@@ -61,10 +61,19 @@ export class RowComponent {
 
   toggleEditMode() {
     this.add = !this.add;
-    this.emitData();
-    this.cleanInput();
+
+    if(this.verifyInput()){
+      this.emitData();
+      this.cleanInput();
+    }
+
     // this.isEditMode = !this.isEditMode;
     // if (!this.isEditMode) { }
+  }
+
+  verifyInput(): boolean {
+    if(this.txtNomeVacina && this.txtLote && this.txtDataValidade) return true
+    else return false
   }
 
   toggleCheck() {
