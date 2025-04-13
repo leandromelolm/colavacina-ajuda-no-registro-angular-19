@@ -1,8 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { 
+
+body {
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 13px;
+    background-color: #f0f0f5
+}
+
+button {
+    border-radius: 15px !important;
+    height: 48px;
+    width: 48px;
+    padding: 0px !important;
+}
+
+input {
+    border-radius: 15px;
+    padding: 0 0 0 5px;
+}
+
+mat-icon{
+    vertical-align: middle;
+    height: 40px;
 }
