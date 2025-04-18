@@ -25,19 +25,24 @@
     <div class="copied-message" *ngIf="copiedMessage">{{ copiedMessage }}</div>
     <div class="copied-message" *ngIf="toastMessage">{{ toastMessage }}</div>
     <div *ngFor="let row of rows; let i = index">
-        <div class="d-flex">
-            <button (click)="toggleCheck(i)">
+        <div class="div__itens">
+            <button class="btn btn-link btn__check_box" (click)="toggleCheck(i)">
                 <mat-icon>{{ row.checked ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
             </button>
             <!-- <button id="copy"><mat-icon class="icon-warn">content_copy</mat-icon></button> -->
             @if (isEditMode) {
-                <input type="text" [(ngModel)]="row.nomeVacina" placeholder="Nome da Vacina">
-                <input type="text" [(ngModel)]="row.lote" placeholder="Lote">
-                <input type="text" [(ngModel)]="row.validade" placeholder="Validade">
+                <input class="input_vacina" type="text" [(ngModel)]="row.nomeVacina" placeholder="Nome da Vacina">
+                <input class="input_lote" type="text" [(ngModel)]="row.lote" placeholder="Lote">
+                <input class="input_validade" type="text" [(ngModel)]="row.validade" placeholder="Validade">
             } @else {
-                <div class="div__text mx-1 text-body-emphasis" (click)="copyToClipboard(row.nomeVacina)">{{ row.nomeVacina }}</div>
-                <div class="div__text me-1 fw-medium" (click)="copyToClipboard(row.lote)">{{ row.lote }}</div>
-                <div class="div__text text-body-secondary" (click)="copyToClipboard(row.validade)">{{ row.validade }}</div>
+                <div class="div__text div_vacina mx-1 text-body-emphasis" 
+                    (click)="copyToClipboard(row.nomeVacina)">{{ row.nomeVacina }}
+                    @if (isSubcutanea(row.nomeVacina)) {
+                        <span class="badge text-bg-warning">subcutânea</span>
+                    }
+                </div>
+                <div class="div__text div_lote me-1 fw-medium" (click)="copyToClipboard(row.lote)">{{ row.lote }}</div>
+                <div class="div__text div_validade text-body-secondary" (click)="copyToClipboard(row.validade)">{{ row.validade }}</div>
                 <div>
                     <select [(ngModel)]="row.opcaoSelecionada">
                         <option *ngFor="let opcao of opcoes" [value]="opcao.id">

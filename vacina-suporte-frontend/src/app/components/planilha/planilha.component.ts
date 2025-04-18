@@ -162,4 +162,17 @@ export class PlanilhaComponent {
       }, 5000);
   }
 
+  isSubcutanea(vacina: string): boolean {
+    const subcutaneas = ["FA", "SRC", "Varicela"];
+  
+    // Quebrar a string em palavras separadas, removendo pontuação e espaços extras
+    const palavras = vacina
+      .toUpperCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // remove acentos
+      .replace(/[^\w\s]/gi, '') // remove pontuação
+      .split(/\s+/); // divide por espaços
+  
+    return subcutaneas.some(v => palavras.includes(v.toUpperCase()));
+  }
+
 }

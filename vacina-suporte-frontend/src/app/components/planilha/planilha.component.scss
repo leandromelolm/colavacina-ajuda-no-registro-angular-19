@@ -13,8 +13,28 @@ button {
     margin: 0px;
 }
 
-input {
-    width: 25%;
+.input_vacina {
+    width: 35%;
+}
+
+.input_lote {
+    width: 40%;
+}
+
+.input_validade {
+    width: 20%;
+}
+
+.div_vacina {
+    width: 40%;
+}
+
+.div_lote {
+    width: 40%;
+}
+
+.div_validade {
+    width: 10%;
 }
 
 .copyable {
@@ -39,6 +59,15 @@ input {
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     font-size: 0.9rem;
     animation: fadeOut 2s forwards;
+}
+
+.div__itens {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.btn__check_box {
+    width: 25px;
 }
   
 @keyframes fadeOut {
