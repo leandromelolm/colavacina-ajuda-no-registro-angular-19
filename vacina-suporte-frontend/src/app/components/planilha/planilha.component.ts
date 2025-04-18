@@ -28,9 +28,10 @@ export class PlanilhaComponent {
   txtId: string = '';
   isEditMode: boolean = false;
   isLoading: boolean = false;
+  isChanged: boolean = false;
 
   opcoes = [
-    { id: '1', nome: 'D E', descricao: 'Deltoide Esquerdo' },
+    { id: '1', nome: 'D E', descricao: 'Deltoide Esquerdo' }, // tooltip
     { id: '2', nome: 'D D', descricao: 'Deltoide Direito' },
     { id: '3', nome: 'F D', descricao: 'Face Externa Superior Direito' },
     { id: '4', nome: 'F E', descricao: 'Face Externa Superior Esquerdo' },
@@ -63,6 +64,7 @@ export class PlanilhaComponent {
   handleRowChange(data: any, index: number) {
     this.rows.push(data)
     localStorage.setItem('planilhaData', JSON.stringify(this.rows));
+    this.isChanged = true;
   }
 
   trackByIndex(index: number, item: any): number {
@@ -81,6 +83,7 @@ export class PlanilhaComponent {
     this.isEditMode = !this.isEditMode;
     if (!this.isEditMode) {
       localStorage.setItem('planilhaData', JSON.stringify(this.rows));
+      this.isChanged = true;
     }
   }
 
@@ -116,6 +119,7 @@ export class PlanilhaComponent {
       localStorage.setItem('planilhaData', JSON.stringify(data.content.vacinas));
       this.updateRows()
       this.isLoading = false;
+      this.isChanged = false;
       console.log('Resposta:', data.content);
     } catch (error) {
       this.isLoading = false;
@@ -174,6 +178,7 @@ export class PlanilhaComponent {
       console.log(res);
       if (res.success) {
         this.messageToast(res.message)
+        this.isChanged = false;
         Swal.fire('Salvo!', res.message, 'success');
       } else {
         this.messageToast(`Falha ao salvar. mensagem de erro: ${res.error}`);
@@ -199,6 +204,34 @@ export class PlanilhaComponent {
       .split(/\s+/); // divide por espaços
 
     return subcutaneas.some(v => palavras.includes(v));
+  }
+
+  confirmDelete(index: number, nomeVacina: string) {
+    Swal.fire({
+      title: `Apagar o item ${nomeVacina}?`,
+      text: 'Este item será removido permanentemente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, deletar',
+      cancelButtonText: 'Cancelar',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: 'btn__confirm',
+        cancelButton: 'btn__cancel'
+      },
+    }).then(result => {
+      if (result.isConfirmed) {
+        this.deleteRow(index);
+        Swal.fire('Deletado!', 'O item foi removido.', 'success');
+      }
+    });
+  }
+
+  deleteRow(index: number) {
+    this.rows.splice(index, 1);
+    localStorage.setItem('planilhaData', JSON.stringify(this.rows));
+    this.isChanged = true;
+    this.messageToast('Item deletado com sucesso.');
   }
 
 }

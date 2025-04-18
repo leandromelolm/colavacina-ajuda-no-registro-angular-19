@@ -93,6 +93,14 @@ select {
     height: 38px;
 }
 
+.div__select {
+    align-content: center;
+}
+
+.btn__delete {
+    border: none;
+}
+
 mat-spinner {
     height: 25px !important;
     width: 46px !important;

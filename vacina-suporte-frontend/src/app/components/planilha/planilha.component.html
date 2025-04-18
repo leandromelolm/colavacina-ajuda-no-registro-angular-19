@@ -9,7 +9,7 @@
             }
         </button>
         <button class="btn btn-outline-primary me-1" (click)="saveListAlert()">
-            <mat-icon>upload</mat-icon>
+            <mat-icon [ngClass]="{ 'red-icon': isChanged, 'green-icon': !isChanged }">upload</mat-icon>
         </button>
     </div>
     <div class="my-1 btn_config">
@@ -47,7 +47,7 @@
                 </div>
                 <div class="div__text div_lote me-1 fw-medium" (click)="copyToClipboard(row.lote)">{{ row.lote }}</div>
                 <div class="div__text div_validade text-body-secondary" (click)="copyToClipboard(row.validade)">{{ row.validade }}</div>
-                <div>
+                <div class="div__select">
                     <select [(ngModel)]="row.opcaoSelecionada">
                       <option 
                         *ngFor="let opcao of opcoes" 
@@ -57,6 +57,11 @@
                       </option>
                     </select>
                 </div>
+                <button
+                    class="btn btn-outline-danger btn__delete"
+                    (click)="confirmDelete(i, row.nomeVacina)">
+                    <mat-icon>delete</mat-icon>
+                </button>
             }
             <!-- <button id="edit" (click)="toggleEditMode()">
                 <mat-icon class="icon-warn">edit</mat-icon>
