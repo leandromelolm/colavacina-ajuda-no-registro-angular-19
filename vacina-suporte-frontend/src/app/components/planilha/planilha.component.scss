@@ -116,3 +116,22 @@ mat-spinner {
     border-radius: 4px;
     padding: 4px;
 }
+
+.copied {
+    background-color: #7edf77;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    animation: pulseCopy 0.4s ease;
+}
+  
+@keyframes pulseCopy {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+}

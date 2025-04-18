@@ -40,15 +40,33 @@
                     <input class="input_lote" type="text" [(ngModel)]="row.lote" placeholder="Lote">
                     <input class="input_validade" type="text" [(ngModel)]="row.validade" placeholder="Validade">
                 } @else {
-                    <div class="div__text div_vacina mx-1 text-body-emphasis" title="imunobiológico"
-                        (click)="copyToClipboard(row.nomeVacina)">
+                    <div
+                        class="div__text div_vacina mx-1 text-body-emphasis"
+                        (click)="copyToClipboard(row.nomeVacina)"
+                        [ngClass]="{ 'copied': copiedValue === row.nomeVacina }"
+                    >
                         {{ row.nomeVacina }}
                         @if (isSubcutanea(row.nomeVacina)) {
                             <span class="badge text-bg-warning">subcutânea</span>
                         }
                     </div>
-                    <div class="div__text div_lote me-1 fw-medium" (click)="copyToClipboard(row.lote)">{{ row.lote }}</div>
-                    <div class="div__text div_validade text-body-secondary" (click)="copyToClipboard(row.validade)">{{ row.validade }}</div>
+
+                    <div
+                        class="div__text div_lote me-1 fw-medium"
+                        (click)="copyToClipboard(row.lote)"
+                        [ngClass]="{ 'copied': copiedValue === row.lote }"
+                    >
+                        {{ row.lote }}
+                    </div>
+
+                    <div
+                        class="div__text div_validade text-body-secondary"
+                        (click)="copyToClipboard(row.validade)"
+                        [ngClass]="{ 'copied': copiedValue === row.validade }"
+                    >
+                        {{ row.validade }}
+                    </div>
+
                     <div class="div__select">
                         <select [(ngModel)]="row.opcaoSelecionada">
                             <option 

@@ -30,6 +30,7 @@ export class PlanilhaComponent {
   isEditMode: boolean = false;
   isLoading: boolean = false;
   isChanged: boolean = false;
+  copiedValue: string = "";
 
   opcoes = [
     { id: '1', nome: 'D E', descricao: 'Deltoide Esquerdo' }, // tooltip
@@ -91,6 +92,7 @@ export class PlanilhaComponent {
   copyToClipboard(text: string) {
     navigator.clipboard.writeText(text).then(() => {
       this.copiedMessage = `Copiado: ${text}`;
+      this.copiedValue = text;
       setTimeout(() => {
         this.copiedMessage = '';
       }, 2000);
