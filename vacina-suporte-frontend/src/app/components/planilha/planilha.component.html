@@ -22,7 +22,11 @@
                 <mat-icon>edit</mat-icon>
             </button>
         </div>
-        <app-row  (dataChanged)="handleRowChange($event, 0)" ngSkipHydration></app-row>
+        <app-row
+            [hidden]="!isAtTop"
+            (dataChanged)="handleRowChange($event, 0)"
+            ngSkipHydration>
+        </app-row>
     </div>
     
     <p></p>

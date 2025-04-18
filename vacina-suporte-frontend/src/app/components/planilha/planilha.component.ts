@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import Swal from 'sweetalert2';
 
@@ -45,6 +45,14 @@ export class PlanilhaComponent {
 
   copiedMessage: string = '';
   toastMessage: string = '';
+
+  isAtTop = true;
+  @HostListener('window:scroll', [])
+
+
+  onWindowScroll() {
+    this.isAtTop = window.pageYOffset === 0;
+  }
 
   updateRows() {
     const saved = localStorage.getItem('planilhaData');
