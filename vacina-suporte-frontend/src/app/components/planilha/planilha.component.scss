@@ -2,10 +2,16 @@
     width: 60px;
 }
 
+.input__id {
+    height: 48px !important;
+}
+
 .btn_config {
     align-content: center;
+    justify-content: center;
     text-align: center;
     box-sizing: content-box;
+    display: flex;
 }
 
 button {
@@ -81,13 +87,6 @@ button {
     min-width:  20%;
 }
 
-.div_download {
-    justify-content: center;
-    text-align: center;
-    box-sizing: content-box;
-    display: flex;
-}
-
 select {
     border-radius: 10px;
     height: 38px;
@@ -134,4 +133,11 @@ mat-spinner {
     100% {
       transform: scale(1);
     }
+}
+
+.div__buttons {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #f0f0f5;
 }

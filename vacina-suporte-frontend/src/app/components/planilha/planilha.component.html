@@ -1,29 +1,29 @@
 <div class="container">
-    <div  class="my-1 div_download">
-        <input class="me-1" type="text" [(ngModel)]="txtId" placeholder="id">
-        <button class="btn btn-outline-primary me-1" (click)="getList(txtId)">
-            @if(!isLoading) {
-                <mat-icon>download</mat-icon>
-            } @else {
-                <mat-spinner></mat-spinner>
-            }
-        </button>
-        <button class="btn btn-outline-primary me-1" (click)="saveListAlert()">
-            <mat-icon [ngClass]="{ 'red-icon': isChanged, 'green-icon': !isChanged }">upload</mat-icon>
-        </button>
+    <div class="div__buttons">
+        <div class="my-1 div_download btn_config">
+            <input class="input__id me-1" type="text" [(ngModel)]="txtId" placeholder="id">
+            <button class="btn btn-outline-primary me-1" (click)="getList(txtId)" title="Baixar lista">
+                @if(!isLoading) {
+                    <mat-icon>download</mat-icon>
+                } @else {
+                    <mat-spinner></mat-spinner>
+                }
+            </button>
+            <button class="btn btn-outline-primary me-1" (click)="saveListAlert()" title="Salvar lista">
+                <mat-icon [ngClass]="{ 'red-icon': isChanged, 'green-icon': !isChanged }">upload</mat-icon>
+            </button>
+            <button class="btn btn-outline-primary me-1" (click)="updateRows()" title="Recarregar">
+                <mat-icon>refresh</mat-icon>
+            </button>
+            <button class="btn btn-outline-danger me-1" (click)="clearAllChecks()" title="Limpar seleção">
+                <mat-icon>clear</mat-icon>
+            </button>
+            <button class="btn btn-outline-secondary" id="edit" (click)="toggleEditMode()" title="Editar lista">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+        <app-row  (dataChanged)="handleRowChange($event, 0)" ngSkipHydration></app-row>
     </div>
-    <div class="my-1 btn_config">
-        <button class="btn btn-outline-primary me-1" (click)="updateRows()">
-            <mat-icon>refresh</mat-icon>
-        </button>
-        <button class="btn btn-outline-danger me-1" (click)="clearAllChecks()">
-            <mat-icon>clear</mat-icon>
-        </button>
-        <button class="btn btn-outline-secondary" id="edit" (click)="toggleEditMode()">
-            <mat-icon>edit</mat-icon>
-        </button>
-    </div>
-    <app-row  (dataChanged)="handleRowChange($event, 0)" ngSkipHydration></app-row>
     
     <p></p>
     <div class="copied-message" *ngIf="copiedMessage">{{ copiedMessage }}</div>
