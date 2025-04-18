@@ -27,14 +27,15 @@ export class PlanilhaComponent {
   txtDataValidade: string = '';
   txtId: string = '';
   isEditMode: boolean = false;
+  isLoading: boolean = false;
 
   opcoes = [
-    { id: '1', nome: 'D E' },
-    { id: '2', nome: 'D D' },
-    { id: '2', nome: 'F D' },
-    { id: '2', nome: 'F E' },
-    { id: '3', nome: 'V E' },
-    { id: '4', nome: 'V D' },
+    { id: '1', nome: 'D E', descricao: 'Deltoide Esquerdo' },
+    { id: '2', nome: 'D D', descricao: 'Deltoide Direito' },
+    { id: '3', nome: 'F D', descricao: 'Face Externa Superior Direito' },
+    { id: '4', nome: 'F E', descricao: 'Face Externa Superior Esquerdo' },
+    { id: '5', nome: 'V E', descricao: 'Vasto Lateral Esquerdo' },
+    { id: '6', nome: 'V D', descricao: 'Vasto Lateral Direito' },
   ];
 
   // opcaoSelecionada: string = 'E';
@@ -108,12 +109,17 @@ export class PlanilhaComponent {
 
   async getList(id: string) {
     const url = `https://script.google.com/macros/s/AKfycbxMjZhJ8AWQzprcHV81K3Zp8WLfrz35odWb4QnS4cZ4uK4PREo4bfER26s1xx3Epndm/exec?action=list&id=${id}`;
-
-    const response = await fetch(url);
-    const data = await response.json();
-    localStorage.setItem('planilhaData', JSON.stringify(data.content.vacinas));
-    this.updateRows()
-    console.log('Resposta:', data.content);
+    this.isLoading = true;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      localStorage.setItem('planilhaData', JSON.stringify(data.content.vacinas));
+      this.updateRows()
+      this.isLoading = false;
+      console.log('Resposta:', data.content);
+    } catch (error) {
+      this.isLoading = false;
+    }
   }
 
   async saveList() {

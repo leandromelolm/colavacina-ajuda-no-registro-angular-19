@@ -2,7 +2,11 @@
     <div  class="my-1 div_download">
         <input class="me-1" type="text" [(ngModel)]="txtId" placeholder="id">
         <button class="btn btn-outline-primary me-1" (click)="getList(txtId)">
-            <mat-icon>download</mat-icon>
+            @if(!isLoading) {
+                <mat-icon>download</mat-icon>
+            } @else {
+                <mat-spinner></mat-spinner>
+            }
         </button>
         <button class="btn btn-outline-primary me-1" (click)="saveListAlert()">
             <mat-icon>upload</mat-icon>
@@ -45,9 +49,12 @@
                 <div class="div__text div_validade text-body-secondary" (click)="copyToClipboard(row.validade)">{{ row.validade }}</div>
                 <div>
                     <select [(ngModel)]="row.opcaoSelecionada">
-                        <option *ngFor="let opcao of opcoes" [value]="opcao.id">
+                      <option 
+                        *ngFor="let opcao of opcoes" 
+                        [value]="opcao.id" 
+                        [title]="opcao.descricao">
                           {{ opcao.nome }}
-                        </option>
+                      </option>
                     </select>
                 </div>
             }
