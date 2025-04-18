@@ -28,45 +28,45 @@
     <p></p>
     <div class="copied-message" *ngIf="copiedMessage">{{ copiedMessage }}</div>
     <div class="copied-message" *ngIf="toastMessage">{{ toastMessage }}</div>
-    <div *ngFor="let row of rows; let i = index">
-        <div class="div__itens">
-            <button class="btn btn-link btn__check_box" (click)="toggleCheck(i)">
-                <mat-icon>{{ row.checked ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
-            </button>
-            <!-- <button id="copy"><mat-icon class="icon-warn">content_copy</mat-icon></button> -->
-            @if (isEditMode) {
-                <input class="input_vacina" type="text" [(ngModel)]="row.nomeVacina" placeholder="Nome da Vacina">
-                <input class="input_lote" type="text" [(ngModel)]="row.lote" placeholder="Lote">
-                <input class="input_validade" type="text" [(ngModel)]="row.validade" placeholder="Validade">
-            } @else {
-                <div class="div__text div_vacina mx-1 text-body-emphasis" 
-                    (click)="copyToClipboard(row.nomeVacina)">{{ row.nomeVacina }}
-                    @if (isSubcutanea(row.nomeVacina)) {
-                        <span class="badge text-bg-warning">subcutânea</span>
-                    }
-                </div>
-                <div class="div__text div_lote me-1 fw-medium" (click)="copyToClipboard(row.lote)">{{ row.lote }}</div>
-                <div class="div__text div_validade text-body-secondary" (click)="copyToClipboard(row.validade)">{{ row.validade }}</div>
-                <div class="div__select">
-                    <select [(ngModel)]="row.opcaoSelecionada">
-                      <option 
-                        *ngFor="let opcao of opcoes" 
-                        [value]="opcao.id" 
-                        [title]="opcao.descricao">
-                          {{ opcao.nome }}
-                      </option>
-                    </select>
-                </div>
-                <button
-                    class="btn btn-outline-danger btn__delete"
-                    (click)="confirmDelete(i, row.nomeVacina)">
-                    <mat-icon>delete</mat-icon>
+
+    <div cdkDropList (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let row of rows; let i = index" cdkDrag>
+            <div class="div__itens">
+                <button class="btn btn-link btn__check_box" (click)="toggleCheck(i)">
+                    <mat-icon>{{ row.checked ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
                 </button>
-            }
-            <!-- <button id="edit" (click)="toggleEditMode()">
-                <mat-icon class="icon-warn">edit</mat-icon>
-            </button> -->
-            
+                @if (isEditMode) {
+                    <input class="input_vacina" type="text" [(ngModel)]="row.nomeVacina" placeholder="Nome da Vacina">
+                    <input class="input_lote" type="text" [(ngModel)]="row.lote" placeholder="Lote">
+                    <input class="input_validade" type="text" [(ngModel)]="row.validade" placeholder="Validade">
+                } @else {
+                    <div class="div__text div_vacina mx-1 text-body-emphasis" 
+                        (click)="copyToClipboard(row.nomeVacina)">{{ row.nomeVacina }}
+                        @if (isSubcutanea(row.nomeVacina)) {
+                            <span class="badge text-bg-warning">subcutânea</span>
+                        }
+                    </div>
+                    <div class="div__text div_lote me-1 fw-medium" (click)="copyToClipboard(row.lote)">{{ row.lote }}</div>
+                    <div class="div__text div_validade text-body-secondary" (click)="copyToClipboard(row.validade)">{{ row.validade }}</div>
+                    <div class="div__select">
+                        <select [(ngModel)]="row.opcaoSelecionada">
+                            <option 
+                                *ngFor="let opcao of opcoes" 
+                                [value]="opcao.id" 
+                                [title]="opcao.descricao">
+                                {{ opcao.nome }}
+                            </option>
+                        </select>
+                    </div>
+                    <button class="btn btn__drag" cdkDragHandle title="Arrastar para mover">
+                        <mat-icon>drag_indicator</mat-icon>
+                    </button>
+                    <button class="btn btn-outline-danger btn__delete" (click)="confirmDelete(i, row.nomeVacina)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                }
+            </div>
         </div>
-    </div>      
+    </div>
+
 </div>

@@ -34,7 +34,7 @@ button {
 }
 
 .div_validade {
-    width: 10%;
+    width: 8%;
 }
 
 .copyable {
@@ -104,4 +104,15 @@ select {
 mat-spinner {
     height: 25px !important;
     width: 46px !important;
+}
+
+[cdkDrag] {
+    cursor: move;
+}
+  
+.cdk-drag-preview {
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    background: white;
+    border-radius: 4px;
+    padding: 4px;
 }

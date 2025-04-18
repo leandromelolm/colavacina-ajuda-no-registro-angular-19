@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import Swal from 'sweetalert2';
 
 interface RowData {
@@ -232,6 +233,12 @@ export class PlanilhaComponent {
     localStorage.setItem('planilhaData', JSON.stringify(this.rows));
     this.isChanged = true;
     this.messageToast('Item deletado com sucesso.');
+  }
+
+  drop(event: CdkDragDrop<RowData[]>) {
+    moveItemInArray(this.rows, event.previousIndex, event.currentIndex);
+    localStorage.setItem('planilhaData', JSON.stringify(this.rows));
+    this.isChanged = true;
   }
 
 }

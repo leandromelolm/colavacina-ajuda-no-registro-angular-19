@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MatIconModule } from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/homecomponent';
@@ -25,7 +26,8 @@ import { ToastMessageComponent } from './components/toast-message/toast-message.
     AppRoutingModule,
     MatIconModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    DragDropModule
   ],
   providers: [
     provideClientHydration(withEventReplay())
