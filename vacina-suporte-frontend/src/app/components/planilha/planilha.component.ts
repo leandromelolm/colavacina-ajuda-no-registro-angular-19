@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { log } from 'console';
+import Swal from 'sweetalert2';
 
 interface RowData {
   nomeVacina: string;
@@ -45,9 +45,9 @@ export class PlanilhaComponent {
   updateRows() {
     const saved = localStorage.getItem('planilhaData');
     console.log(saved);
-    
+
     const rawRows = saved ? JSON.parse(saved) : [];
-  
+
     // Garante que cada item tenha todas as propriedades esperadas
     this.rows = rawRows.map((row: Partial<RowData>) => ({
       nomeVacina: row.nomeVacina || '',
@@ -58,7 +58,7 @@ export class PlanilhaComponent {
       opcaoSelecionada: row.opcaoSelecionada || ''
     }));
   }
-  
+
   handleRowChange(data: any, index: number) {
     this.rows.push(data)
     localStorage.setItem('planilhaData', JSON.stringify(this.rows));
@@ -71,11 +71,11 @@ export class PlanilhaComponent {
   toggleCheck(index: number) {
     this.rows[index].checked = !this.rows[index].checked;
   }
-  
+
   toggleEditMode2(index: number) {
     this.rows[index].isEditMode = !this.rows[index].isEditMode;
   }
-  
+
   toggleEditMode() {
     this.isEditMode = !this.isEditMode;
     if (!this.isEditMode) {
@@ -119,10 +119,10 @@ export class PlanilhaComponent {
   async saveList() {
 
     const lista = localStorage.getItem('planilhaData');
-    
-    if(this.txtId === '') {
+
+    if (this.txtId === '') {
       this.messageToast('Preencha o campo id')
-      return 
+      return
     }
 
     const data = {
@@ -134,19 +134,41 @@ export class PlanilhaComponent {
     this.send(data);
   }
 
-  async send(data : any) {
+  saveListAlert() {
+    Swal.fire({
+      title: `Confirma salvar ID ${this.txtId}?`,
+      text: 'Confirme se deseja salvar as alterações.',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, salvar',
+      cancelButtonText: 'Cancelar',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: 'btn__confirm',
+        cancelButton: 'btn__cancel'
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.saveList();
+      } else {
+        console.log('Salvamento cancelado.');
+      }
+    });
+  }
 
+  async send(data: any) {
     const url = `https://script.google.com/macros/s/AKfycbxMjZhJ8AWQzprcHV81K3Zp8WLfrz35odWb4QnS4cZ4uK4PREo4bfER26s1xx3Epndm/exec`;
     try {
       const response = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(data)
       });
-      
+
       const res = await response.json();
       console.log(res);
       if (res.success) {
         this.messageToast(res.message)
+        Swal.fire('Salvo!', res.message, 'success');
       } else {
         this.messageToast(`Falha ao salvar. mensagem de erro: ${res.error}`);
       }
@@ -157,22 +179,20 @@ export class PlanilhaComponent {
 
   messageToast(textMessage: string) {
     this.toastMessage = `${textMessage}`;
-      setTimeout(() => {
-        this.toastMessage = '';
-      }, 5000);
+    setTimeout(() => {
+      this.toastMessage = '';
+    }, 5000);
   }
 
   isSubcutanea(vacina: string): boolean {
     const subcutaneas = ["FA", "SRC", "Varicela"];
-  
-    // Quebrar a string em palavras separadas, removendo pontuação e espaços extras
+
     const palavras = vacina
-      .toUpperCase()
       .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // remove acentos
       .replace(/[^\w\s]/gi, '') // remove pontuação
       .split(/\s+/); // divide por espaços
-  
-    return subcutaneas.some(v => palavras.includes(v.toUpperCase()));
+
+    return subcutaneas.some(v => palavras.includes(v));
   }
 
 }

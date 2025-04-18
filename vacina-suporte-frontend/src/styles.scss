@@ -25,3 +25,25 @@ mat-icon{
     vertical-align: middle;
     height: 40px;
 }
+
+.btn__confirm {
+    background-color: #3085d6;
+    color: white;
+    padding: 8px 24px;
+    border-radius: 4px;
+    min-width: 90px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn__cancel {
+    background-color: #aaa;
+    color: white;
+    padding: 8px 24px;
+    border-radius: 4px;
+    min-width: 90px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
