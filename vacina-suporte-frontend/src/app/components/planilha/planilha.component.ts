@@ -21,7 +21,6 @@ export class PlanilhaComponent {
 
   rowCount: number = 0;
   rows: RowData[] = [];
-
   iconCheck: string = 'check_box_outline_blank';
   txtNomeVacina: string = '';
   txtLote: string = '';
@@ -31,7 +30,8 @@ export class PlanilhaComponent {
   isLoading: boolean = false;
   isChanged: boolean = false;
   copiedValue: string = "";
-
+  copiedMessage: string = '';
+  toastMessage: string = '';
   opcoes = [
     { id: '1', nome: 'D E', descricao: 'Deltoide Esquerdo' }, // tooltip
     { id: '2', nome: 'D D', descricao: 'Deltoide Direito' },
@@ -40,15 +40,8 @@ export class PlanilhaComponent {
     { id: '5', nome: 'V E', descricao: 'Vasto Lateral Esquerdo' },
     { id: '6', nome: 'V D', descricao: 'Vasto Lateral Direito' },
   ];
-
-  // opcaoSelecionada: string = 'E';
-
-  copiedMessage: string = '';
-  toastMessage: string = '';
-
   isAtTop = true;
   @HostListener('window:scroll', [])
-
 
   onWindowScroll() {
     this.isAtTop = window.pageYOffset === 0;

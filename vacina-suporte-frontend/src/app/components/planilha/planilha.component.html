@@ -34,7 +34,10 @@
     <div class="copied-message" *ngIf="toastMessage">{{ toastMessage }}</div>
 
     <div cdkDropList (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let row of rows; let i = index" cdkDrag>
+        <div 
+          *ngFor="let row of rows; let i = index" 
+          cdkDrag 
+          [cdkDragDisabled]="isEditMode">
             <div class="div__itens">
                 <button class="btn btn-link btn__check_box" (click)="toggleCheck(i)">
                     <mat-icon>{{ row.checked ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
@@ -81,7 +84,7 @@
                             </option>
                         </select>
                     </div>
-                    <button class="btn btn__drag" cdkDragHandle title="Arrastar para mover">
+                    <button class="btn btn__drag" cdkDragHandle title="Arrastar para mover" arial-label="Arrastar para mover linha">
                         <mat-icon>drag_indicator</mat-icon>
                     </button>
                     <button class="btn btn-outline-danger btn__delete" (click)="confirmDelete(i, row.nomeVacina)">
