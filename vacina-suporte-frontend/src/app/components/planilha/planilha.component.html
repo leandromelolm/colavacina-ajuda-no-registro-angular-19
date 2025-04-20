@@ -2,7 +2,7 @@
     <div class="div__buttons">
         <div class="my-1 div_download btn_config">
             <input class="input__id me-1" type="text" [(ngModel)]="txtId" placeholder="id">
-            <button class="btn btn-outline-primary me-1" (click)="getList(txtId)" title="Baixar lista">
+            <button class="btn btn-outline-primary me-1" (click)="downloadList(txtId)" title="Baixar lista">
                 @if(!isLoading) {
                     <mat-icon>download</mat-icon>
                 } @else {
@@ -12,14 +12,14 @@
             <button class="btn btn-outline-primary me-1" (click)="saveListAlert()" title="Salvar lista">
                 <mat-icon [ngClass]="{ 'red-icon': isChanged, 'green-icon': !isChanged }">upload</mat-icon>
             </button>
-            <button class="btn btn-outline-primary me-1" (click)="updateRows()" title="Recarregar">
-                <mat-icon>refresh</mat-icon>
-            </button>
             <button class="btn btn-outline-danger me-1" (click)="clearAllChecks()" title="Limpar seleção">
                 <mat-icon>clear</mat-icon>
             </button>
             <button class="btn btn-outline-secondary" id="edit" (click)="toggleEditMode()" title="Editar lista">
                 <mat-icon>edit</mat-icon>
+            </button>
+            <button class="btn btn-outline-primary me-1" (click)="updateRows()" title="Recarregar lista local">
+                <mat-icon>refresh</mat-icon>
             </button>
         </div>
         <app-row
@@ -31,9 +31,9 @@
     
     <p></p>
     <div class="copied-message" *ngIf="copiedMessage">{{ copiedMessage }}</div>
-    <div class="copied-message" *ngIf="toastMessage">{{ toastMessage }}</div>
+    <div class="copied-message" *ngIf="txtToastMessage">{{ txtToastMessage }}</div>
 
-    <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <div cdkDropList (cdkDropListDropped)="drop($event)" class="div__list">
         <div 
           *ngFor="let row of rows; let i = index" 
           cdkDrag 
@@ -46,6 +46,9 @@
                     <input class="input_vacina" type="text" [(ngModel)]="row.nomeVacina" placeholder="Nome da Vacina">
                     <input class="input_lote" type="text" [(ngModel)]="row.lote" placeholder="Lote">
                     <input class="input_validade" type="text" [(ngModel)]="row.validade" placeholder="Validade">
+                    <button class="btn btn-outline-danger btn__delete" (click)="confirmDelete(i, row.nomeVacina)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
                 } @else {
                     <div
                         class="div__text div_vacina mx-1 text-body-emphasis"
@@ -74,7 +77,7 @@
                         {{ row.validade }}
                     </div>
 
-                    <div class="div__select">
+                    <div class="div__select d-none">
                         <select [(ngModel)]="row.opcaoSelecionada">
                             <option 
                                 *ngFor="let opcao of opcoes" 
@@ -84,11 +87,20 @@
                             </option>
                         </select>
                     </div>
+
+                    <button class="btn btn-outline-secondary btn__letter me-1" 
+                        (click)="toggleLetter(i)" title="Alternar posição"
+                        [ngClass]="{
+                            'letter-empty': !row.opcaoSelecionada || row.opcaoSelecionada === '-',
+                            'letter-e': row.opcaoSelecionada === 'E',
+                            'letter-d': row.opcaoSelecionada === 'D'
+                        }"
+                        >
+                        {{ row.opcaoSelecionada || '-' }}
+                    </button>
+
                     <button class="btn btn__drag" cdkDragHandle title="Arrastar para mover" arial-label="Arrastar para mover linha">
                         <mat-icon>drag_indicator</mat-icon>
-                    </button>
-                    <button class="btn btn-outline-danger btn__delete" (click)="confirmDelete(i, row.nomeVacina)">
-                        <mat-icon>delete</mat-icon>
                     </button>
                 }
             </div>

@@ -31,18 +31,32 @@ export class PlanilhaComponent {
   isChanged: boolean = false;
   copiedValue: string = "";
   copiedMessage: string = '';
-  toastMessage: string = '';
+  txtToastMessage: string = '';
   opcoes = [
-    { id: '1', nome: 'D E', descricao: 'Deltoide Esquerdo' }, // tooltip
+    { id: '0', nome: '', descricao: '' }, // tooltip
+    { id: '1', nome: 'D E', descricao: 'Deltoide Esquerdo' },
     { id: '2', nome: 'D D', descricao: 'Deltoide Direito' },
     { id: '3', nome: 'F D', descricao: 'Face Externa Superior Direito' },
     { id: '4', nome: 'F E', descricao: 'Face Externa Superior Esquerdo' },
     { id: '5', nome: 'V E', descricao: 'Vasto Lateral Esquerdo' },
     { id: '6', nome: 'V D', descricao: 'Vasto Lateral Direito' },
   ];
-  isAtTop = true;
-  @HostListener('window:scroll', [])
 
+  letterStates: string[] = ['-', 'E', 'D'];
+  isAtTop = true;
+
+
+  toggleLetter(index: number): void {
+    const row = this.rows[index];
+    const current = row.opcaoSelecionada || '-';
+    const nextIndex = (this.letterStates.indexOf(current) + 1) % this.letterStates.length;
+    row.opcaoSelecionada = this.letterStates[nextIndex];
+    // persiste a alteração
+    // localStorage.setItem('planilhaData', JSON.stringify(this.rows));
+    // this.isChanged = true;
+  }
+
+  @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isAtTop = window.pageYOffset === 0;
   }
@@ -53,7 +67,6 @@ export class PlanilhaComponent {
 
     const rawRows = saved ? JSON.parse(saved) : [];
 
-    // Garante que cada item tenha todas as propriedades esperadas
     this.rows = rawRows.map((row: Partial<RowData>) => ({
       nomeVacina: row.nomeVacina || '',
       lote: row.lote || '',
@@ -65,7 +78,17 @@ export class PlanilhaComponent {
   }
 
   handleRowChange(data: any, index: number) {
+    this.handleRowChangeFirstList(data, index);
+  }
+
+  handleRowChangeEndList(data: any, index: number) {
     this.rows.push(data)
+    localStorage.setItem('planilhaData', JSON.stringify(this.rows));
+    this.isChanged = true;
+  }
+
+  handleRowChangeFirstList(data: RowData, index: number) {
+    this.rows = [ data, ...this.rows ];
     localStorage.setItem('planilhaData', JSON.stringify(this.rows));
     this.isChanged = true;
   }
@@ -114,7 +137,16 @@ export class PlanilhaComponent {
     });
   }
 
-  async getList(id: string) {
+  downloadList(id: string) {
+    console.log(id)
+    if (id.length > 3)
+      this.getList(id)
+    else
+      this.messageToast('Id inválido')
+  } 
+
+  async getList(id: string) {    
+
     const url = `https://script.google.com/macros/s/AKfycbxMjZhJ8AWQzprcHV81K3Zp8WLfrz35odWb4QnS4cZ4uK4PREo4bfER26s1xx3Epndm/exec?action=list&id=${id}`;
     this.isLoading = true;
     try {
@@ -135,7 +167,7 @@ export class PlanilhaComponent {
     const lista = localStorage.getItem('planilhaData');
 
     if (this.txtId === '') {
-      this.messageToast('Preencha o campo id')
+      this.messageToast('Preencha o campo id');
       return
     }
 
@@ -193,9 +225,9 @@ export class PlanilhaComponent {
   }
 
   messageToast(textMessage: string) {
-    this.toastMessage = `${textMessage}`;
+    this.txtToastMessage = `${textMessage}`;
     setTimeout(() => {
-      this.toastMessage = '';
+      this.txtToastMessage = '';
     }, 5000);
   }
 
@@ -242,6 +274,25 @@ export class PlanilhaComponent {
     moveItemInArray(this.rows, event.previousIndex, event.currentIndex);
     localStorage.setItem('planilhaData', JSON.stringify(this.rows));
     this.isChanged = true;
+  }
+
+  windowOpen() {
+    const url = 'https://colavacina.web.app';
+    const nomeJanela = 'mobileView';
+    const features = [
+      'width=375',           // largura típica de um iPhone SE em px
+      'height=667',          // altura típica
+      'top=100',             // distância do topo da tela
+      'right=0',
+      'resizable=yes',       // permite redimensionar
+      'scrollbars=yes',      // habilita barras de rolagem
+      'toolbar=no',          // esconde barra de ferramentas
+      'location=no',         // esconde barra de endereço
+      'status=no',
+      'menubar=no'
+    ].join(',');
+
+    window.open(url, nomeJanela, features);
   }
 
 }

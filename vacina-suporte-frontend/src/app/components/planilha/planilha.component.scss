@@ -4,6 +4,7 @@
 
 .input__id {
     height: 48px !important;
+    width: 100px;
 }
 
 .btn_config {
@@ -28,7 +29,7 @@ button {
 }
 
 .input_validade {
-    width: 20%;
+    width: 15%;
 }
 
 .div_vacina {
@@ -67,9 +68,15 @@ button {
     animation: fadeOut 2s forwards;
 }
 
+.div__list {
+    max-width: 700px;
+    margin: auto;
+}
+
 .div__itens {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 .btn__check_box {
@@ -84,7 +91,7 @@ button {
 
 .div__text {
     align-content: center;
-    min-width:  20%;
+    min-width:  8%;
 }
 
 select {
@@ -98,6 +105,36 @@ select {
 
 .btn__delete {
     border: none;
+}
+
+.btn__letter {
+    border: solid transparent;
+    min-width: 2rem;      // largura fixa
+    text-align: center;   // centraliza o '-','E' ou 'D'
+    font-weight: bold;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+  
+    &.letter-empty {
+      background: #f0f0f0;
+      color: #666;
+    }
+    &.letter-e {
+      background: #cce5ff;
+      color: #004085;
+    }
+    &.letter-d {
+      background: #d4edda;
+      color: #155724;
+    }
+  
+    &:hover {
+      filter: brightness(0.95);
+    }
 }
 
 mat-spinner {
