@@ -8,8 +8,8 @@
 }
 
 .input__id {
-    height: 48px !important;
-    width: 100px;
+    height: clamp(36px, 6vw, 48px);    
+    width: clamp(90px, 6vw, 120px);
 }
 
 .btn_config {
@@ -182,4 +182,22 @@ mat-spinner {
     top: 0;
     z-index: 1000;
     background-color: #f0f0f5;
+    padding-bottom: 2px;
+}
+
+app-row {
+    display: block;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hidden-row {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    display: none;
+}
+  
+.visible-row {
+    opacity: 1;
+    transform: translateY(0);
 }

@@ -15,15 +15,15 @@
             <button class="btn btn-outline-danger me-1" (click)="clearAllChecks()" title="Limpar seleção">
                 <mat-icon>clear</mat-icon>
             </button>
-            <button class="btn btn-outline-secondary" id="edit" (click)="toggleEditMode()" title="Editar lista">
+            <button class="btn btn-outline-secondary me-1" id="edit" (click)="toggleEditMode()" title="Editar lista">
                 <mat-icon>edit</mat-icon>
             </button>
-            <button class="btn btn-outline-primary me-1" (click)="updateRows()" title="Recarregar lista local">
+            <button class="btn btn-outline-primary" (click)="updateRows()" title="Recarregar lista local">
                 <mat-icon>refresh</mat-icon>
             </button>
         </div>
         <app-row
-            [hidden]="!isAtTop"
+            [ngClass]="{ 'visible-row': showRow, 'hidden-row': !showRow }"
             (dataChanged)="handleRowChange($event, 0)"
             ngSkipHydration>
         </app-row>

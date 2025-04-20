@@ -1,7 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import Swal from 'sweetalert2';
-
 interface RowData {
   nomeVacina: string;
   lote: string;
@@ -43,8 +42,7 @@ export class PlanilhaComponent {
   ];
 
   letterStates: string[] = ['-', 'E', 'D'];
-  isAtTop = true;
-
+  showRow = true;
 
   toggleLetter(index: number): void {
     const row = this.rows[index];
@@ -58,7 +56,7 @@ export class PlanilhaComponent {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    this.isAtTop = window.pageYOffset === 0;
+    this.showRow = window.pageYOffset === 0;
   }
 
   updateRows() {
