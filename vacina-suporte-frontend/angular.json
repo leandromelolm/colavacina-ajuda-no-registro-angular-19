@@ -69,7 +69,10 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "outputHashing": "all",
+              "namedChunks": true,
+              "aot": true
             }
           },
           "defaultConfiguration": "production"
