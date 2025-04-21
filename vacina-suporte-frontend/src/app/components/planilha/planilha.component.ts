@@ -25,6 +25,7 @@ export class PlanilhaComponent {
   txtLote: string = '';
   txtDataValidade: string = '';
   txtId: string = '';
+  listaVacinasId: string = '';
   isEditMode: boolean = false;
   isLoading: boolean = false;
   isChanged: boolean = false;
@@ -60,6 +61,7 @@ export class PlanilhaComponent {
   }
 
   updateRows() {
+    this.listaVacinasId = localStorage.getItem('listaVacinasId') || '';
     const saved = localStorage.getItem('planilhaData');
     console.log(saved);
 
@@ -151,6 +153,7 @@ export class PlanilhaComponent {
       const response = await fetch(url);
       const data = await response.json();
       localStorage.setItem('planilhaData', JSON.stringify(data.content.vacinas));
+      localStorage.setItem('listaVacinasId', data.message);
       this.updateRows()
       this.isLoading = false;
       this.isChanged = false;

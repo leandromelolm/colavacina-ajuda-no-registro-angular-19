@@ -32,6 +32,15 @@ input {
     width: clamp(36px, 6vw, 48px);
 }
 
+input:focus {
+    border: 1px solid aquamarine !important;
+}
+
+input:active {
+    border: 1px solid aquamarine !important;
+}
+
+
 .btn__confirm {
     background-color: #3085d6;
     color: white;
