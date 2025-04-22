@@ -1,6 +1,7 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, QueryList, ViewChildren } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import Swal from 'sweetalert2';
+
 interface RowData {
   nomeVacina: string;
   lote: string;
@@ -44,6 +45,7 @@ export class PlanilhaComponent {
 
   letterStates: string[] = ['-', 'E', 'D'];
   showRow = true;
+  selectedNomesVacinas: string[] = [];
 
   toggleLetter(index: number): void {
     const row = this.rows[index];
@@ -58,6 +60,21 @@ export class PlanilhaComponent {
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.showRow = window.pageYOffset === 0;
+  }
+
+
+  toggleSelecionado(nomeVacina: string) {
+    const index = this.selectedNomesVacinas.indexOf(nomeVacina);
+
+    if (index === -1) {
+      this.selectedNomesVacinas.push(nomeVacina);
+    } else {
+      this.selectedNomesVacinas.splice(index, 1);
+    }
+  }
+
+  clearAllSelecoes() {
+    this.selectedNomesVacinas = [];
   }
 
   updateRows() {
@@ -129,6 +146,7 @@ export class PlanilhaComponent {
     this.rows.forEach(row => row.checked = false);
     localStorage.setItem('planilhaData', JSON.stringify(this.rows));
     this.resetTodosSelects();
+    this.clearAllSelecoes();
   }
 
   resetTodosSelects() {

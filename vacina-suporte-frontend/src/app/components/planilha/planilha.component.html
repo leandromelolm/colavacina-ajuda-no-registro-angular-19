@@ -2,23 +2,23 @@
     <div class="div__buttons">
         <div class="my-1 div_download btn_config">
             <input class="input__id me-1" type="text" [(ngModel)]="txtId" placeholder="id">
-            <button class="btn btn-outline-primary me-1" (click)="downloadList(txtId)" title="Baixar lista">
+            <button class="btn btn-outline-primary me-1 btn__list" (click)="downloadList(txtId)" title="Baixar lista">
                 @if(!isLoading) {
                     <mat-icon>download</mat-icon>
                 } @else {
                     <mat-spinner></mat-spinner>
                 }
             </button>
-            <button class="btn btn-outline-primary me-1" (click)="saveListAlert()" title="Salvar lista">
+            <button class="btn btn-outline-primary me-1 btn__list" (click)="saveListAlert()" title="Salvar lista">
                 <mat-icon [ngClass]="{ 'red-icon': isChanged, 'green-icon': !isChanged }">upload</mat-icon>
             </button>
-            <button class="btn btn-outline-danger me-1" (click)="clearAllChecks()" title="Limpar seleção">
+            <button class="btn btn-outline-danger me-1 btn__list" (click)="clearAllChecks()" title="Limpar seleção">
                 <mat-icon>clear</mat-icon>
             </button>
-            <button class="btn btn-outline-secondary me-1" id="edit" (click)="toggleEditMode()" title="Editar lista">
+            <button class="btn btn-outline-secondary me-1 btn__list" id="edit" (click)="toggleEditMode()" title="Editar lista">
                 <mat-icon>edit</mat-icon>
             </button>
-            <button class="btn btn-outline-primary" (click)="updateRows()" title="Recarregar lista local">
+            <button class="btn btn-outline-primary btn__list" (click)="updateRows()" title="Recarregar lista local">
                 <mat-icon>refresh</mat-icon>
             </button>
         </div>
@@ -40,7 +40,7 @@
           cdkDrag 
           [cdkDragDisabled]="isEditMode">
             <div class="div__itens">
-                <button class="btn btn-link btn__check_box" (click)="toggleCheck(i)">
+                <button class="btn btn-link btn__check_box d-none" (click)="toggleCheck(i)">
                     <mat-icon>{{ row.checked ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
                 </button>
                 @if (isEditMode) {
@@ -53,8 +53,11 @@
                 } @else {
                     <div
                         class="div__text div_vacina mx-1 text-body-emphasis"
-                        (click)="copyToClipboard(row.nomeVacina)"
-                        [ngClass]="{ 'copied': copiedValue === row.nomeVacina }"
+                        (click)="toggleSelecionado(row.nomeVacina)"
+                        [ngClass]="{
+                            'selecionado': selectedNomesVacinas.includes(row.nomeVacina),
+                            'copied': copiedValue === row.nomeVacina
+                        }"
                         [title]="row.nomeVacina"
                     >
                         {{ row.nomeVacina }}
@@ -78,7 +81,8 @@
                         [ngClass]="{ 'copied': copiedValue === row.validade }"
                         [title]="row.validade"
                     >
-                        {{ row.validade | slice:0:8 }}
+                        <!-- {{ row.validade | slice:0:8 }} -->
+                        {{ row.validade | truncate:8 }}
                     </div>
 
                     <div class="div__select d-none">
@@ -92,7 +96,7 @@
                         </select>
                     </div>
 
-                    <button class="btn btn-outline-secondary btn__letter me-1" 
+                    <button class="btn btn-outline-secondary btn__letter me-1 btn__list" 
                         (click)="toggleLetter(i)" title="Alternar posição"
                         [ngClass]="{
                             'letter-empty': !row.opcaoSelecionada || row.opcaoSelecionada === '-',
@@ -103,7 +107,7 @@
                         {{ row.opcaoSelecionada || '-' }}
                     </button>
 
-                    <button class="btn btn__drag" cdkDragHandle title="Arrastar para mover" arial-label="Arrastar para mover linha">
+                    <button class="btn btn__drag btn__list" cdkDragHandle title="Arrastar para mover" arial-label="Arrastar para mover linha">
                         <mat-icon>drag_indicator</mat-icon>
                     </button>
                 }

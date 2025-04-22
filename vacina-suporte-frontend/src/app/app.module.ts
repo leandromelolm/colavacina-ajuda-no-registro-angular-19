@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MatIconModule } from '@angular/material/icon';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/homecomponent';
@@ -29,7 +30,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     MatIconModule,
     FormsModule,
     MatProgressSpinnerModule,
-    DragDropModule
+    DragDropModule,
+    MatChipsModule
   ],
   providers: [
     provideClientHydration(withEventReplay())

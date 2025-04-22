@@ -95,6 +95,13 @@ button {
     100% { opacity: 0; }
 }
 
+.div_vacina.selecionado {
+    background-color: #abc7ff;
+    border-radius: 8px;
+    padding: 4px 8px;
+    transition: background-color 0.3s ease;
+}
+
 .div__text {
     align-content: center;
     min-width:  10%;
