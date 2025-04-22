@@ -55,6 +55,7 @@
                         class="div__text div_vacina mx-1 text-body-emphasis"
                         (click)="copyToClipboard(row.nomeVacina)"
                         [ngClass]="{ 'copied': copiedValue === row.nomeVacina }"
+                        [title]="row.nomeVacina"
                     >
                         {{ row.nomeVacina }}
                         @if (isSubcutanea(row.nomeVacina)) {
@@ -66,16 +67,18 @@
                         class="div__text div_lote me-1 fw-medium"
                         (click)="copyToClipboard(row.lote)"
                         [ngClass]="{ 'copied': copiedValue === row.lote }"
+                        title={{row.lote}}
                     >
-                        {{ row.lote }}
+                        {{ row.lote | truncate:20 }}
                     </div>
 
                     <div
                         class="div__text div_validade text-body-secondary"
                         (click)="copyToClipboard(row.validade)"
                         [ngClass]="{ 'copied': copiedValue === row.validade }"
+                        [title]="row.validade"
                     >
-                        {{ row.validade }}
+                        {{ row.validade | slice:0:8 }}
                     </div>
 
                     <div class="div__select d-none">

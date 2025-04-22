@@ -12,6 +12,7 @@ import { HomeComponent } from './pages/home/homecomponent';
 import { PlanilhaComponent } from './components/planilha/planilha.component';
 import { RowComponent } from './components/row/row.component';
 import { ToastMessageComponent } from './components/toast-message/toast-message.component';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ToastMessageComponent } from './components/toast-message/toast-message.
     HomeComponent,
     PlanilhaComponent,
     RowComponent,
-    ToastMessageComponent
+    ToastMessageComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,
