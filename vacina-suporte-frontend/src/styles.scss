@@ -60,12 +60,20 @@ input {
     vertical-align: middle;
     height: 40px;
     animation: pulse 0.6s infinite ease-in-out;
+
+    &:hover {
+        color: white !important;
+    }
 }
 
 .green-icon {
     color: green !important;
     vertical-align: middle;
     height: 40px;
+
+    &:hover {
+        color: white !important;
+    }
 }
 
 @keyframes pulse {

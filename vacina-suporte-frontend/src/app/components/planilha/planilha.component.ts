@@ -47,7 +47,7 @@ export class PlanilhaComponent {
   showRow = true;
   selectedNomesVacinas: string[] = [];
   selectedLotes: string[] = [];
-  hiddenDivId: boolean = false;
+  hiddenDivId: boolean = true;
 
   toggleLetter(index: number): void {
     const row = this.rows[index];
