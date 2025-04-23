@@ -47,6 +47,7 @@ export class PlanilhaComponent {
   showRow = true;
   selectedNomesVacinas: string[] = [];
   selectedLotes: string[] = [];
+  hiddenDivId: boolean = false;
 
   toggleLetter(index: number): void {
     const row = this.rows[index];
@@ -332,6 +333,11 @@ export class PlanilhaComponent {
     ].join(',');
 
     window.open(url, nomeJanela, features);
+  }
+
+  info() {
+    console.log('info', this.hiddenDivId)
+    this.hiddenDivId = !this.hiddenDivId;
   }
 
 }

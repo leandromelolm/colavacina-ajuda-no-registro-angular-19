@@ -21,13 +21,18 @@
             <button class="btn btn-outline-primary btn__list" (click)="updateRows()" title="Recarregar lista local">
                 <mat-icon>refresh</mat-icon>
             </button>
+            <button class="btn btn-outline-primary btn__list" (click)="info()" title="Informações">
+                <mat-icon>info</mat-icon>
+            </button>
         </div>
         <app-row
             [ngClass]="{ 'visible-row': showRow, 'hidden-row': !showRow }"
             (dataChanged)="handleRowChange($event, 0)"
             ngSkipHydration>
         </app-row>
-        <div class="text-center div__id">{{listaVacinasId}}</div>
+
+        <div class="text-center div__id" [hidden]="hiddenDivId">ID: {{listaVacinasId}}</div>
+
     </div>
     
     <p></p>
