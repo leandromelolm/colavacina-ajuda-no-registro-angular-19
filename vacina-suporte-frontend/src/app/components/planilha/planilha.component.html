@@ -9,7 +9,7 @@
                     <mat-spinner></mat-spinner>
                 }
             </button>
-            <button class="btn btn-outline-primary me-1 btn__list" (click)="saveListAlert()" title="Salvar lista">
+            <button class="btn btn-outline-primary me-1 btn__list btn__upload" (click)="saveListAlert()" title="Salvar lista">
                 <mat-icon [ngClass]="{ 'red-icon': isChanged, 'green-icon': !isChanged }">upload</mat-icon>
             </button>
             <button class="btn btn-outline-danger me-1 btn__list" (click)="clearAllChecks()" title="Limpar seleção">
