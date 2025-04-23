@@ -1,7 +1,22 @@
+.div_container {
+    padding: 4px 2px;
+    background-color: #243140; // #f1f1f7
+}
 
 input {
-    width: 25%;
     margin: 0 1px;
+}
+
+.input_vacina {
+    width: 30%;
+}
+
+.input_lote {
+    width: 30%;
+}
+
+.input_validade {
+    width: 20%;
 }
 
 .copyable {

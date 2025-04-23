@@ -1,6 +1,29 @@
-.container {
+.div__buttons {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #243140;
+    padding: 0px 0px;
+}
+
+.div__btn {
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: content-box;
+    display: flex;
+    padding: 2px 0px;
+}
+
+app-row {
+    display: block;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     max-width: 700px;
-    padding: 0 8px;
+    place-self: center;
+}
+
+.div__id {
+    color: #d4edda;
 }
 
 .input__size-row {
@@ -10,19 +33,6 @@
 .input__id {
     height: clamp(36px, 6vw, 48px);    
     width: clamp(90px, 6vw, 120px);
-}
-
-.btn_config {
-    align-content: center;
-    justify-content: center;
-    text-align: center;
-    box-sizing: content-box;
-    display: flex;
-}
-
-button {
-    border-radius: 10px;
-    margin: 0px;
 }
 
 .input_vacina {
@@ -74,7 +84,7 @@ button {
 }
 
 .div__list {
-    // max-width: 700px;
+    max-width: 700px;
     margin: auto;
 }
 
@@ -98,8 +108,23 @@ button {
 .div_vacina.selecionado {
     background-color: #abc7ff;
     border-radius: 8px;
-    padding: 4px 8px;
+    padding: 3px 4px;
     transition: background-color 0.3s ease;
+}
+
+.selecionado-lote {
+    background-color:#007bff1a;
+    border-radius: 8px;
+    padding: 3px 4px;
+    transition: background-color 0.3s ease;
+}
+
+.copied {
+    background-color: #7edf77;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    animation: pulseCopy 0.4s ease;
+    padding: 4px 4px;
 }
 
 .div__text {
@@ -166,13 +191,6 @@ mat-spinner {
     border-radius: 4px;
     padding: 4px;
 }
-
-.copied {
-    background-color: #7edf77;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    animation: pulseCopy 0.4s ease;
-}
   
 @keyframes pulseCopy {
     0% {
@@ -184,19 +202,6 @@ mat-spinner {
     100% {
       transform: scale(1);
     }
-}
-
-.div__buttons {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: #f0f0f5;
-    padding-bottom: 2px;
-}
-
-app-row {
-    display: block;
-    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .hidden-row {

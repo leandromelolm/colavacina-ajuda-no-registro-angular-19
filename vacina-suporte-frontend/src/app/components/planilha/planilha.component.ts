@@ -46,6 +46,7 @@ export class PlanilhaComponent {
   letterStates: string[] = ['-', 'E', 'D'];
   showRow = true;
   selectedNomesVacinas: string[] = [];
+  selectedLotes: string[] = [];
 
   toggleLetter(index: number): void {
     const row = this.rows[index];
@@ -57,11 +58,15 @@ export class PlanilhaComponent {
     // this.isChanged = true;
   }
 
+  onClickLote(text: string) {
+    this.copyToClipboard(text);
+    this.toggleSelectedLote(text);
+  }
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.showRow = window.pageYOffset === 0;
   }
-
 
   toggleSelecionado(nomeVacina: string) {
     const index = this.selectedNomesVacinas.indexOf(nomeVacina);
@@ -73,8 +78,35 @@ export class PlanilhaComponent {
     }
   }
 
-  clearAllSelecoes() {
+  clearAllSelelectedVacina() {
     this.selectedNomesVacinas = [];
+  }
+
+  toggleSelectedLote(lote: string) {
+    const idx = this.selectedLotes.indexOf(lote);
+    if (idx === -1) {
+      this.selectedLotes.push(lote);
+    } else {
+      this.selectedLotes.splice(idx, 1);
+    }
+  }
+
+  clearAllSelectedLote() {
+    this.selectedLotes = [];
+  }
+
+  resetTodosSelects() {
+    this.rows.forEach(row => {
+      row.opcaoSelecionada = "";
+    });
+  }
+
+  clearAllChecks() {
+    this.rows.forEach(row => row.checked = false);
+    localStorage.setItem('planilhaData', JSON.stringify(this.rows));
+    this.resetTodosSelects();
+    this.clearAllSelelectedVacina();
+    this.clearAllSelectedLote();
   }
 
   updateRows() {
@@ -139,19 +171,6 @@ export class PlanilhaComponent {
       }, 2000);
     }).catch(err => {
       console.error('Erro ao copiar!', err);
-    });
-  }
-
-  clearAllChecks() {
-    this.rows.forEach(row => row.checked = false);
-    localStorage.setItem('planilhaData', JSON.stringify(this.rows));
-    this.resetTodosSelects();
-    this.clearAllSelecoes();
-  }
-
-  resetTodosSelects() {
-    this.rows.forEach(row => {
-      row.opcaoSelecionada = "";
     });
   }
 

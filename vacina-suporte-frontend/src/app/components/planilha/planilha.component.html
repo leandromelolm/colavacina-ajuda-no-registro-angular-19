@@ -1,6 +1,6 @@
-<div class="container">
+<div>
     <div class="div__buttons">
-        <div class="my-1 div_download btn_config">
+        <div class="div__btn">
             <input class="input__id me-1" type="text" [(ngModel)]="txtId" placeholder="id">
             <button class="btn btn-outline-primary me-1 btn__list" (click)="downloadList(txtId)" title="Baixar lista">
                 @if(!isLoading) {
@@ -27,7 +27,7 @@
             (dataChanged)="handleRowChange($event, 0)"
             ngSkipHydration>
         </app-row>
-        <div class="text-center">{{listaVacinasId}}</div>
+        <div class="text-center div__id">{{listaVacinasId}}</div>
     </div>
     
     <p></p>
@@ -68,13 +68,15 @@
 
                     <div
                         class="div__text div_lote me-1 fw-medium"
-                        (click)="copyToClipboard(row.lote)"
-                        [ngClass]="{ 'copied': copiedValue === row.lote }"
-                        title={{row.lote}}
+                        (click)="onClickLote(row.lote)"
+                        [ngClass]="{
+                            'copied': copiedValue === row.lote,
+                            'selecionado-lote': selectedLotes.includes(row.lote)
+                        }"
+                        title="{{row.lote}}"
                     >
                         {{ row.lote | truncate:20 }}
                     </div>
-
                     <div
                         class="div__text div_validade text-body-secondary"
                         (click)="copyToClipboard(row.validade)"

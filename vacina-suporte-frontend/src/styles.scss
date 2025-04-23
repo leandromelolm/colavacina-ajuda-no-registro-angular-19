@@ -10,6 +10,7 @@ body {
 }
 
 .btn__list {
+    background-color: #f0f0f5;
     border-radius: 15px !important;
     height: clamp(36px, 6vw, 48px);
     width: clamp(36px, 6vw, 48px);
@@ -31,15 +32,6 @@ input {
     height: clamp(36px, 6vw, 48px);
     width: clamp(36px, 6vw, 48px);
 }
-
-input:focus {
-    border: 1px solid aquamarine !important;
-}
-
-input:active {
-    border: 1px solid aquamarine !important;
-}
-
 
 .btn__confirm {
     background-color: #3085d6;
