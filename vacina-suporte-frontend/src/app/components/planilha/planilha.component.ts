@@ -96,6 +96,7 @@ export class PlanilhaComponent {
   }
 
   resetTodosSelects() {
+    this.copiedValue = '';
     this.rows.forEach(row => {
       row.opcaoSelecionada = "";
     });
