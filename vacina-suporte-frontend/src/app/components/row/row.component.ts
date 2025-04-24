@@ -46,7 +46,7 @@ export class RowComponent {
     this.dataChanged.emit({
       nomeVacina: this.txtNomeVacina,
       lote: this.txtLote,
-      validade: this.txtDataValidade,
+      validade: this.txtDataValidade || "-",
       checked: false,
       isEditMode: false
     });
@@ -72,7 +72,7 @@ export class RowComponent {
   }
 
   verifyInput(): boolean {
-    if(this.txtNomeVacina && this.txtLote && this.txtDataValidade) return true
+    if(this.txtNomeVacina && this.txtLote) return true
     else return false
   }
 

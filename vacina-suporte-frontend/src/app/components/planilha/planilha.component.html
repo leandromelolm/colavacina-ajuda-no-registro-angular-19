@@ -1,7 +1,7 @@
 <div>
     <div class="div__buttons">
         <div class="div__btn">
-            <input class="input__id me-1" type="text" [(ngModel)]="txtId" placeholder="id">
+            <input class="input__id me-1" type="search" [(ngModel)]="txtId" placeholder="id">
             <button class="btn btn-outline-primary me-1 btn__list" (click)="downloadList(txtId)" title="Baixar lista">
                 @if(!isLoading) {
                     <mat-icon>download</mat-icon>
@@ -21,17 +21,27 @@
             <button class="btn btn-outline-primary me-1 btn__list" (click)="updateRows()" title="Recarregar lista local">
                 <mat-icon>refresh</mat-icon>
             </button>
-            <button class="btn btn-outline-primary btn__list" (click)="info()" title="Informações">
+            <button class="btn btn-outline-info me-1 btn__list" (click)="moreVertical()" title="∙∙∙ Mais">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <button [hidden]="isHiddenDiv" class="btn btn-outline-warning btn__list" (click)="openSheet()" title="Informações ">
                 <mat-icon>info</mat-icon>
             </button>
         </div>
-        <app-row
-            [ngClass]="{ 'visible-row': showRow, 'hidden-row': !showRow }"
-            (dataChanged)="handleRowChange($event, 0)"
-            ngSkipHydration>
-        </app-row>
+        <div [hidden]="isHiddenDiv">
+            <div class="more__vert">        
+                <app-row (dataChanged)="handleRowChange($event, 0)" ngSkipHydration>
+                </app-row>
+            </div>
+        </div>
 
-        <div class="text-center div__id no_select" [hidden]="hiddenDivId">ID: {{listaVacinasId}}</div>
+        <div [ngClass]="{ 'visible-row': showRow, 'hidden-row': !showRow }">        
+            <div class="div__info">
+                <div class="text-center div__id no_select me-1" *ngIf="listaVacinasId">
+                    ID {{listaVacinasId}}
+                </div>
+            </div>
+        </div>
 
     </div>
     
@@ -49,9 +59,9 @@
                     <mat-icon>{{ row.checked ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
                 </button>
                 @if (isEditMode) {
-                    <input class="input_vacina" type="text" [(ngModel)]="row.nomeVacina" placeholder="Nome da Vacina">
-                    <input class="input_lote" type="text" [(ngModel)]="row.lote" placeholder="Lote">
-                    <input class="input_validade" type="text" [(ngModel)]="row.validade" placeholder="Validade">
+                    <input class="input_vacina" type="search" [(ngModel)]="row.nomeVacina" placeholder="Nome da Vacina">
+                    <input class="input_lote" type="search" [(ngModel)]="row.lote" placeholder="Lote">
+                    <input class="input_validade" type="search" [(ngModel)]="row.validade" placeholder="Validade">
                     <button class="btn btn-outline-danger btn__delete" (click)="confirmDelete(i, row.nomeVacina)">
                         <mat-icon>delete</mat-icon>
                     </button>

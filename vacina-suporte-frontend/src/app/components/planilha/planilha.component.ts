@@ -1,6 +1,8 @@
 import { Component, HostListener, QueryList, ViewChildren } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import Swal from 'sweetalert2';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 
 interface RowData {
   nomeVacina: string;
@@ -47,7 +49,22 @@ export class PlanilhaComponent {
   showRow = true;
   selectedNomesVacinas: string[] = [];
   selectedLotes: string[] = [];
-  hiddenDivId: boolean = true;
+  isHiddenDiv: boolean = true;
+
+  constructor(private bottomSheet: MatBottomSheet) {}
+
+  openSheet(): void {
+    const sheetRef = this.bottomSheet.open(BottomSheetComponent, {
+      data: {id: this.listaVacinasId}
+    });
+
+    sheetRef.afterDismissed().subscribe((resultado) => {
+      if (resultado) {
+        console.log('Valor retornado do bottom-sheet:', resultado);
+        this.handleRowChange(resultado, 0);
+      }
+    });
+  }
 
   toggleLetter(index: number): void {
     const row = this.rows[index];
@@ -298,7 +315,7 @@ export class PlanilhaComponent {
     }).then(result => {
       if (result.isConfirmed) {
         this.deleteRow(index);
-        Swal.fire('Deletado!', 'O item foi removido.', 'success');
+        // Swal.fire('Deletado!', 'O item foi removido.', 'success');
       }
     });
   }
@@ -335,9 +352,9 @@ export class PlanilhaComponent {
     window.open(url, nomeJanela, features);
   }
 
-  info() {
-    console.log('info', this.hiddenDivId)
-    this.hiddenDivId = !this.hiddenDivId;
+  moreVertical() {
+    console.log('info', this.isHiddenDiv)
+    this.isHiddenDiv = !this.isHiddenDiv;
   }
 
 }

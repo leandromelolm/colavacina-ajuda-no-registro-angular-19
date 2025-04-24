@@ -1,0 +1,8 @@
+<div class="container">
+    <h3>{{data.id}}</h3>
+    <app-row
+        (dataChanged)="handleRowChange($event)"
+        ngSkipHydration>
+    </app-row>
+    <button class="btn" (click)="testeEnviarOutroComponente('enviar para outro componente')">Fechar</button>
+</div>

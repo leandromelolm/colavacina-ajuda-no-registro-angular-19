@@ -12,7 +12,7 @@
     text-align: center;
     box-sizing: content-box;
     display: flex;
-    padding: 2px 0px;
+    padding: 4px 0px;
 }
 
 app-row {
@@ -222,4 +222,18 @@ mat-spinner {
 .no_select {
     user-select: none;
     -webkit-user-select: none; /* Para Safari */
+}
+
+.more__vert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0px;
+}
+
+.div__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0px;
 }
