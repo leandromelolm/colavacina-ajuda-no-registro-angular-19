@@ -31,7 +31,7 @@
             ngSkipHydration>
         </app-row>
 
-        <div class="text-center div__id" [hidden]="hiddenDivId">ID: {{listaVacinasId}}</div>
+        <div class="text-center div__id no_select" [hidden]="hiddenDivId">ID: {{listaVacinasId}}</div>
 
     </div>
     
@@ -57,11 +57,10 @@
                     </button>
                 } @else {
                     <div
-                        class="div__text div_vacina mx-1 text-body-emphasis"
+                        class="mx-1 text-body-emphasis div__text div_vacina no_select"
                         (click)="toggleSelecionado(row.nomeVacina)"
                         [ngClass]="{
                             'selecionado': selectedNomesVacinas.includes(row.nomeVacina),
-                            'copied': copiedValue === row.nomeVacina
                         }"
                         [title]="row.nomeVacina"
                     >
@@ -72,7 +71,7 @@
                     </div>
 
                     <div
-                        class="div__text div_lote me-1 fw-medium"
+                        class="me-1 fw-medium div__text div_lote curso_copy no_select"
                         (click)="onClickLote(row.lote)"
                         [ngClass]="{
                             'copied': copiedValue === row.lote,
@@ -83,7 +82,7 @@
                         {{ row.lote | truncate:20 }}
                     </div>
                     <div
-                        class="div__text div_validade text-body-secondary"
+                        class="text-body-secondary div__text div_validade curso_copy"
                         (click)="copyToClipboard(row.validade)"
                         [ngClass]="{ 'copied': copiedValue === row.validade }"
                         [title]="row.validade"

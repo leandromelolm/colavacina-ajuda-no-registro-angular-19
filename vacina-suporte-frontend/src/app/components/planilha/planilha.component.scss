@@ -130,6 +130,9 @@ app-row {
 .div__text {
     align-content: center;
     min-width:  10%;
+}
+
+.curso_copy {
     cursor: copy;
 }
 
@@ -214,4 +217,9 @@ mat-spinner {
 .visible-row {
     opacity: 1;
     transform: translateY(0);
+}
+
+.no_select {
+    user-select: none;
+    -webkit-user-select: none; /* Para Safari */
 }
