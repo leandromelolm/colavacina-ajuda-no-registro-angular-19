@@ -14,10 +14,6 @@ export class BottomSheetComponent {
     private bottomSheetRef: MatBottomSheetRef<BottomSheetComponent>
   ) {}
 
-  testeEnviarOutroComponente(option: string): void {
-    this.bottomSheetRef.dismiss(option);
-  }
-
   handleRowChange(data: any): void {
     this.bottomSheetRef.dismiss(data);
   }
