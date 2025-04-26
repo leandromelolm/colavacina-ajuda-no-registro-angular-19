@@ -24,6 +24,9 @@
             <button class="btn btn-outline-info me-1 btn__list" (click)="moreVertical()" title="∙∙∙ Mais">
                 <mat-icon>more_vert</mat-icon>
             </button>
+            <button [hidden]="isHiddenDiv" class="btn btn-outline-warning btn__list me-1" (click)="windowOpen()" title="Redimensionar ">
+                <mat-icon>vertical_split</mat-icon>
+            </button>
             <button [hidden]="isHiddenDiv" class="btn btn-outline-warning btn__list" (click)="openSheet()" title="Informações ">
                 <mat-icon>info</mat-icon>
             </button>

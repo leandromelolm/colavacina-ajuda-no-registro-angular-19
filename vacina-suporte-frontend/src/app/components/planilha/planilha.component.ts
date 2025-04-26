@@ -53,6 +53,10 @@ export class PlanilhaComponent {
 
   constructor(private bottomSheet: MatBottomSheet) {}
 
+  ngOnInit() {
+    this.getUrl();
+  }
+
   openSheet(): void {
     const sheetRef = this.bottomSheet.open(BottomSheetComponent, {
       data: {id: this.listaVacinasId}
@@ -333,14 +337,32 @@ export class PlanilhaComponent {
     this.isChanged = true;
   }
 
+  getUrl() {
+    let urlParams = new URLSearchParams(window.location.search)
+    let d = urlParams.get('d') || null;
+    if (d){
+      sessionStorage.setItem('d', d);
+      localStorage.setItem('listaVacinasId', d);
+      this.updateRows()
+    }
+  }
+  
+  clearSessionStorage() {
+    sessionStorage.clear();
+  }
+
   windowOpen() {
-    const url = 'https://colavacina.web.app';
+    const url = `${window.location.origin}/?d=${this.listaVacinasId}`;
     const nomeJanela = 'mobileView';
+    const screenHeight = window.screen.availHeight;
+    const screenWidth = window.screen.availWidth; 
+    const windowWidth = 375;                          // largura fixa que você quer
+    const left = screenWidth - windowWidth; 
     const features = [
       'width=375',           // largura típica de um iPhone SE em px
-      'height=667',          // altura típica
-      'top=100',             // distância do topo da tela
-      'right=0',
+      `height=${screenHeight}`,
+      'top=5',             // distância do topo da tela
+      `left=${left}`,
       'resizable=yes',       // permite redimensionar
       'scrollbars=yes',      // habilita barras de rolagem
       'toolbar=no',          // esconde barra de ferramentas
