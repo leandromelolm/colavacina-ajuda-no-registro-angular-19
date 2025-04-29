@@ -16,6 +16,7 @@ import { RowComponent } from './components/row/row.component';
 import { ToastMessageComponent } from './components/toast-message/toast-message.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { BottomSheetComponent } from './components/bottom-sheet/bottom-sheet.component';
+import { CalendarioVacinaComponent } from './components/calendario-vacina/calendario-vacina.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BottomSheetComponent } from './components/bottom-sheet/bottom-sheet.com
     RowComponent,
     ToastMessageComponent,
     TruncatePipe,
-    BottomSheetComponent
+    BottomSheetComponent,
+    CalendarioVacinaComponent
   ],
   imports: [
     BrowserModule,

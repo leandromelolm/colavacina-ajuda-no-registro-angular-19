@@ -1,0 +1,22 @@
+<p>calendario-vacina works!</p>
+<div class="container mt-5">
+    <h2>Lista de Vacinas</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Vacina</th>
+                <th>Dose</th>
+                <th>Faixa Etária</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let vaccine of vaccines">
+                <td>{{ vaccine.vacina }}</td>
+                <td>{{ vaccine.dose || 'N/A' }}</td>
+                <td>{{ vaccine.faixa }}</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>

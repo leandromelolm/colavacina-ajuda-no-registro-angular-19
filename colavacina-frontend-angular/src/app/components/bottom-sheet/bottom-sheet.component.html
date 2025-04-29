@@ -1,8 +1,9 @@
 <div class="container">
     <h3>Em Desenvolvimento</h3>
+    <app-calendario-vacina></app-calendario-vacina>
     <h3>{{data.id}}</h3>
     <app-row
         (dataChanged)="handleRowChange($event)"
-        ngSkipHydration>
+        ngSkipHydration hidden="true">
     </app-row>
 </div>
