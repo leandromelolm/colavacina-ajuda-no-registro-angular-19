@@ -1,4 +1,9 @@
-<p>calendario-vacina works!</p>
+
+<div hidden="true">
+    <button class="btn__crianca" (click)="filtrar('Criança')">Criança</button>
+    <div id="listVacinaSimplificada" [innerHTML]="popoverListHtml"></div>
+</div>
+
 <div class="container mt-5">
     <h2>Lista de Vacinas</h2>
     <div class="table-responsive">
@@ -7,7 +12,9 @@
             <tr>
                 <th>Vacina</th>
                 <th>Dose</th>
-                <th>Faixa Etária</th>
+                <th>Faixa</th>
+                <th>Idade Min Ano</th>
+                <th>Idade Min Mês</th>
             </tr>
         </thead>
         <tbody>
@@ -15,6 +22,8 @@
                 <td>{{ vaccine.vacina }}</td>
                 <td>{{ vaccine.dose || 'N/A' }}</td>
                 <td>{{ vaccine.faixa }}</td>
+                <td>{{ vaccine.idade_ano_minimo }}</td>
+                <td>{{ vaccine.idade_mes_minimo }}</td>
             </tr>
         </tbody>
         </table>

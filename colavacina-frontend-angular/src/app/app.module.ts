@@ -17,6 +17,7 @@ import { ToastMessageComponent } from './components/toast-message/toast-message.
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { BottomSheetComponent } from './components/bottom-sheet/bottom-sheet.component';
 import { CalendarioVacinaComponent } from './components/calendario-vacina/calendario-vacina.component';
+import { EsquemaVacinaComponent } from './components/esquema-vacina/esquema-vacina.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CalendarioVacinaComponent } from './components/calendario-vacina/calend
     ToastMessageComponent,
     TruncatePipe,
     BottomSheetComponent,
-    CalendarioVacinaComponent
+    CalendarioVacinaComponent,
+    EsquemaVacinaComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,7 @@ import { CalendarioVacinaComponent } from './components/calendario-vacina/calend
     MatProgressSpinnerModule,
     DragDropModule,
     MatChipsModule,
-    MatBottomSheetModule
+    MatBottomSheetModule   
   ],
   providers: [
     provideClientHydration(withEventReplay())

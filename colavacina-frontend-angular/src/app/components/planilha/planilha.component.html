@@ -15,21 +15,23 @@
             <button class="btn btn-outline-danger me-1 btn__list" (click)="clearAllChecks()" title="Limpar seleção">
                 <mat-icon>clear</mat-icon>
             </button>
-            <button class="btn btn-outline-secondary me-1 btn__list" id="edit" (click)="toggleEditMode()" title="Editar lista">
-                <mat-icon>edit</mat-icon>
+            <button class="btn btn-outline-warning me-1 btn__list" (click)="openSheet()" title="Informações ">
+                <mat-icon>info</mat-icon>
             </button>
-            <button class="btn btn-outline-primary me-1 btn__list" (click)="updateRows()" title="Recarregar lista local">
-                <mat-icon>refresh</mat-icon>
-            </button>
+
             <button class="btn btn-outline-info me-1 btn__list" (click)="moreVertical()" title="∙∙∙ Mais">
                 <mat-icon>more_vert</mat-icon>
+            </button>
+            <button [hidden]="isHiddenDiv" class="btn btn-outline-primary me-1 btn__list" (click)="updateRows()" title="Recarregar lista local">
+                <mat-icon>refresh</mat-icon>
+            </button>
+            <button [hidden]="isHiddenDiv" class="btn btn-outline-secondary me-1 btn__list" id="edit" (click)="toggleEditMode()" title="Editar lista">
+                <mat-icon>edit</mat-icon>
             </button>
             <button [hidden]="isHiddenDiv" class="btn btn-outline-warning btn__list me-1" (click)="windowOpen()" title="Redimensionar ">
                 <mat-icon>vertical_split</mat-icon>
             </button>
-            <button [hidden]="isHiddenDiv" class="btn btn-outline-warning btn__list" (click)="openSheet()" title="Informações ">
-                <mat-icon>info</mat-icon>
-            </button>
+
         </div>
         <div [hidden]="isHiddenDiv">
             <div class="more__vert">        
