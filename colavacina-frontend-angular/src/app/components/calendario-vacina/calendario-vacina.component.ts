@@ -19,7 +19,7 @@ export class CalendarioVacinaComponent {
   vacinasOrdenadaPorIdade: VacinaCompleta[] = []; // Preencha com seus dados
   gruposVacinas: GrupoVacinas[] = [];
 
-  faixasDisponiveis: string[] = ['Criança', 'Adolescente', 'Adulto', 'Idoso'];
+  faixasDisponiveis: string[] = ['Criança', 'Adolescente', 'Adulto', 'Idoso', 'Gestante'];
   faixaSelecionada: string = 'Criança';
 
   constructor(
