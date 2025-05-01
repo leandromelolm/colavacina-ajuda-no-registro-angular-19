@@ -301,7 +301,7 @@ export class PlanilhaComponent {
   }
 
   isSubcutanea(vacina: string): boolean {
-    const subcutaneas = ["FA", "SRC", "Varicela"];
+    const subcutaneas = ["FA", "SRC", "Varicela", "SRCV"];
 
     const palavras = vacina
       .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // remove acentos
