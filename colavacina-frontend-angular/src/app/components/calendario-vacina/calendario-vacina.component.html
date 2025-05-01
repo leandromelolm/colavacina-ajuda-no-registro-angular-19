@@ -42,7 +42,7 @@
           <button *ngFor="let vacina of grupo.vacinas"
                 (click)="abrirDetalhes(vacina)"
                 class="btn btn-outline-success m-1">
-            {{ vacina.vacina }} ({{ vacina.dose }})
+            {{ vacina.vacina }} {{ vacina.dose ? ' (' + vacina.dose + ')' : '' }}
           </button>
         </ul>
     </div>
