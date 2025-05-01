@@ -33,7 +33,7 @@ export class PlanilhaComponent {
   isEditMode: boolean = false;
   isLoading: boolean = false;
   isChanged: boolean = false;
-  copiedValue: string = "";
+  copiedValue: string = '';
   copiedMessage: string = '';
   txtToastMessage: string = '';
   opcoes = [
@@ -46,7 +46,7 @@ export class PlanilhaComponent {
     { id: '6', nome: 'V D', descricao: 'Vasto Lateral Direito' },
   ];
 
-  letterStates: string[] = ['-', 'E', 'D'];
+  letterStates: string[] = ['-', 'D', 'E'];
   showRow = true;
   selectedNomesVacinas: string[] = [];
   selectedLotes: string[] = [];
@@ -98,7 +98,6 @@ export class PlanilhaComponent {
 
   toggleSelecionado(nomeVacina: string) {
     const index = this.selectedNomesVacinas.indexOf(nomeVacina);
-
     if (index === -1) {
       this.selectedNomesVacinas.push(nomeVacina);
     } else {
@@ -185,6 +184,9 @@ export class PlanilhaComponent {
 
   toggleEditMode() {
     this.isEditMode = !this.isEditMode;
+    if(this.rows.length == 0){
+      return this.messageToast('lista vazia');
+    }
     if (!this.isEditMode) {
       localStorage.setItem('planilhaData', JSON.stringify(this.rows));
       this.isChanged = true;

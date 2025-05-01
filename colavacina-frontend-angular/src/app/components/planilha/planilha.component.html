@@ -15,7 +15,7 @@
             <button class="btn btn-outline-danger me-1 btn__list" (click)="clearAllChecks()" title="Limpar seleção">
                 <mat-icon>clear</mat-icon>
             </button>
-            <button class="btn btn-outline-warning me-1 btn__list" (click)="openSheet()" title="Informações ">
+            <button class="btn btn-outline-warning me-1 btn__list" (click)="openSheet()" title="Informações calendário de vacina">
                 <mat-icon>info</mat-icon>
             </button>
 
@@ -26,7 +26,7 @@
                 <mat-icon>refresh</mat-icon>
             </button>
             <button [hidden]="isHiddenDiv" class="btn btn-outline-secondary me-1 btn__list" id="edit" (click)="toggleEditMode()" title="Editar lista">
-                <mat-icon>edit</mat-icon>
+                @if(!this.isEditMode){<mat-icon>edit</mat-icon>} @else {<mat-icon class="red-icon">save_as</mat-icon>}
             </button>
             <button [hidden]="isHiddenDiv" class="btn btn-outline-warning btn__list me-1" (click)="windowOpen()" title="Redimensionar ">
                 <mat-icon>vertical_split</mat-icon>
@@ -89,7 +89,7 @@
                         class="me-1 fw-medium div__text div_lote curso_copy no_select"
                         (click)="onClickLote(row.lote)"
                         [ngClass]="{
-                            'copied': copiedValue === row.lote,
+                            'copied': copiedValue === row.lote && !!row.lote,
                             'selecionado-lote': selectedLotes.includes(row.lote)
                         }"
                         title="{{row.lote}}"

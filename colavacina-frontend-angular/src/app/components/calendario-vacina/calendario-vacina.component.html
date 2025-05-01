@@ -26,7 +26,7 @@
     <div *ngFor="let grupo of gruposVacinas">
         <h5>
             <ng-container *ngIf="grupo.idade_ano === 0 && grupo.idade_mes === 0; else idadeNormal">
-              ao nascer
+              Ao nascer
             </ng-container>
             <ng-template #idadeNormal>
               <ng-container *ngIf="grupo.idade_ano > 0">
