@@ -1,0 +1,52 @@
+<div class="div__container">
+    <h5>{{ vacina.vacina }}</h5>
+
+    <div class="d-grid my-2">
+        <b>Sigla:</b>
+        <div>{{ vacina.vacina_sigla }}</div>
+        <b>Dose:</b>
+        <div>{{  vacina.dose }}</div>
+    </div>
+    <div class="d-grid my-2">
+        <b>Faixa:</b>
+        <div>{{ vacina.faixa }}</div>
+    </div>    
+    <div class="d-grid my-2">
+        <b>Observação:</b>
+        <div>{{ vacina.observacao }}</div>
+    </div>
+    <div class="d-grid my-2">
+        <b>Informações:</b>
+        <div>{{ vacina.informacoes_complementares }}</div>
+    </div>
+    <div class="d-grid my-2">
+        <b>Via administração:</b>
+        <div>{{ vacina.via_de_administracao }}</div>
+    </div>
+    <div class="d-grid my-2">
+        <b>Local administração:</b>
+        <div>{{ vacina.local_de_administracao }}</div>
+    </div>
+</div>
+
+
+<!--
+  id: number;
+  vacina: string;
+  vacina_sigla: string;
+  dose: string;
+  idade_ano_minimo: number;
+  idade_mes_minimo: number;
+  idade_ano_maximo: string;
+  idade_mes_maximo: string;
+  faixa: string;
+  categoria: string;
+  grupo_de_atendimento: string;
+  grupo: string;
+  observacao: string;
+  informacoes_complementares: string;
+  via_de_administracao: string;
+  local_de_administracao: string;
+  lote: string;
+  validade: string;
+-->

@@ -1,8 +1,54 @@
 
-<div hidden="true">
-    <button class="btn__crianca" (click)="filtrar('Criança')">Criança</button>
-    <div id="listVacinaSimplificada" [innerHTML]="popoverListHtml"></div>
+<h5>Vacinas Calendário</h5>
+<p>
+    Consulte o calendário de vacina do Ministério da Saúde
+    <a href="https://www.gov.br/saude/pt-br/vacinacao/calendario" target="_blank" rel="noopener noreferrer">aqui</a>.
+</p>
+
+<hr>
+
+<label for="faixa">Filtrar:</label>
+<select 
+    [(ngModel)]="faixaSelecionada"
+    id="faixa"
+    (ngModelChange)="filtrarPorGrupoEtario($event)"
+    class="select__faixa">
+  <option *ngFor="let faixa of faixasDisponiveis" [value]="faixa">
+    {{ faixa }}
+  </option>
+</select>
+
+<button (click)="filtrarPorGrupoEtario(faixaSelecionada)" class="btn btn-outline-secondary">Filtrar</button>
+
+<hr>
+
+<div>
+    <div *ngFor="let grupo of gruposVacinas">
+        <h5>
+            <ng-container *ngIf="grupo.idade_ano === 0 && grupo.idade_mes === 0; else idadeNormal">
+              ao nascer
+            </ng-container>
+            <ng-template #idadeNormal>
+              <ng-container *ngIf="grupo.idade_ano > 0">
+                {{ grupo.idade_ano }} {{ grupo.idade_ano === 1 ? 'ano' : 'anos' }}
+              </ng-container>
+              <ng-container *ngIf="grupo.idade_mes > 0">
+                <span *ngIf="grupo.idade_ano > 0">e </span>
+                {{ grupo.idade_mes }} {{ grupo.idade_mes === 1 ? 'mês' : 'meses' }}
+              </ng-container>
+            </ng-template>
+          </h5>         
+        <ul>
+          <button *ngFor="let vacina of grupo.vacinas"
+                (click)="abrirDetalhes(vacina)"
+                class="btn btn-outline-success m-1">
+            {{ vacina.vacina }} ({{ vacina.dose }})
+          </button>
+        </ul>
+    </div>
 </div>
+
+<hr>
 
 <div class="container mt-5">
     <h2>Lista de Vacinas</h2>
@@ -13,8 +59,8 @@
                 <th>Vacina</th>
                 <th>Dose</th>
                 <th>Faixa</th>
-                <th>Idade Min Ano</th>
-                <th>Idade Min Mês</th>
+                <th>Ano</th>
+                <th>Mês</th>
             </tr>
         </thead>
         <tbody>

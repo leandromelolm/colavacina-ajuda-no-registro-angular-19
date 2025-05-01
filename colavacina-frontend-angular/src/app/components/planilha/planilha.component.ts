@@ -1,8 +1,9 @@
-import { Component, HostListener, QueryList, ViewChildren } from '@angular/core';
+import { Component, HostListener, Inject, PLATFORM_ID, QueryList, ViewChildren } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import Swal from 'sweetalert2';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
+import { isPlatformBrowser } from '@angular/common';
 
 interface RowData {
   nomeVacina: string;
@@ -51,10 +52,15 @@ export class PlanilhaComponent {
   selectedLotes: string[] = [];
   isHiddenDiv: boolean = true;
 
-  constructor(private bottomSheet: MatBottomSheet) {}
+  constructor(
+    private bottomSheet: MatBottomSheet,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
-    this.getUrl();
+    if (isPlatformBrowser(this.platformId)) {
+      this.getUrl();
+    }
   }
 
   openSheet(): void {

@@ -18,6 +18,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { BottomSheetComponent } from './components/bottom-sheet/bottom-sheet.component';
 import { CalendarioVacinaComponent } from './components/calendario-vacina/calendario-vacina.component';
 import { EsquemaVacinaComponent } from './components/esquema-vacina/esquema-vacina.component';
+import { DetalhesVacinaDialogComponent } from './components/detalhes-vacina-dialog/detalhes-vacina-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { EsquemaVacinaComponent } from './components/esquema-vacina/esquema-vaci
     TruncatePipe,
     BottomSheetComponent,
     CalendarioVacinaComponent,
-    EsquemaVacinaComponent
+    EsquemaVacinaComponent,
+    DetalhesVacinaDialogComponent
   ],
   imports: [
     BrowserModule,

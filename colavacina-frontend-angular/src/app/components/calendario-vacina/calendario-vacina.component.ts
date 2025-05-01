@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { GrupoVacinas, VacinaCompleta, VacinaService } from '../../service/vacina.service';
+import { DetalhesVacinaDialogComponent } from '../detalhes-vacina-dialog/detalhes-vacina-dialog.component';
 
 @Component({
   selector: 'app-calendario-vacina',
@@ -12,6 +15,18 @@ export class CalendarioVacinaComponent {
   popoverListHtml: string = '';
   dados:  any[] = [];
 
+  vacinas: VacinaCompleta[] = []; // Preencha com seus dados
+  vacinasOrdenadaPorIdade: VacinaCompleta[] = []; // Preencha com seus dados
+  gruposVacinas: GrupoVacinas[] = [];
+
+  faixasDisponiveis: string[] = ['Criança', 'Adolescente', 'Adulto', 'Idoso'];
+  faixaSelecionada: string = 'Criança';
+
+  constructor(
+    private vacinaService: VacinaService,
+    private dialog: MatDialog
+  ) {}
+
   ngOnInit() {
     this.checkSessionStorage();
   }
@@ -21,8 +36,8 @@ export class CalendarioVacinaComponent {
     if (vacinas) {
       console.log("vacinas Session", vacinas);
       this.exibirLista(JSON.parse(vacinas));
-      this.createPopoverList(JSON.parse(vacinas));
-      this.dados = JSON.parse(vacinas);
+      this.vacinas = JSON.parse(vacinas);
+      this.carregartabela(this.vacinas);
     } else {
       this.getListaVacinasDoCalendario();
     }
@@ -32,47 +47,49 @@ export class CalendarioVacinaComponent {
     const res = await fetch('https://script.google.com/macros/s/AKfycbyLuUjtOp2eFEB34iHwptYnLgTfEDceyYAeetdSpNAFXtXLZcX-PDVy90iQElM40YQwjw/exec?action=read');
     const data = await res.json();
     sessionStorage.setItem("esquema-vacina", JSON.stringify(data.content));
-    this.exibirLista(data.content);
-    this.createPopoverList(data.content);
+    this.vacinas = data.content;
+    this.carregartabela(data.content);    
+  }
+
+  carregartabela(data: any) {
+    this.vacinasOrdenadaPorIdade = this.ordenarPorGrupo(data);
+    this.filtrarPorGrupoEtario(this.faixaSelecionada);
   }
 
   exibirLista(vacinas: any[]) {
     this.vaccines = vacinas;
   }
 
-  createPopoverList(lista: any[]) {
-    const list = lista.map(e => `
-      <a tabindex="0"
-        class="btn btn-sm btn-outline my-1 btn__${e.id.toString().substr(0, 1)}"
-        data-bs-toggle="popover"
-        data-bs-title="${e.vacina}  ${e.dose}"
-        data-bs-html="true"
-        data-bs-trigger="focus"
-        data-bs-content="
-          <div>
-            <strong>Observação:</strong> ${e.observacao}<br>
-            <strong>Informações:</strong> ${e.informacoes_complementares}<br>
-            <strong>Via:</strong> ${e.via_de_administracao}<br>
-            <strong>Local:</strong> ${e.local_de_administracao}<br>
-            ${e.lote}<br>
-            ${e.validade}
-          </div>"
-      >${e.vacina} | ${e.dose}</a>`).join('');
-
-    this.popoverListHtml = list;
+  filtrarPorGrupoEtario(filtroSelecionado: string) {
+    console.log(filtroSelecionado);    
+    this.dados = this.vacinasOrdenadaPorIdade.filter(vacina => vacina.faixa === filtroSelecionado);
+    console.log(this.dados);
+    this.exibirLista(this.dados);
+    // if(filtroSelecionado === 'Criança'){
+      this.gruposVacinas = this.vacinaService.agruparPorIdade(this.dados);
+    // }
   }
 
-  filtrar(faixa: string) {
-    let result = this.dados;
-    if (faixa !== 'Todos') {
-      result = this.dados.filter(v => v.faixa === faixa);
-    }
-    if (faixa === 'Criança') {
-      document.getElementById('selectIdade')?.classList.remove('d__none');
-    } else {
-      document.getElementById('selectIdade')?.classList.add('d__none');
-    }
-    this.createPopoverList(result);
+
+  ordenarPorGrupo(vacinas: any): any {
+    return [...vacinas].sort((a, b) => {
+      const grupoA = this.grupoParaNumero(a.grupo);
+      const grupoB = this.grupoParaNumero(b.grupo);
+      return grupoA - grupoB;
+    });
   }
+
+  private grupoParaNumero(grupo: string): number {
+    const [ano, mes] = grupo.split(',').map(Number);
+    return ano * 12 + mes;
+  }
+
+  abrirDetalhes(vacina: VacinaCompleta) {
+    console.log('dialog')
+    this.dialog.open(DetalhesVacinaDialogComponent, {
+      data: vacina,
+    });
+  }
+
 }
 
