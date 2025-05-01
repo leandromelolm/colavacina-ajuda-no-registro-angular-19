@@ -173,6 +173,23 @@ select {
       background: #d4edda;
       color: #155724;
     }
+
+    &.letter-bd {
+      background: #d4edda;
+      color: #155724;
+    }
+    &.letter-be {
+      background: #d4edda;
+      color: #24933e;
+    }
+    &.letter-cd {
+        background: #cce5ff;
+        color: #a20855;
+    }
+    &.letter-ce {
+        background: #cce5ff;
+        color: #c32e79;
+    }
   
     &:hover {
       filter: brightness(0.95);
@@ -181,7 +198,8 @@ select {
 
 mat-spinner {
     height: 25px !important;
-    width: 46px !important;
+    // width: 46px !important;
+    width: 100% !important;
 }
 
 [cdkDrag] {

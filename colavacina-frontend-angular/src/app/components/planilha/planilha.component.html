@@ -118,14 +118,17 @@
                     </div>
 
                     <button class="btn btn-outline-secondary btn__letter me-1 btn__list" 
-                        (click)="toggleLetter(i)" title="Alternar posição"
+                        (click)="toggleLetter(i)"
+                        [title]="getLetterState(row.opcaoSelecionada).descricao"
                         [ngClass]="{
-                            'letter-empty': !row.opcaoSelecionada || row.opcaoSelecionada === '-',
-                            'letter-e': row.opcaoSelecionada === 'E',
-                            'letter-d': row.opcaoSelecionada === 'D'
+                        'letter-empty': row.opcaoSelecionada === '0',
+                        'letter-be': row.opcaoSelecionada === '1',
+                        'letter-bd': row.opcaoSelecionada === '2',
+                        'letter-ce': row.opcaoSelecionada === '3',
+                        'letter-cd': row.opcaoSelecionada === '4'
                         }"
-                        >
-                        {{ row.opcaoSelecionada || '-' }}
+                    >
+                        {{ getLetterState(row.opcaoSelecionada).nome }}
                     </button>
 
                     <button class="btn btn__drag btn__list" cdkDragHandle title="Arrastar para mover" arial-label="Arrastar para mover linha">

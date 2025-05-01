@@ -14,6 +14,12 @@ interface RowData {
   opcaoSelecionada?: string;
 }
 
+interface LetterState {
+  id: string;
+  nome: string;
+  descricao: string;
+}
+
 @Component({
   selector: 'app-planilha',
   standalone: false,
@@ -46,7 +52,14 @@ export class PlanilhaComponent {
     { id: '6', nome: 'V D', descricao: 'Vasto Lateral Direito' },
   ];
 
-  letterStates: string[] = ['-', 'D', 'E'];
+  // letterStates: string[] = ['-', 'BD', 'BE', 'CD', 'CE'];
+  letterStates: LetterState[] = [
+    { id: '0', nome: '', descricao: '' },
+    { id: '1', nome: 'BD', descricao: 'Braço direito' },
+    { id: '2', nome: 'BE', descricao: 'Braço esquerdo' },
+    { id: '3', nome: 'CD', descricao: 'Vasto lateral da coxa direita' },
+    { id: '4', nome: 'CE', descricao: 'Vasto lateral da coxa esquerdo' }
+  ];
   showRow = true;
   selectedNomesVacinas: string[] = [];
   selectedLotes: string[] = [];
@@ -78,12 +91,24 @@ export class PlanilhaComponent {
 
   toggleLetter(index: number): void {
     const row = this.rows[index];
-    const current = row.opcaoSelecionada || '-';
-    const nextIndex = (this.letterStates.indexOf(current) + 1) % this.letterStates.length;
-    row.opcaoSelecionada = this.letterStates[nextIndex];
-    // persiste a alteração
-    // localStorage.setItem('planilhaData', JSON.stringify(this.rows));
+
+    // Descobre o índice atual (por id)
+    const currentId = row.opcaoSelecionada ?? '0';
+    const currentIdx = this.letterStates.findIndex(ls => ls.id === currentId);
+
+    // Próximo índice (circular)
+    const nextIdx = (currentIdx + 1) % this.letterStates.length;
+
+    // Atualiza com o id do próximo estado
+    row.opcaoSelecionada = this.letterStates[nextIdx].id;
+
+    // Marca alteração se necessário
     // this.isChanged = true;
+    // localStorage.setItem('planilhaData', JSON.stringify(this.rows));
+  }
+
+  getLetterState(id: string | undefined): LetterState {
+    return this.letterStates.find(ls => ls.id === id) || this.letterStates[0];
   }
 
   onClickLote(text: string) {
@@ -364,17 +389,17 @@ export class PlanilhaComponent {
     const nomeJanela = 'mobileView';
     const screenHeight = window.screen.availHeight;
     const screenWidth = window.screen.availWidth; 
-    const windowWidth = 375;                          // largura fixa que você quer
+    const windowWidth = 375;
     const left = screenWidth - windowWidth; 
     const features = [
-      'width=375',           // largura típica de um iPhone SE em px
+      `width=${windowWidth}`,
       `height=${screenHeight}`,
-      'top=5',             // distância do topo da tela
+      'top=0',  // distância do topo da tela
       `left=${left}`,
-      'resizable=yes',       // permite redimensionar
-      'scrollbars=yes',      // habilita barras de rolagem
-      'toolbar=no',          // esconde barra de ferramentas
-      'location=no',         // esconde barra de endereço
+      'resizable=yes',  // permite redimensionar
+      'scrollbars=yes', // habilita barras de rolagem
+      'toolbar=no',     // esconde barra de ferramentas
+      'location=no',    // esconde barra de endereço
       'status=no',
       'menubar=no'
     ].join(',');
