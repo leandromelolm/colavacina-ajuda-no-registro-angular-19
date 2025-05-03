@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GrupoVacinas, VacinaCompleta, VacinaService } from '../../service/vacina.service';
 import { DetalhesVacinaDialogComponent } from '../detalhes-vacina-dialog/detalhes-vacina-dialog.component';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-calendario-vacina',
@@ -22,13 +23,17 @@ export class CalendarioVacinaComponent {
   faixasDisponiveis: string[] = ['Criança', 'Adolescente', 'Adulto', 'Idoso', 'Gestante'];
   faixaSelecionada: string = 'Criança';
 
+  informacoes_vacina: SafeHtml = '';
+
   constructor(
     private vacinaService: VacinaService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
     this.checkSessionStorage();
+    this.getInformesVacina();
   }
 
   checkSessionStorage() {
@@ -40,6 +45,20 @@ export class CalendarioVacinaComponent {
       this.carregartabela(this.vacinas);
     } else {
       this.getListaVacinasDoCalendario();
+    }
+  }
+
+  async getInformesVacina() {
+
+    const informes = sessionStorage.getItem('vacinacao_informes');
+
+    if(!informes) {
+      const res = await fetch('https://script.google.com/macros/s/AKfycbwMeNCvn1vLD8IjRZ-fcjduA4wDUsOrOF3p1p-ftpqtipzrqNa3ovGJttAtgJiumIcvlg/exec?action=informes')
+      const data = await res.json();
+      sessionStorage.setItem('vacinacao_informes', data.content[0].informe);
+      this.informacoes_vacina = this.sanitizer.bypassSecurityTrustHtml(data.content[0].informe);  
+    } else{
+      this.informacoes_vacina = this.sanitizer.bypassSecurityTrustHtml(informes);
     }
   }
 

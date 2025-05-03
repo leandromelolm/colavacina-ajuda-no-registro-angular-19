@@ -57,7 +57,8 @@
     <div cdkDropList (cdkDropListDropped)="drop($event)" class="div__list">
         <div 
           *ngFor="let row of rows; let i = index" 
-          cdkDrag 
+          cdkDrag
+          cdkDragLockAxis="y"
           [cdkDragDisabled]="isEditMode">
             <div class="div__itens">
                 <button class="btn btn-link btn__check_box d-none" (click)="toggleCheck(i)">
