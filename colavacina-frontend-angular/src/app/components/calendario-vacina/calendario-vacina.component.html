@@ -1,5 +1,5 @@
 
-<h5>Vacinas Calendário</h5>
+<h5>Calendário Nacional de Vacinação</h5>
 
 <div [innerHTML]="informacoes_vacina"></div>
 
@@ -57,8 +57,8 @@
                 <th>Vacina</th>
                 <th>Dose</th>
                 <th>Faixa</th>
-                <th>Ano</th>
-                <th>Mês</th>
+                <th>Observação</th>
+                <th>Outras informações</th>
             </tr>
         </thead>
         <tbody>
@@ -66,10 +66,31 @@
                 <td>{{ vaccine.vacina }}</td>
                 <td>{{ vaccine.dose || 'N/A' }}</td>
                 <td>{{ vaccine.faixa }}</td>
-                <td>{{ vaccine.idade_ano_minimo }}</td>
-                <td>{{ vaccine.idade_mes_minimo }}</td>
+                <td>{{ vaccine.observacao }}</td>
+                <td>{{ vaccine.informacoes_complementares }}</td>
             </tr>
         </tbody>
         </table>
     </div>
 </div>
+
+<!--
+  id: number;
+  vacina: string;
+  vacina_sigla: string;
+  dose: string;
+  idade_ano_minimo: number;
+  idade_mes_minimo: number;
+  idade_ano_maximo: string;
+  idade_mes_maximo: string;
+  faixa: string;
+  categoria: string;
+  grupo_de_atendimento: string;
+  grupo: string;
+  observacao: string;
+  informacoes_complementares: string;
+  via_de_administracao: string;
+  local_de_administracao: string;
+  lote: string;
+  validade: string;
+-->

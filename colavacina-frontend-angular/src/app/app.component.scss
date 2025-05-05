@@ -1,0 +1,34 @@
+.mat-drawer {
+    border: 1px solid darkgray;
+    border-start-end-radius: 0px;
+}
+ 
+.mat-drawer-container {
+    position: static;
+}
+
+
+.sidenav-container {
+    height: 100vh;
+}
+  
+mat-sidenav {
+    width: 250px;
+}
+  
+.content {
+    // padding: 16px;
+}
+
+mat-toolbar {
+    padding: 0px;
+    background-color: #243140;
+}
+
+.sidenav_titulo {
+    color: white;
+}
+
+.mat-icon__menu {
+    color: white;
+}

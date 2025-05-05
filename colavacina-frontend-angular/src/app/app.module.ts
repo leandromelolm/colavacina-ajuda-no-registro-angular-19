@@ -8,6 +8,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/homecomponent';
@@ -19,6 +23,8 @@ import { BottomSheetComponent } from './components/bottom-sheet/bottom-sheet.com
 import { CalendarioVacinaComponent } from './components/calendario-vacina/calendario-vacina.component';
 import { EsquemaVacinaComponent } from './components/esquema-vacina/esquema-vacina.component';
 import { DetalhesVacinaDialogComponent } from './components/detalhes-vacina-dialog/detalhes-vacina-dialog.component';
+import { SobreComponent } from './pages/sobre/sobre.component';
+import { CalendarioVacinalComponent } from './pages/calendario-vacinal/calendario-vacinal.component';
 
 @NgModule({
   declarations: [
@@ -31,17 +37,23 @@ import { DetalhesVacinaDialogComponent } from './components/detalhes-vacina-dial
     BottomSheetComponent,
     CalendarioVacinaComponent,
     EsquemaVacinaComponent,
-    DetalhesVacinaDialogComponent
+    DetalhesVacinaDialogComponent,
+    SobreComponent,
+    CalendarioVacinalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatIconModule,
     FormsModule,
     MatProgressSpinnerModule,
     DragDropModule,
+    MatIconModule,
     MatChipsModule,
-    MatBottomSheetModule   
+    MatBottomSheetModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatButtonModule
   ],
   providers: [
     provideClientHydration(withEventReplay())

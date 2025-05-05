@@ -37,7 +37,7 @@ export class CalendarioVacinaComponent {
   }
 
   checkSessionStorage() {
-    const vacinas = sessionStorage.getItem("esquema-vacina");
+    const vacinas = sessionStorage.getItem("esquema-vacina") || null;
     if (vacinas) {
       console.log("vacinas Session", vacinas);
       this.exibirLista(JSON.parse(vacinas));
