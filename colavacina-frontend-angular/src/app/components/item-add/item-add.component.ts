@@ -3,12 +3,12 @@ import { log } from 'console';
 
 
 @Component({
-  selector: 'app-row',
+  selector: 'app-item-add',
   standalone: false,
-  templateUrl: './row.component.html',
-  styleUrl: './row.component.scss'
+  templateUrl: './item-add.component.html',
+  styleUrl: './item-add.component.scss'
 })
-export class RowComponent {
+export class ItemAddComponent {
 
   @Input() index!: number;
   @Output() dataChanged = new EventEmitter<any>();

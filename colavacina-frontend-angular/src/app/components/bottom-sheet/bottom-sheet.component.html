@@ -5,11 +5,11 @@
     <app-calendario-vacina></app-calendario-vacina>
 
     <h5>{{data.id}}</h5>
-    <app-row
+    <app-item-add
         (dataChanged)="handleRowChange($event)"
         ngSkipHydration 
         hidden="true"
     >
-    </app-row>
+    </app-item-add>
 
 </div>

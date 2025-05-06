@@ -15,13 +15,16 @@
             <button class="btn btn-outline-danger me-1 btn__list" (click)="clearAllChecks()" title="Limpar seleção">
                 <mat-icon>clear</mat-icon>
             </button>
-            <button class="btn btn-outline-warning me-1 btn__list" (click)="openSheet()" title="Informações calendário de vacina">
+            <button class="btn btn-outline-info me-1 btn__list" (click)="openSheet()" title="Informações calendário de vacina">
                 <mat-icon>info</mat-icon>
             </button>
 
-            <button class="btn btn-outline-info me-1 btn__list" (click)="moreVertical()" title="∙∙∙ Mais">
+            <button class="btn btn-outline-dark me-1 btn__list" (click)="moreOptions()" title="∙∙∙ Mais">
                 <mat-icon>more_vert</mat-icon>
             </button>
+        </div>
+
+        <div class="div__btn">
             <button [hidden]="isHiddenDiv" class="btn btn-outline-primary me-1 btn__list" (click)="updateRows()" title="Recarregar lista local">
                 <mat-icon>refresh</mat-icon>
             </button>
@@ -31,12 +34,11 @@
             <button [hidden]="isHiddenDiv" class="btn btn-outline-warning btn__list me-1" (click)="windowOpen()" title="Redimensionar ">
                 <mat-icon>vertical_split</mat-icon>
             </button>
-
         </div>
+        
         <div [hidden]="isHiddenDiv">
             <div class="more__vert">        
-                <app-row (dataChanged)="handleRowChange($event, 0)" ngSkipHydration>
-                </app-row>
+                <app-item-add (dataChanged)="handleRowChange($event, 0)" ngSkipHydration></app-item-add>
             </div>
         </div>
 

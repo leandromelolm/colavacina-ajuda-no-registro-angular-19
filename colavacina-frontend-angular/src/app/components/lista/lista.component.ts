@@ -21,12 +21,12 @@ interface LetterState {
 }
 
 @Component({
-  selector: 'app-planilha',
+  selector: 'app-lista',
   standalone: false,
-  templateUrl: './planilha.component.html',
-  styleUrl: './planilha.component.scss'
+  templateUrl: './lista.component.html',
+  styleUrl: './lista.component.scss'
 })
-export class PlanilhaComponent {
+export class ListaComponent {
 
   rowCount: number = 0;
   rows: RowData[] = [];
@@ -407,8 +407,7 @@ export class PlanilhaComponent {
     window.open(url, nomeJanela, features);
   }
 
-  moreVertical() {
-    console.log('info', this.isHiddenDiv)
+  moreOptions() {
     this.isHiddenDiv = !this.isHiddenDiv;
   }
 
