@@ -4,6 +4,7 @@ import { GrupoVacinas, VacinaCompleta, VacinaService } from '../../service/vacin
 import { DetalhesVacinaDialogComponent } from '../detalhes-vacina-dialog/detalhes-vacina-dialog.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-calendario-vacina',
@@ -20,20 +21,20 @@ export class CalendarioVacinaComponent {
   vacinas: VacinaCompleta[] = []; // Preencha com seus dados
   vacinasOrdenadaPorIdade: VacinaCompleta[] = []; // Preencha com seus dados
   gruposVacinas: GrupoVacinas[] = [];
-
   faixasDisponiveis: string[] = ['Criança', 'Adolescente', 'Adulto', 'Idoso', 'Gestante'];
   faixaSelecionada: string = 'Criança';
-
   informacoes_vacina: SafeHtml = '';
-
   tituloGrupo: string = "";
+  isBrowser: boolean;
 
   constructor(
     private vacinaService: VacinaService,
     private dialog: MatDialog,
     private sanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   ngOnInit() {
     this.checkSessionStorage();
@@ -41,7 +42,7 @@ export class CalendarioVacinaComponent {
   }
 
   checkSessionStorage(): void {
-    if (typeof window !== 'undefined' && window.sessionStorage) {
+    if (typeof window !== 'undefined' && window.sessionStorage) { // também funciona usar o this.isBrowser
       const vacinas = sessionStorage.getItem("esquema-vacina");
       if (!vacinas) {
         this.getListaVacinasDoCalendario();
@@ -55,10 +56,10 @@ export class CalendarioVacinaComponent {
   }
 
   async getInformesVacina() {
-    if (isPlatformBrowser(this.platformId)) {
+    if (this.isBrowser) {
       const informes = sessionStorage.getItem('vacinacao_informes');
       if(!informes) {
-        const res = await fetch('https://script.google.com/macros/s/AKfycbwMeNCvn1vLD8IjRZ-fcjduA4wDUsOrOF3p1p-ftpqtipzrqNa3ovGJttAtgJiumIcvlg/exec?action=informes')
+        const res = await fetch(`https://script.google.com/macros/s/${environment.idSheetInforme}/exec?action=informes`)
         const data = await res.json();
         sessionStorage.setItem('vacinacao_informes', data.content[0].informe);
         this.informacoes_vacina = this.sanitizer.bypassSecurityTrustHtml(data.content[0].informe);  
@@ -69,7 +70,7 @@ export class CalendarioVacinaComponent {
   }
 
   async getListaVacinasDoCalendario() {
-    const res = await fetch('https://script.google.com/macros/s/AKfycbyLuUjtOp2eFEB34iHwptYnLgTfEDceyYAeetdSpNAFXtXLZcX-PDVy90iQElM40YQwjw/exec?action=read');
+    const res = await fetch(`https://script.google.com/macros/s/${environment.idSheetCalendarioVacinas}/exec?action=read`);
     const data = await res.json();
     sessionStorage.setItem("esquema-vacina", JSON.stringify(data.content));
     this.vacinas = data.content;

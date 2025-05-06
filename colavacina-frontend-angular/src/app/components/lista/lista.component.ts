@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 import { isPlatformBrowser } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 interface RowData {
   nomeVacina: string;
@@ -240,7 +241,7 @@ export class ListaComponent {
 
   async getList(id: string) {    
 
-    const url = `https://script.google.com/macros/s/AKfycbxMjZhJ8AWQzprcHV81K3Zp8WLfrz35odWb4QnS4cZ4uK4PREo4bfER26s1xx3Epndm/exec?action=list&id=${id}`;
+    const url = `https://script.google.com/macros/s/${environment.idSheetLista}/exec?action=list&id=${id}`;
     this.isLoading = true;
     try {
       const response = await fetch(url);
@@ -297,7 +298,7 @@ export class ListaComponent {
   }
 
   async send(data: any) {
-    const url = `https://script.google.com/macros/s/AKfycbxMjZhJ8AWQzprcHV81K3Zp8WLfrz35odWb4QnS4cZ4uK4PREo4bfER26s1xx3Epndm/exec`;
+    const url = `https://script.google.com/macros/s/${environment.idSheetLista}/exec`;
     try {
       const response = await fetch(url, {
         method: 'POST',
