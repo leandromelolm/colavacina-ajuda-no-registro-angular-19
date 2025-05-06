@@ -26,6 +26,8 @@ export class CalendarioVacinaComponent {
 
   informacoes_vacina: SafeHtml = '';
 
+  tituloGrupo: string = "";
+
   constructor(
     private vacinaService: VacinaService,
     private dialog: MatDialog,
@@ -38,9 +40,9 @@ export class CalendarioVacinaComponent {
     this.getInformesVacina();
   }
 
-  checkSessionStorage() {
-    if (isPlatformBrowser(this.platformId)) {
-      const vacinas = sessionStorage.getItem("esquema-vacina") || null;
+  checkSessionStorage(): void {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      const vacinas = sessionStorage.getItem("esquema-vacina");
       if (!vacinas) {
         this.getListaVacinasDoCalendario();
       } else {
@@ -53,14 +55,16 @@ export class CalendarioVacinaComponent {
   }
 
   async getInformesVacina() {
-    const informes = sessionStorage.getItem('vacinacao_informes');
-    if(!informes) {
-      const res = await fetch('https://script.google.com/macros/s/AKfycbwMeNCvn1vLD8IjRZ-fcjduA4wDUsOrOF3p1p-ftpqtipzrqNa3ovGJttAtgJiumIcvlg/exec?action=informes')
-      const data = await res.json();
-      sessionStorage.setItem('vacinacao_informes', data.content[0].informe);
-      this.informacoes_vacina = this.sanitizer.bypassSecurityTrustHtml(data.content[0].informe);  
-    } else{
-      this.informacoes_vacina = this.sanitizer.bypassSecurityTrustHtml(informes);
+    if (isPlatformBrowser(this.platformId)) {
+      const informes = sessionStorage.getItem('vacinacao_informes');
+      if(!informes) {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbwMeNCvn1vLD8IjRZ-fcjduA4wDUsOrOF3p1p-ftpqtipzrqNa3ovGJttAtgJiumIcvlg/exec?action=informes')
+        const data = await res.json();
+        sessionStorage.setItem('vacinacao_informes', data.content[0].informe);
+        this.informacoes_vacina = this.sanitizer.bypassSecurityTrustHtml(data.content[0].informe);  
+      } else{
+        this.informacoes_vacina = this.sanitizer.bypassSecurityTrustHtml(informes);
+      }
     }
   }
 
@@ -82,7 +86,8 @@ export class CalendarioVacinaComponent {
   }
 
   filtrarPorGrupoEtario(filtroSelecionado: string) {
-    console.log(filtroSelecionado);    
+    console.log(filtroSelecionado);
+    this.tituloGrupo = filtroSelecionado;
     this.dados = this.vacinasOrdenadaPorIdade.filter(vacina => vacina.faixa === filtroSelecionado);
     console.log(this.dados);
     this.exibirLista(this.dados);

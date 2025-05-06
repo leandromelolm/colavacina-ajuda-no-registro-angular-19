@@ -17,11 +17,10 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/homecomponent';
 import { ListaComponent } from './components/lista/lista.component';
 import { ItemAddComponent } from './components/item-add/item-add.component';
-import { ToastMessageComponent } from './components/toast-message/toast-message.component';
+import { ToastMessageComponent } from './shared/toast-message/toast-message.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { BottomSheetComponent } from './components/bottom-sheet/bottom-sheet.component';
 import { CalendarioVacinaComponent } from './components/calendario-vacina/calendario-vacina.component';
-import { EsquemaVacinaComponent } from './components/esquema-vacina/esquema-vacina.component';
 import { DetalhesVacinaDialogComponent } from './components/detalhes-vacina-dialog/detalhes-vacina-dialog.component';
 import { AboutComponent } from './pages/about/about';
 import { VaccinesComponent } from './pages/vaccines/vaccines.component';
@@ -37,7 +36,6 @@ import { SidenavContainerComponent } from './shared/sidenav-container/sidenav-co
     TruncatePipe,
     BottomSheetComponent,
     CalendarioVacinaComponent,
-    EsquemaVacinaComponent,
     DetalhesVacinaDialogComponent,
     AboutComponent,
     VaccinesComponent,

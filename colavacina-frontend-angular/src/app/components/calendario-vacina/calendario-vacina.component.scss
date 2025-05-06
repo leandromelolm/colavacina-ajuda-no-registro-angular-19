@@ -28,9 +28,25 @@
   border-color: #0dcaf0;
 }
 
+.btn__gestante {
+  background-color: #c00a93;
+  color: white;
+  border-color: #c00a93;
+}
+
 .select__faixa {
   height: 38px;
   border-radius: 0.375rem;
   margin: 0px 2px;
   padding: 0px 1px;
+}
+
+.button-container button {
+  margin: 2px;
+  border-radius: 22px;
+  height: 48px;
+}
+
+.btn__vacina {
+  border-radius: 10px !important;
 }

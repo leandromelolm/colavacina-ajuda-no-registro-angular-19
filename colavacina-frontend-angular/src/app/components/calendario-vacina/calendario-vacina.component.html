@@ -5,22 +5,34 @@
 
 <hr>
 
-<label for="faixa">Filtrar:</label>
-<select 
-    [(ngModel)]="faixaSelecionada"
-    id="faixa"
-    (ngModelChange)="filtrarPorGrupoEtario($event)"
+<div class="select__faixa d-none">
+  <label for="faixa">Filtrar:</label>
+  <select [(ngModel)]="faixaSelecionada" id="faixa" (ngModelChange)="filtrarPorGrupoEtario($event)"
     class="select__faixa">
-  <option *ngFor="let faixa of faixasDisponiveis" [value]="faixa">
-    {{ faixa }}
-  </option>
-</select>
+    <option *ngFor="let faixa of faixasDisponiveis" [value]="faixa">
+      {{ faixa }}
+    </option>
+  </select>
+  <button (click)="filtrarPorGrupoEtario(faixaSelecionada)" class="btn btn-outline-secondary">Filtrar</button>
+</div>
 
-<button (click)="filtrarPorGrupoEtario(faixaSelecionada)" class="btn btn-outline-secondary">Filtrar</button>
+<div class="button_faixa">
+  <div class="button-container">
+    <button class="btn btn__crianca" (click)="filtrarPorGrupoEtario('Criança')">Criança</button>
+    <button class="btn btn__adolescente" (click)="filtrarPorGrupoEtario('Adolescente')">Adolescente</button>
+    <button class="btn btn__adulto" (click)="filtrarPorGrupoEtario('Adulto')">Adulto</button>
+    <button class="btn btn__idoso" (click)="filtrarPorGrupoEtario('Idoso')">Idoso</button>
+    <button class="btn btn__gestante" (click)="filtrarPorGrupoEtario('Gestante')">Gestante</button>
+  </div>
+</div>
 
 <hr>
 
 <div>
+
+    <h3>{{tituloGrupo}}</h3>
+    <br>
+
     <div *ngFor="let grupo of gruposVacinas">
         <h5>
             <ng-container *ngIf="grupo.idade_ano === 0 && grupo.idade_mes === 0; else idadeNormal">
@@ -39,7 +51,7 @@
         <ul>
           <button *ngFor="let vacina of grupo.vacinas"
                 (click)="abrirDetalhes(vacina)"
-                class="btn btn-outline-success m-1">
+                class="btn btn-outline-success m-1 btn__vacina">
             {{ vacina.vacina }} {{ vacina.dose ? ' (' + vacina.dose + ')' : '' }}
           </button>
         </ul>
