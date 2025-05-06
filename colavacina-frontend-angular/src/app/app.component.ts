@@ -13,7 +13,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 export class AppComponent {
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  title = 'vacina-suporte-frontend';
+  title = 'ColaVacina';
   rota: string = '';
 
   isSmallScreen: boolean = true;

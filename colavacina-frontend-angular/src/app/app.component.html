@@ -5,9 +5,10 @@
     [opened]="!isSmallScreen"
     >
         <mat-nav-list>
-            <a mat-list-item (click)="getUrlParameter('/home')" (click)="closeIfMobile()">Início</a>
+            <a mat-list-item (click)="getUrlParameter('/home')" (click)="closeIfMobile()">Página Principal</a>
             <a mat-list-item (click)="getUrlParameter('/calendario-vacinal')" (click)="closeIfMobile()">Calendario de Vacinação</a>
-            <a mat-list-item [routerLink]="['/sobre']" (click)="closeIfMobile()">Sobre</a>
+            <a mat-list-item (click)="getUrlParameter('/sobre')" (click)="closeIfMobile()">Sobre</a>
+            <!-- <a mat-list-item [routerLink]="['/sobre']" (click)="closeIfMobile()">Sobre</a> -->
         </mat-nav-list>
     </mat-sidenav>
 
@@ -16,7 +17,7 @@
             <button class="btn" (click)="sidenav.toggle()">
                 <mat-icon class="mat-icon__menu">menu</mat-icon>
             </button>
-            <span class="sidenav_titulo">ColaVacina</span>
+            <span class="sidenav_titulo">{{title}}</span>
         </mat-toolbar>
 
         <div class="content">

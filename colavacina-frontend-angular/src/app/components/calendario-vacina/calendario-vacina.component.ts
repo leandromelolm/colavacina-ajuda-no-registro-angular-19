@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GrupoVacinas, VacinaCompleta, VacinaService } from '../../service/vacina.service';
 import { DetalhesVacinaDialogComponent } from '../detalhes-vacina-dialog/detalhes-vacina-dialog.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-calendario-vacina',
@@ -28,7 +29,8 @@ export class CalendarioVacinaComponent {
   constructor(
     private vacinaService: VacinaService,
     private dialog: MatDialog,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit() {
@@ -37,21 +39,21 @@ export class CalendarioVacinaComponent {
   }
 
   checkSessionStorage() {
-    const vacinas = sessionStorage.getItem("esquema-vacina") || null;
-    if (vacinas) {
-      console.log("vacinas Session", vacinas);
-      this.exibirLista(JSON.parse(vacinas));
-      this.vacinas = JSON.parse(vacinas);
-      this.carregartabela(this.vacinas);
-    } else {
-      this.getListaVacinasDoCalendario();
+    if (isPlatformBrowser(this.platformId)) {
+      const vacinas = sessionStorage.getItem("esquema-vacina") || null;
+      if (!vacinas) {
+        this.getListaVacinasDoCalendario();
+      } else {
+        console.log("vacinas Session", vacinas);
+        this.exibirLista(JSON.parse(vacinas));
+        this.vacinas = JSON.parse(vacinas);
+        this.carregartabela(this.vacinas);
+      }
     }
   }
 
   async getInformesVacina() {
-
     const informes = sessionStorage.getItem('vacinacao_informes');
-
     if(!informes) {
       const res = await fetch('https://script.google.com/macros/s/AKfycbwMeNCvn1vLD8IjRZ-fcjduA4wDUsOrOF3p1p-ftpqtipzrqNa3ovGJttAtgJiumIcvlg/exec?action=informes')
       const data = await res.json();
