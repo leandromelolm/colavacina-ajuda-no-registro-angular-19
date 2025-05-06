@@ -12,15 +12,10 @@ import { MatSidenav } from '@angular/material/sidenav';
 })
 export class AppComponent {
 
-  @ViewChild('sidenav') sidenav!: MatSidenav;
-  title = 'ColaVacina';
-  rota: string = '';
-
   isSmallScreen: boolean = true;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private router: Router
   ) {
     this.breakpointObserver.observe([Breakpoints.Handset])
       .subscribe(result => {
@@ -28,20 +23,4 @@ export class AppComponent {
       });
   }
 
-  getUrlParameter(rota: string): void {
-    const urlParamIdLista = localStorage.getItem('listaVacinasId');
-    const queryParams = urlParamIdLista ? { d: urlParamIdLista } : {};
-    this.rota = rota;
-    if( rota == '/home'){
-      this.router.navigate(["/"], { queryParams });
-    } else {
-      this.router.navigate([this.rota])
-    }
-  }
-
-  closeIfMobile() {
-    if (this.isSmallScreen) {
-      this.sidenav.close();
-    }
-  }
 }

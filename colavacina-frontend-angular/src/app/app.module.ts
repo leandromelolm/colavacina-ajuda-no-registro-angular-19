@@ -25,6 +25,7 @@ import { EsquemaVacinaComponent } from './components/esquema-vacina/esquema-vaci
 import { DetalhesVacinaDialogComponent } from './components/detalhes-vacina-dialog/detalhes-vacina-dialog.component';
 import { SobreComponent } from './pages/sobre/sobre.component';
 import { CalendarioVacinalComponent } from './pages/calendario-vacinal/calendario-vacinal.component';
+import { SidenavContainerComponent } from './shared/sidenav-container/sidenav-container.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CalendarioVacinalComponent } from './pages/calendario-vacinal/calendari
     EsquemaVacinaComponent,
     DetalhesVacinaDialogComponent,
     SobreComponent,
-    CalendarioVacinalComponent
+    CalendarioVacinalComponent,
+    SidenavContainerComponent
   ],
   imports: [
     BrowserModule,

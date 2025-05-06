@@ -1,27 +1,3 @@
-<mat-sidenav-container class="sidenav-container">
-    <mat-sidenav 
-    #sidenav
-    [mode]="isSmallScreen ? 'over' : 'side'"
-    [opened]="!isSmallScreen"
-    >
-        <mat-nav-list>
-            <a mat-list-item (click)="getUrlParameter('/home')" (click)="closeIfMobile()">Página Principal</a>
-            <a mat-list-item (click)="getUrlParameter('/calendario-vacinal')" (click)="closeIfMobile()">Calendario de Vacinação</a>
-            <a mat-list-item (click)="getUrlParameter('/sobre')" (click)="closeIfMobile()">Sobre</a>
-            <!-- <a mat-list-item [routerLink]="['/sobre']" (click)="closeIfMobile()">Sobre</a> -->
-        </mat-nav-list>
-    </mat-sidenav>
-
-    <mat-sidenav-content>
-        <mat-toolbar color="primary">
-            <button class="btn" (click)="sidenav.toggle()">
-                <mat-icon class="mat-icon__menu">menu</mat-icon>
-            </button>
-            <span class="sidenav_titulo">{{title}}</span>
-        </mat-toolbar>
-
-        <div class="content">
-            <router-outlet />
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+<app-sidenav-container [isSmallScreen]="isSmallScreen">
+    <router-outlet />
+</app-sidenav-container>
