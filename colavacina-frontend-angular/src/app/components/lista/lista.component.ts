@@ -5,6 +5,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../../environments/environment';
+import { ToastMessageService } from '../../service/toast-message.service';
 
 interface RowData {
   nomeVacina: string;
@@ -68,7 +69,8 @@ export class ListaComponent {
 
   constructor(
     private bottomSheet: MatBottomSheet,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private toastService: ToastMessageService
   ) {}
 
   ngOnInit() {
@@ -235,8 +237,10 @@ export class ListaComponent {
     console.log(id)
     if (id.length > 3)
       this.getList(id)
-    else
+    else {
       this.messageToast('Id inválido')
+      this.toastService.show({ text: 'ID inválido!', type: 'error' });
+    }
   } 
 
   async getList(id: string) {    
@@ -252,6 +256,7 @@ export class ListaComponent {
       this.isLoading = false;
       this.isChanged = false;
       console.log('Resposta:', data.content);
+      this.toastService.show({ text: 'Itens baixados com sucesso!', type: 'success' });
     } catch (error) {
       this.isLoading = false;
     }
@@ -262,7 +267,8 @@ export class ListaComponent {
     const lista = localStorage.getItem('planilhaData');
 
     if (this.txtId === '') {
-      this.messageToast('Preencha o campo id');
+      // this.messageToast('Preencha o campo id');
+      this.toastService.show({ text: 'Preencha o campo id!', type: 'error' });
       return
     }
 

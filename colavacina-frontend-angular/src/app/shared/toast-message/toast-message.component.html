@@ -1,1 +1,5 @@
-<p>toast-message works!</p>
+<div class="toast-container">
+    <div class="toast" *ngFor="let toast of toasts" [ngClass]="toast.type || 'info'">
+        {{ toast.text }}
+    </div>
+</div>
