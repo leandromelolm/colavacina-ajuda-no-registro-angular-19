@@ -1,5 +1,8 @@
 <div>
-    <div class="div__buttons">
+    <div 
+      class="div__buttons"
+      [ngClass]="{ 'div__buttons_scroll': showFloatingButton }" >
+    >
         <div class="div__btn">
             <input class="input__id me-1" type="search" [(ngModel)]="txtId" placeholder="id">
             <button class="btn btn-outline-primary me-1 btn__list" (click)="downloadList(txtId)" title="Baixar lista">

@@ -66,16 +66,30 @@ export class ListaComponent {
   selectedNomesVacinas: string[] = [];
   selectedLotes: string[] = [];
   isHiddenDiv: boolean = true;
+  isBrowser: boolean = false;
+  showFloatingButton: boolean = false;
 
   constructor(
     private bottomSheet: MatBottomSheet,
     @Inject(PLATFORM_ID) private platformId: Object,
     private toastService: ToastMessageService
-  ) {}
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
+    if (this.isBrowser) {
       this.getUrl();
+    }
+    this.onWindowScrollToButtom();
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScrollToButtom() {
+    if (this.isBrowser) {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+      this.showFloatingButton = scrollTop > 60;
+      console.log(scrollTop);
     }
   }
 

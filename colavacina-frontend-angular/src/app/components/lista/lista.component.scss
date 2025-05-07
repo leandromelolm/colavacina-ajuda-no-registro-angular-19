@@ -257,3 +257,15 @@ mat-spinner {
     align-items: center;
     padding: 4px 0px;
 }
+
+.div__buttons_scroll {
+    position: fixed;
+    top: 12px;
+    z-index: 1000;
+    background-color: #243140;
+    padding: 0px 0px;
+    border-end-end-radius: 10px;
+    border-end-start-radius: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
