@@ -16,8 +16,20 @@ export class ToastMessageComponent {
   ngOnInit(): void {
     this.toastService.toastState$.subscribe((toast: ToastMessage) => {
       this.toasts.push(toast);
+      const timeout = toast.duration ?? 3000;
+  
+      setTimeout(() => {
+        this.toasts = this.toasts.filter(t => t !== toast);
+      }, timeout);
+    });
+  }
+
+  __ngOnInit(): void {
+    this.toastService.toastState$.subscribe((toast: ToastMessage) => {
+      this.toasts.push(toast);
       const index = this.toasts.length - 1;
       const timeout = toast.duration ?? 3000;
+      console.log('toast')
 
       setTimeout(() => {
         this.toasts.splice(index, 1);
@@ -25,3 +37,10 @@ export class ToastMessageComponent {
     });
   }
 }
+
+/**
+.toast.success 
+.toast.error 
+.toast.info 
+.toast.warning 
+*/

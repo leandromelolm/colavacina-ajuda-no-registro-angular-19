@@ -213,7 +213,8 @@ export class ListaComponent {
   toggleEditMode() {
     this.isEditMode = !this.isEditMode;
     if(this.rows.length == 0){
-      return this.messageToast('lista vazia');
+      this.toastService.show({ text: 'Lista vazia!', type: 'warning' });
+      return;
     }
     if (!this.isEditMode) {
       localStorage.setItem('planilhaData', JSON.stringify(this.rows));
@@ -238,7 +239,6 @@ export class ListaComponent {
     if (id.length > 3)
       this.getList(id)
     else {
-      this.messageToast('Id inválido')
       this.toastService.show({ text: 'ID inválido!', type: 'error' });
     }
   } 
@@ -266,12 +266,6 @@ export class ListaComponent {
 
     const lista = localStorage.getItem('planilhaData');
 
-    if (this.txtId === '') {
-      // this.messageToast('Preencha o campo id');
-      this.toastService.show({ text: 'Preencha o campo id!', type: 'error' });
-      return
-    }
-
     const data = {
       lista: lista,
       id: this.txtId,
@@ -282,6 +276,12 @@ export class ListaComponent {
   }
 
   saveListAlert() {
+
+    if (this.txtId === '') {
+      this.toastService.show({ text: 'Preencha o campo ID!', type: 'error' });
+      return;
+    }
+
     Swal.fire({
       title: `Confirma salvar ID ${this.txtId}?`,
       text: 'Confirme se deseja salvar as alterações.',
@@ -314,22 +314,17 @@ export class ListaComponent {
       const res = await response.json();
       console.log(res);
       if (res.success) {
-        this.messageToast(res.message)
+        this.toastService.show({ text: res.message, type: 'success' });
         this.isChanged = false;
         Swal.fire('Salvo!', res.message, 'success');
       } else {
-        this.messageToast(`Falha ao salvar. mensagem de erro: ${res.error}`);
+        this.toastService.show({ text: "Falha ao salvar. mensagem de erro", type: 'error' });
+        
       }
     } catch (error) {
-      this.messageToast(`Erro: ${error}`);
-    }
-  }
+      this.toastService.show({ text: `Erro: ${error}`, type: 'error' });
 
-  messageToast(textMessage: string) {
-    this.txtToastMessage = `${textMessage}`;
-    setTimeout(() => {
-      this.txtToastMessage = '';
-    }, 5000);
+    }
   }
 
   isSubcutanea(vacina: string): boolean {
@@ -368,7 +363,7 @@ export class ListaComponent {
     this.rows.splice(index, 1);
     localStorage.setItem('planilhaData', JSON.stringify(this.rows));
     this.isChanged = true;
-    this.messageToast('Item deletado com sucesso.');
+    this.toastService.show({ text: 'Item deletado com sucesso.', type: 'success' });
   }
 
   drop(event: CdkDragDrop<RowData[]>) {

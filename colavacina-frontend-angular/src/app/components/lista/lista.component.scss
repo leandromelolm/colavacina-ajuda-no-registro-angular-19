@@ -1,7 +1,7 @@
 .div__buttons {
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 999;
     background-color: #243140;
     padding: 0px 0px;
     border-end-end-radius: 10px;
@@ -75,7 +75,7 @@ app-row {
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 9999;
+    z-index: 999;
     background-color: #e6ffe6;
     color: #2e7d32;
     padding: 12px 16px;
