@@ -20,7 +20,10 @@
               (click)="sidenav.toggle()" >
                 <mat-icon class="mat-icon__menu">menu</mat-icon>
             </button>
-            <span class="sidenav_titulo">{{title}}</span>
+            <span class="sidenav_titulo"
+                [ngClass]="{ 'd-none': isSmallScreen && showFloatingButton }" >
+                {{title}}
+            </span>
         </mat-toolbar>
 
         <!-- Projeção do conteúdo <router-outlet />-->
