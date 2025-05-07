@@ -89,11 +89,12 @@ export class CalendarioVacinaComponent {
   filtrarPorGrupoEtario(filtroSelecionado: string) {
     console.log(filtroSelecionado);
     this.tituloGrupo = filtroSelecionado;
+    this.faixaSelecionada = filtroSelecionado;
     this.dados = this.vacinasOrdenadaPorIdade.filter(vacina => vacina.faixa === filtroSelecionado);
     console.log(this.dados);
     this.exibirLista(this.dados);
     // if(filtroSelecionado === 'Criança'){
-      this.gruposVacinas = this.vacinaService.agruparPorIdade(this.dados);
+    this.gruposVacinas = this.vacinaService.agruparPorIdade(this.dados);
     // }
   }
 

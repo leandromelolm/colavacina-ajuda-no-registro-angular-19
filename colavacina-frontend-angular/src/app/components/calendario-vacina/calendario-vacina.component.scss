@@ -4,35 +4,20 @@
     }
 }
 
-.btn__crianca {
+.btn__success {
+  // background-color: #25D366;
   background-color: #198754;
   color: white;
-  border-color: #198754;
+  border-color: #25D366;
 }
 
-.btn__adolescente {
-  background-color: #fd7e14;
-  color: white;
-  border-color: #fd7e14;
+.btn__secondary {
+  background-color: #f0f0f0;
+  color: #3b3b3b;
+  border-color: #dcdcdc;
 }
 
-.btn__adulto {
-  background-color: #0d6efd;
-  color: white;
-  border-color: #0d6efd;
-}
 
-.btn__idoso {
-  background-color: #0dcaf0;
-  color: white;
-  border-color: #0dcaf0;
-}
-
-.btn__gestante {
-  background-color: #c00a93;
-  color: white;
-  border-color: #c00a93;
-}
 
 .select__faixa {
   height: 38px;
@@ -46,6 +31,27 @@
   border-radius: 22px;
   height: 48px;
 }
+
+.scroll-buttons {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+  -webkit-overflow-scrolling: touch;
+
+  white-space: nowrap; // impedir quebra de linha
+
+  scrollbar-width: none; // Firefox
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari
+  }
+
+  .btn {
+    flex: 0 0 auto; 
+    min-width: 100px;
+  }
+}
+
 
 .btn__vacina {
   border-radius: 10px !important;
