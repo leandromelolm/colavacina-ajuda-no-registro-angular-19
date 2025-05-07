@@ -79,9 +79,10 @@ export class ListaComponent {
     }
   }
 
-  openSheet(): void {
+  openBottomSheet(): void {
     const sheetRef = this.bottomSheet.open(BottomSheetComponent, {
-      data: {id: this.listaVacinasId}
+      data: {id: this.listaVacinasId},
+      panelClass: 'custom-bottom-sheet'
     });
 
     sheetRef.afterDismissed().subscribe((resultado) => {

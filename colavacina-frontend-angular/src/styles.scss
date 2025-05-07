@@ -97,3 +97,13 @@ input {
       opacity: 1;
     }
 }
+
+.custom-bottom-sheet {
+  height: 95vh !important;
+  max-height: 95vh !important;
+}
+
+.mat-bottom-sheet-container {
+  max-height: 95vh !important;
+  border-radius: 0px !important;
+}
