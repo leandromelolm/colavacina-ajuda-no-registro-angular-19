@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { 
+  height: auto;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+}
 
 body {
     margin: 0; 
@@ -106,4 +111,8 @@ input {
 .mat-bottom-sheet-container {
   max-height: 95vh !important;
   border-radius: 0px !important;
+}
+
+.mat-drawer-backdrop {
+  position: fixed !important;
 }

@@ -9,11 +9,12 @@
 
 
 .sidenav-container {
-    height: 100vh;
+    min-height: 100vh;
 }
   
 mat-sidenav {
     width: 250px;
+    position: fixed;
 }
 
 mat-toolbar {
@@ -28,4 +29,29 @@ mat-toolbar {
 
 .mat-icon__menu {
     color: white;
+}
+  
+mat-sidenav-content {
+    overflow: auto;
+}
+  
+.menu__fixed {
+    position: fixed;
+    height: 44px;
+    background-color: #2e3c4c;
+    top: -10px;
+    left: 0px;
+    z-index: 1000;
+    border-radius: 0px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.menu__button {
+    position: static;
+    margin-right: 4px;
+    top: 16px; 
+    left: 16px;
+    z-index: 1000; 
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }

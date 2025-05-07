@@ -1,7 +1,10 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, Input, ViewChild } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, HostListener, Inject, Input, PLATFORM_ID, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { log } from 'console';
+import { fromEvent, throttleTime } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav-container',
@@ -12,14 +15,20 @@ import { Router } from '@angular/router';
 export class SidenavContainerComponent {
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
+  @Input() isSmallScreen: boolean = false;
   title = 'ColaVacina';
   rota: string = '';
+  showFloatingButton = false;
+  isBrowser: boolean;
 
-  @Input() isSmallScreen: boolean = false;
+  @ViewChild('contentContainer') contentContainer!: ElementRef;
 
   constructor(
-    private router: Router
-  ) { }
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { 
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   getUrlParameter(rota: string): void {
     const urlParamIdLista = localStorage.getItem('listaVacinasId');
@@ -36,6 +45,24 @@ export class SidenavContainerComponent {
     if (this.isSmallScreen) {
       this.sidenav.close();
     }
+  }
+
+  ngOnInit() {
+    if (this.isBrowser) {
+      this.onWindowScroll();
+    }
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (this.isBrowser) {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+      this.showFloatingButton = this.isSmallScreen && scrollTop > 60;
+    }
+  }
+
+  toggleSidenav(sidenav: MatSidenav) {
+    sidenav.toggle();
   }
 
 }

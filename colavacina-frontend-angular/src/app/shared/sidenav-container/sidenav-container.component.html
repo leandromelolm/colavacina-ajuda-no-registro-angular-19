@@ -1,20 +1,23 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav 
-    #sidenav
-    [mode]="isSmallScreen ? 'over' : 'side'"
-    [opened]="!isSmallScreen"
+        #sidenav
+        [mode]="isSmallScreen ? 'over' : 'side'"
+        [opened]="!isSmallScreen"
     >
         <mat-nav-list>
-            <a mat-list-item (click)="getUrlParameter('/home')" (click)="closeIfMobile()">Página Principal</a>
-            <a mat-list-item (click)="getUrlParameter('/calendario-vacinal')" (click)="closeIfMobile()">Calendario de Vacinação</a>
-            <a mat-list-item (click)="getUrlParameter('/sobre')" (click)="closeIfMobile()">Sobre</a>
+            <a mat-list-item (click)="getUrlParameter('/home'); closeIfMobile()">Página Principal</a>
+            <a mat-list-item (click)="getUrlParameter('/calendario-vacinal'); closeIfMobile()">Calendario de Vacinação</a>
+            <a mat-list-item (click)="getUrlParameter('/sobre'); closeIfMobile()">Sobre</a>
             <!-- <a mat-list-item [routerLink]="['/sobre']" (click)="closeIfMobile()">Sobre</a> -->
         </mat-nav-list>
     </mat-sidenav>
 
-    <mat-sidenav-content>
-        <mat-toolbar color="primary">
-            <button class="btn" (click)="sidenav.toggle()">
+    <mat-sidenav-content #contentContainer>
+        <mat-toolbar color="primary" 
+          [ngClass]="{ 'menu__fixed': isSmallScreen && showFloatingButton }" >
+            <button
+              class="btn menu__button"
+              (click)="sidenav.toggle()" >
                 <mat-icon class="mat-icon__menu">menu</mat-icon>
             </button>
             <span class="sidenav_titulo">{{title}}</span>
