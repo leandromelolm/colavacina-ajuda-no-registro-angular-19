@@ -3,7 +3,6 @@
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
 
 
-
 ## Deploy firebase
 
 
@@ -64,13 +63,14 @@ firebase deploy --only hosting
 
 ```
 
-```bash
+## Git Comandos
 
-```
+git  | Comando
+-------: | --------
+pull de branch diferente   | `git pull origin main`
+logs resumidos             | `git log --oneline`
+_                          | `-`
 
-```bash
-
-```
 
 
 ## Development server

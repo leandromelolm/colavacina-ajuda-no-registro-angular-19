@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
-import { log } from 'console';
 import { ToastMessageService } from '../../service/toast-message.service';
 
 
