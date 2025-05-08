@@ -110,7 +110,7 @@ export class ListaComponent {
 
   openBottomSheet(): void {
     const sheetRef = this.bottomSheet.open(BottomSheetComponent, {
-      data: {id: this.listaVacinasId},
+      data: {id: `Lista ID:${this.listaVacinasId}`},
       panelClass: 'custom-bottom-sheet',
       restoreFocus: false
     });

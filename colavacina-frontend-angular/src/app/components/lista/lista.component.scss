@@ -39,10 +39,41 @@
     // top: 12px;
     left: 50%;
     transform: translateX(-50%);
+    width: 100vw;
     z-index: 1000;
     padding: 0px 0px;
     border-end-end-radius: 10px;
     border-end-start-radius: 10px;
+}
+
+.scrollx__buttons {
+    scroll-snap-type: x mandatory;
+    display: block;
+    overflow-x: auto;
+    padding: 0.5rem 1rem;
+    margin: 0 10px;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 100vw;
+    box-sizing: border-box;
+
+    scrollbar-width: none; // Firefox
+    &::-webkit-scrollbar {
+        display: none; // Chrome, Safari
+    }
+    
+    > * {
+        scroll-snap-align: start;
+        flex: 0 0 auto;    // não cresce e não encolhe, mantém tamanho natural dos buttons
+    }
+
+    &::before {
+        content: "";
+        flex: 0 0 1.5rem;   // espaço fixo de 1.5rem antes do primeiro botão
+    }
 }
 
 .div__btn {
@@ -280,13 +311,6 @@ mat-spinner {
 .no_select {
     user-select: none;
     -webkit-user-select: none; /* Para Safari */
-}
-
-.more__vert {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 0px;
 }
 
 .div__info {
