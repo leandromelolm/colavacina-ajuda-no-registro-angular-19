@@ -9,14 +9,17 @@ input {
 
 .input_vacina {
     width: 30%;
+    max-width: 250px;
 }
 
 .input_lote {
     width: 30%;
+    max-width: 250px;
 }
 
 .input_validade {
     width: 20%;
+    max-width: 100px;
 }
 
 .copyable {
