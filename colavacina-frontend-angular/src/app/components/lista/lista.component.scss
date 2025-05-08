@@ -6,6 +6,43 @@
     padding: 0px 0px;
     border-end-end-radius: 10px;
     border-end-start-radius: 10px;
+    // transition: top 0.3s, transform 0.3s;
+
+    &.div__buttons_scroll:not(.hidden-toolbar) {
+        animation: showToolbar 300ms ease-out forwards;
+    }
+    
+    // quando a flag menuHidden = true
+    &.hidden-toolbar {
+        animation: hideToolbar 300ms ease-in forwards;
+    }
+}
+
+@keyframes showToolbar {
+    from { top: -60px; }   /* começa acima */
+    to   { top:   0; }     /* termina na posição normal */
+}
+  
+@keyframes hideToolbar {
+    from { top:   0; }     /* começa na posição normal */
+    to   { top: -60px; }   /* termina acima (sumindo pra cima) */
+}
+
+// Quando rolar pra baixo, esconde no topo
+.hidden-toolbar {
+    top: -60px;
+}
+  
+// Quando mostrar o botão flutuante
+.div__buttons_scroll {
+    position: fixed;
+    // top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 0px 0px;
+    border-end-end-radius: 10px;
+    border-end-start-radius: 10px;
 }
 
 .div__btn {
@@ -229,7 +266,7 @@ mat-spinner {
 
 .hidden-row {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(10px);
     pointer-events: none;
     display: none;
 }
@@ -237,6 +274,7 @@ mat-spinner {
 .visible-row {
     opacity: 1;
     transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .no_select {
@@ -256,16 +294,4 @@ mat-spinner {
     justify-content: center;
     align-items: center;
     padding: 4px 0px;
-}
-
-.div__buttons_scroll {
-    position: fixed;
-    top: 12px;
-    z-index: 1000;
-    background-color: #243140;
-    padding: 0px 0px;
-    border-end-end-radius: 10px;
-    border-end-start-radius: 10px;
-    left: 50%;
-    transform: translateX(-50%);
 }

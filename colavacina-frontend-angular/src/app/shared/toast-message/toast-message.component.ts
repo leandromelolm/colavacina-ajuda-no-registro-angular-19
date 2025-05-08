@@ -29,7 +29,6 @@ export class ToastMessageComponent {
       this.toasts.push(toast);
       const index = this.toasts.length - 1;
       const timeout = toast.duration ?? 3000;
-      console.log('toast')
 
       setTimeout(() => {
         this.toasts.splice(index, 1);

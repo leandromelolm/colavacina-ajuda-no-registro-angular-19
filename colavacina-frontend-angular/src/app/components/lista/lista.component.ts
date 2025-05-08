@@ -69,6 +69,10 @@ export class ListaComponent {
   isBrowser: boolean = false;
   showFloatingButton: boolean = false;
 
+  menuHidden = false;
+  private lastScrollTop = 0;
+  private threshold = 5; // sensibilidade no scrool
+
   constructor(
     private bottomSheet: MatBottomSheet,
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -80,23 +84,35 @@ export class ListaComponent {
   ngOnInit() {
     if (this.isBrowser) {
       this.getUrl();
+      this.onWindowScroll();
     }
-    this.onWindowScrollToButtom();
   }
 
   @HostListener('window:scroll', [])
-  onWindowScrollToButtom() {
-    if (this.isBrowser) {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
-      this.showFloatingButton = scrollTop > 60;
-      console.log(scrollTop);
+  onWindowScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+    // 1) mostrar ou esconder botão flutuante
+    this.showFloatingButton = scrollTop > 30;
+
+    // 2) detectar direção para esconder/reexibir o menu
+    const direction = scrollTop > this.lastScrollTop ? 'down' : 'up';
+    if (direction === 'down' && scrollTop - this.lastScrollTop > this.threshold) {
+      this.menuHidden = true;
+      console.log(direction)
+    } else if (direction === 'up' && this.lastScrollTop - scrollTop > this.threshold) {
+      console.log(direction)
+      this.menuHidden = false;
     }
+
+    this.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
   }
 
   openBottomSheet(): void {
     const sheetRef = this.bottomSheet.open(BottomSheetComponent, {
       data: {id: this.listaVacinasId},
-      panelClass: 'custom-bottom-sheet'
+      panelClass: 'custom-bottom-sheet',
+      restoreFocus: false
     });
 
     sheetRef.afterDismissed().subscribe((resultado) => {
@@ -132,11 +148,6 @@ export class ListaComponent {
   onClickLote(text: string) {
     this.copyToClipboard(text);
     this.toggleSelectedLote(text);
-  }
-
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    this.showRow = window.pageYOffset === 0;
   }
 
   toggleSelecionado(nomeVacina: string) {
