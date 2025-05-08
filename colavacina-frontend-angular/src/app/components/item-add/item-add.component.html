@@ -1,16 +1,9 @@
 <div class="div_container d-flex justify-content-center">
-    <!-- <button id="check" (click)="toggleCheck()"><mat-icon>{{iconCheck}}</mat-icon></button>  -->
-    <!-- <button id="copy"><mat-icon class="icon-warn">content_copy</mat-icon></button> -->
-    @if (isEditMode) {
+    
         <input type="text" class="input_vacina" [(ngModel)]="txtNomeVacina" placeholder="Nome da Vacina">
         <input type="text" class="input_lote" [(ngModel)]="txtLote" placeholder="Lote">
         <input type="text" class="input_validade" [(ngModel)]="txtDataValidade" placeholder="Validade">
-    } @else {
-        <div class="mx-1" (click)="copyToClipboard(txtNomeVacina)">{{ txtNomeVacina }}</div>
-        <div class="me-1" (click)="copyToClipboard(txtLote)">{{ txtLote }}</div>
-        <div (click)="copyToClipboard(txtDataValidade)">{{ txtDataValidade }}</div>
-    }
-    <!-- <button id="edit" (click)="toggleEditMode()"><mat-icon class="icon-warn">edit</mat-icon></button> -->
+    
      <div class="ms-1">
          <button id="edit" (click)="toggleEditMode()" class="btn btn-outline-success btn__list" title="Adicionar item">
              <!-- <mat-icon class="icon-warn">{{ add ? 'vaccines' : 'add' }}</mat-icon> -->
@@ -19,5 +12,3 @@
      </div>
     
 </div>
-
-<div class="copied-message" *ngIf="copiedMessage">{{ copiedMessage }}</div>

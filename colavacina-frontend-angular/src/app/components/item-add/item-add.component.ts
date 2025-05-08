@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { log } from 'console';
+import { ToastMessageService } from '../../service/toast-message.service';
 
 
 @Component({
@@ -22,16 +23,11 @@ export class ItemAddComponent {
   txtDataValidade: string = '';
   add: boolean = false;
 
-  copiedMessage: string = '';
+  constructor(
+    private toastService: ToastMessageService
+  ) {}
 
-  // ngOnInit() {
-  //   if (this.rowData) {
-  //     console.log(this.rowData)
-  //     this.txtNomeVacina = this.rowData.nomeVacina || '';
-  //     this.txtLote = this.rowData.lote || '';
-  //     this.txtDataValidade = this.rowData.validade || '';
-  //   }
-  // }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes)
@@ -50,7 +46,7 @@ export class ItemAddComponent {
       checked: false,
       isEditMode: false
     });
-
+    this.toastService.show({ text: 'Item adicionado!', type: 'success' });
   }
 
   cleanInput() {
@@ -66,30 +62,19 @@ export class ItemAddComponent {
       this.emitData();
       this.cleanInput();
     }
-
-    // this.isEditMode = !this.isEditMode;
-    // if (!this.isEditMode) { }
   }
 
   verifyInput(): boolean {
-    if(this.txtNomeVacina && this.txtLote) return true
-    else return false
+    if(!this.txtNomeVacina && !this.txtLote) { 
+      this.toastService.show({ text: 'Preencha os campos nome e lote!', type: 'warning' });
+      return false
+    }
+    else 
+      return true
   }
 
   toggleCheck() {
     this.iconCheck =  'check_box' === this.iconCheck  ? 'check_box_outline_blank' : 'check_box';
-
-  }
-
-  copyToClipboard(text: string) {
-    navigator.clipboard.writeText(text).then(() => {
-      this.copiedMessage = `Copiado: ${text}`;
-      setTimeout(() => {
-        this.copiedMessage = '';
-      }, 2000);
-    }).catch(err => {
-      console.error('Erro ao copiar!', err);
-    });
   }
 
 }

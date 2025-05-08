@@ -250,7 +250,8 @@ export class ListaComponent {
 
   copyToClipboard(text: string) {
     navigator.clipboard.writeText(text).then(() => {
-      this.copiedMessage = `Copiado: ${text}`;
+      // this.copiedMessage = `Copiado: ${text}`;
+      this.toastService.show({ text: `Copiado: ${text}`, type: 'success' });
       this.copiedValue = text;
       setTimeout(() => {
         this.copiedMessage = '';
