@@ -191,7 +191,7 @@ export class ListaComponent {
     this.clearAllSelectedLote();
   }
 
-  updateRows() {
+  updateList() {
     this.listaVacinasId = localStorage.getItem('listaVacinasId') || '';
     const saved = localStorage.getItem('planilhaData');
     console.log(saved);
@@ -236,8 +236,39 @@ export class ListaComponent {
     this.rows[index].isEditMode = !this.rows[index].isEditMode;
   }
 
-  toggleEditMode() {
+  alertSaveEditLocal() {
+    Swal.fire({
+      title: `Confirma salvar edição localmente?`,
+      text: 'Confirme se deseja salvar as alterações localmente.',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, salvar',
+      cancelButtonText: 'Cancelar',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: 'btn__confirm',
+        cancelButton: 'btn__cancel'
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.saveEditLocalStorage();
+        this.toastService.show({ text: 'Edição salva localmente!', type: 'success' });
+      } else {
+        this.updateList();
+        this.toastService.show({ text: 'Salvamento de edição cancelado!', type: 'warning' });
+      }
+    });
+  }
+
+  toggleEditMode():void {
     this.isEditMode = !this.isEditMode;
+    
+    if(!this.isEditMode) {
+      this.alertSaveEditLocal();
+    }
+  }
+
+  saveEditLocalStorage():void {
     if(this.rows.length == 0){
       this.toastService.show({ text: 'Lista vazia!', type: 'warning' });
       return;
@@ -279,7 +310,7 @@ export class ListaComponent {
       const data = await response.json();
       localStorage.setItem('planilhaData', JSON.stringify(data.content.vacinas));
       localStorage.setItem('listaVacinasId', data.message);
-      this.updateRows()
+      this.updateList()
       this.isLoading = false;
       this.isChanged = false;
       console.log('Resposta:', data.content);
@@ -405,7 +436,7 @@ export class ListaComponent {
     if (d){
       sessionStorage.setItem('d', d);
       localStorage.setItem('listaVacinasId', d);
-      this.updateRows()
+      this.updateList()
     }
   }
   

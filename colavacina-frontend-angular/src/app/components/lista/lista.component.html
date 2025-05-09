@@ -31,7 +31,7 @@
             <button class="btn btn-outline-secondary me-1 btn__list" id="edit" (click)="toggleEditMode()" title="Editar lista">
                 @if(!this.isEditMode){<mat-icon>edit</mat-icon>} @else {<mat-icon class="red-icon">save_as</mat-icon>}
             </button>            
-            <button class="btn btn-outline-primary me-1 btn__list" (click)="updateRows()" title="Recarregar lista local">
+            <button class="btn btn-outline-primary me-1 btn__list" (click)="updateList()" title="Recarregar lista local">
                 <mat-icon>refresh</mat-icon>
             </button>            
             <button class="btn btn-outline-warning btn__list me-1" (click)="windowOpen()" title="Abrir página redimensionada">
@@ -40,7 +40,7 @@
         </div>
 
         <div class="div__btn d-none">
-            <button [hidden]="isHiddenDiv" class="btn btn-outline-primary me-1 btn__list" (click)="updateRows()" title="Recarregar lista local">
+            <button [hidden]="isHiddenDiv" class="btn btn-outline-primary me-1 btn__list" (click)="updateList()" title="Recarregar lista local">
                 <mat-icon>refresh</mat-icon>
             </button>
             <button [hidden]="isHiddenDiv" class="btn btn-outline-secondary me-1 btn__list" id="edit" (click)="toggleEditMode()" title="Editar lista">
