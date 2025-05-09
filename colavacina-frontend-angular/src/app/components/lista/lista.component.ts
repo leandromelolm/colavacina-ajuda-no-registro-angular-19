@@ -41,6 +41,7 @@ export class ListaComponent {
   isEditMode: boolean = false;
   isLoading: boolean = false;
   isChanged: boolean = false;
+  anyItemEdited: boolean = false;
   copiedValue: string = '';
   copiedMessage: string = '';
   txtToastMessage: string = '';
@@ -194,7 +195,7 @@ export class ListaComponent {
   updateList() {
     this.listaVacinasId = localStorage.getItem('listaVacinasId') || '';
     const saved = localStorage.getItem('planilhaData');
-    console.log(saved);
+    // console.log(saved);
 
     const rawRows = saved ? JSON.parse(saved) : [];
 
@@ -232,11 +233,15 @@ export class ListaComponent {
     this.rows[index].checked = !this.rows[index].checked;
   }
 
-  toggleEditMode2(index: number) {
-    this.rows[index].isEditMode = !this.rows[index].isEditMode;
+  onRowChange(): void {
+    this.anyItemEdited = true;
+    // this.toastService.show({ text: 'Item editado. Salve para confirmar!', type: 'info' });
   }
 
   alertSaveEditLocal() {
+    if(!this.anyItemEdited){
+      return;
+    }
     Swal.fire({
       title: `Confirma salvar edição localmente?`,
       text: 'Confirme se deseja salvar as alterações localmente.',
@@ -253,9 +258,11 @@ export class ListaComponent {
       if (result.isConfirmed) {
         this.saveEditLocalStorage();
         this.toastService.show({ text: 'Edição salva localmente!', type: 'success' });
+        this.anyItemEdited = false;
       } else {
         this.updateList();
         this.toastService.show({ text: 'Salvamento de edição cancelado!', type: 'warning' });
+        this.anyItemEdited = false;
       }
     });
   }

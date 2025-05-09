@@ -82,10 +82,10 @@
                     <mat-icon>{{ row.checked ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
                 </button>
                 @if (isEditMode) {
-                    <input class="input_vacina" type="search" [(ngModel)]="row.nomeVacina" placeholder="Nome da Vacina">
-                    <input class="input_lote" type="search" [(ngModel)]="row.lote" placeholder="Lote">
-                    <input class="input_validade" type="search" [(ngModel)]="row.validade" placeholder="Validade">
-                    <button class="btn btn-outline-danger btn__delete" (click)="confirmDelete(i, row.nomeVacina)">
+                    <input class="input_vacina" type="search" [(ngModel)]="row.nomeVacina" placeholder="Nome da Vacina" (ngModelChange)="onRowChange()">
+                    <input class="input_lote" type="search" [(ngModel)]="row.lote" placeholder="Lote" (ngModelChange)="onRowChange()">
+                    <input class="input_validade" type="search" [(ngModel)]="row.validade" placeholder="Validade" (ngModelChange)="onRowChange()">
+                    <button class="btn btn-outline-danger btn__delete" (click)="confirmDelete(i, row.nomeVacina)" (ngModelChange)="onRowChange()">
                         <mat-icon>delete</mat-icon>
                     </button>
                 } @else {
