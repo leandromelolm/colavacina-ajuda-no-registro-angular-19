@@ -2,30 +2,46 @@
     <h5>{{ vacina.vacina }}</h5>
 
     <div class="d-grid my-2">
-        <b>Sigla:</b>
+        @if(vacina.vacina_sigla){<b>Sigla:</b>}
         <div>{{ vacina.vacina_sigla }}</div>
-        <b>Dose:</b>
-        <div>{{  vacina.dose }}</div>
+        @if(vacina.dose){<b>Dose:</b>}
+        <div>{{ vacina.dose }}</div>
     </div>
     <div class="d-grid my-2">
-        <b>Faixa:</b>
+        @if(vacina.faixa){<b>Faixa:</b>}
         <div>{{ vacina.faixa }}</div>
     </div>    
     <div class="d-grid my-2">
-        <b>Observação:</b>
+        @if(vacina.observacao){<b>Observação:</b>}
         <div>{{ vacina.observacao }}</div>
     </div>
     <div class="d-grid my-2">
-        <b>Informações:</b>
+        @if(vacina.informacoes_complementares){<b>Informações:</b>}
         <div>{{ vacina.informacoes_complementares }}</div>
     </div>
     <div class="d-grid my-2">
-        <b>Via administração:</b>
+        @if(vacina.via_de_administracao){<b>Via administração:</b>}
         <div>{{ vacina.via_de_administracao }}</div>
     </div>
     <div class="d-grid my-2">
-        <b>Local administração:</b>
+        @if(vacina.local_de_administracao){<b>Local administração:</b>}
         <div>{{ vacina.local_de_administracao }}</div>
+    </div>
+    <div class="d-grid my-2">
+        @if(vacina.indicacao){<b>Indicação:</b>}
+        <div>{{ vacina.indicacao }}</div>
+    </div>
+    <div class="d-grid my-2">
+        @if(vacina.contra_indicacao){<b>Contraindicação:</b>}
+        <div>{{ vacina.contra_indicacao }}</div>
+    </div>
+    <div class="d-grid my-2">
+        @if(vacina.esquema){<b>Esquema:</b>}
+        <div>{{ vacina.esquema }}</div>
+    </div>
+    <div class="d-grid my-2">
+        @if(vacina.conservacao_e_validade){<b>Conservação e validade:</b>}
+        <div>{{ vacina.conservacao_e_validade}}</div>
     </div>
 </div>
 

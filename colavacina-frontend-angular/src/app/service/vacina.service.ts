@@ -19,6 +19,10 @@ export interface VacinaCompleta {
   local_de_administracao: string;
   lote: string;
   validade: string;
+  indicacao: string;
+  contra_indicacao: string;
+  esquema: string;
+  conservacao_e_validade: string;
 }
 
 export interface GrupoVacinas {
