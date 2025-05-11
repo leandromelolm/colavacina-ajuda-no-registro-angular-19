@@ -109,9 +109,13 @@ export class ListaComponent {
     this.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
   }
 
+  toggleMenuHidden(): boolean {
+    return this.menuHidden = !this.menuHidden;
+  }
+
   openBottomSheet(): void {
     const sheetRef = this.bottomSheet.open(BottomSheetComponent, {
-      data: {id: `Lista ID:${this.listaVacinasId}`},
+      data: {id: `Lista Código:${this.listaVacinasId}`},
       panelClass: 'custom-bottom-sheet',
       restoreFocus: false
     });
@@ -144,6 +148,10 @@ export class ListaComponent {
 
   getLetterState(id: string | undefined): LetterState {
     return this.letterStates.find(ls => ls.id === id) || this.letterStates[0];
+  }
+
+  pegarLocalDeVacinacao(id: string | undefined): any {
+    return this.opcoes.find(o => o.id === id) || this.opcoes[0];
   }
 
   onClickLote(text: string) {
@@ -304,7 +312,7 @@ export class ListaComponent {
     if (id.length > 3)
       this.getList(id)
     else {
-      this.toastService.show({ text: 'ID inválido!', type: 'error' });
+      this.toastService.show({ text: 'Código inválido!', type: 'error' });
     }
   } 
 
@@ -343,12 +351,12 @@ export class ListaComponent {
   saveListAlert() {
 
     if (this.txtId === '') {
-      this.toastService.show({ text: 'Preencha o campo ID!', type: 'error' });
+      this.toastService.show({ text: 'Preencha o campo Código!', type: 'error' });
       return;
     }
 
     Swal.fire({
-      title: `Confirma salvar ID ${this.txtId}?`,
+      title: `Confirma salvar Código ${this.txtId}?`,
       text: 'Confirme se deseja salvar as alterações.',
       icon: 'question',
       showCancelButton: true,

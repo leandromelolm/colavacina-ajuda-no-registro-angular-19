@@ -57,10 +57,10 @@
             </div>
         </div>
 
-        <div [ngClass]="{ 'visible-row': showRow, 'hidden-row': !showRow }" (click)="menuHidden = false">        
+        <div [ngClass]="{ 'visible-row': showRow, 'hidden-row': !showRow }" (click)='toggleMenuHidden()'>        
             <div class="div__info">
                 <div class="text-center div__id no_select me-1" *ngIf="listaVacinasId">
-                    ID {{listaVacinasId}}
+                    Código {{listaVacinasId}}
                 </div>
             </div>
         </div>
@@ -124,8 +124,10 @@
                         {{ row.validade | truncate:8 }}
                     </div>
 
-                    <div class="div__select d-none">
-                        <select [(ngModel)]="row.opcaoSelecionada">
+                    <div class="div__select">
+                        <select
+                          [(ngModel)]="row.opcaoSelecionada" 
+                          [title]="pegarLocalDeVacinacao(row.opcaoSelecionada).descricao">
                             <option 
                                 *ngFor="let opcao of opcoes" 
                                 [value]="opcao.id" 
@@ -135,7 +137,7 @@
                         </select>
                     </div>
 
-                    <button class="btn btn-outline-secondary btn__letter me-1 btn__list" 
+                    <button class="btn btn-outline-secondary btn__letter me-1 btn__list d-none" 
                         (click)="toggleLetter(i)"
                         [title]="getLetterState(row.opcaoSelecionada).descricao"
                         [ngClass]="{
@@ -149,7 +151,7 @@
                         {{ getLetterState(row.opcaoSelecionada).nome }}
                     </button>
 
-                    <button class="btn btn__drag btn__list" cdkDragHandle title="Arrastar para mover" arial-label="Arrastar para mover linha">
+                    <button class="btn btn__drag btn__list bg-transparent" cdkDragHandle title="Arrastar para mover" arial-label="Arrastar para mover linha">
                         <mat-icon>drag_indicator</mat-icon>
                     </button>
                 }
