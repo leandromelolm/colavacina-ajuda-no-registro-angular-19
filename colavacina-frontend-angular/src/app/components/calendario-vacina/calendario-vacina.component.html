@@ -17,6 +17,42 @@
 </div>
 
 <div class="button_faixa">
+  <div class="button-container scroll-buttons">
+    <button class="btn"
+      #btnCrianca
+      [ngClass]="faixaSelecionada === 'Criança' ? 'btn__success' : 'btn__secondary'"
+      (click)="filtrarPorGrupoEtario('Criança'); centralizarTagSelecionada(btnCrianca)">
+      Criança
+    </button>
+    <button class="btn"
+      #btnAdolescente
+      [ngClass]="faixaSelecionada === 'Adolescente' ? 'btn__success' : 'btn__secondary'"
+      (click)="filtrarPorGrupoEtario('Adolescente'); centralizarTagSelecionada(btnAdolescente)">
+      Adolescente
+    </button>
+    <button class="btn"
+      #btnAdulto
+      [ngClass]="faixaSelecionada === 'Adulto' ? 'btn__success' : 'btn__secondary'"
+      (click)="filtrarPorGrupoEtario('Adulto'); centralizarTagSelecionada(btnAdulto)">
+      Adulto
+    </button>
+    <button class="btn"
+      #btnIdoso
+      [ngClass]="faixaSelecionada === 'Idoso' ? 'btn__success' : 'btn__secondary'"
+      (click)="filtrarPorGrupoEtario('Idoso'); centralizarTagSelecionada(btnIdoso)">
+      Idoso
+    </button>
+    <button class="btn"
+      #btnGestante
+      [ngClass]="faixaSelecionada === 'Gestante' ? 'btn__success' : 'btn__secondary'"
+      (click)="filtrarPorGrupoEtario('Gestante'); centralizarTagSelecionada(btnGestante)">
+      Gestante
+    </button>
+  </div>
+</div>
+
+
+<!-- <div class="button_faixa">
   <div class="button-container scroll-buttons ">
     <button class="btn" [ngClass]="faixaSelecionada === 'Criança' ? 'btn__success' : 'btn__secondary'" 
     (click)="filtrarPorGrupoEtario('Criança')">Criança
@@ -34,7 +70,7 @@
     (click)="filtrarPorGrupoEtario('Gestante')">Gestante
   </button>
   </div>
-</div>
+</div> -->
 
 <hr>
 

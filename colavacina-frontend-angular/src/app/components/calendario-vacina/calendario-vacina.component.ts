@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, ElementRef, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GrupoVacinas, VacinaCompleta, VacinaService } from '../../service/vacina.service';
 import { DetalhesVacinaDialogComponent } from '../detalhes-vacina-dialog/detalhes-vacina-dialog.component';
@@ -98,6 +98,21 @@ export class CalendarioVacinaComponent {
     // }
   }
 
+  centralizarTagSelecionada(buttonElement: HTMLElement) {
+    const container = buttonElement.parentElement;
+    console.log(buttonElement);    
+    if (container) {
+      const containerWidth = container.clientWidth;
+      const buttonOffsetLeft = buttonElement.offsetLeft;
+      const buttonWidth = buttonElement.offsetWidth;
+  
+      const scrollTo = buttonOffsetLeft - (containerWidth / 2) + (buttonWidth / 2);
+      container.scrollTo({
+        left: scrollTo,
+        behavior: 'smooth'
+      });
+    }
+  }
 
   ordenarPorGrupo(vacinas: any): any {
     return [...vacinas].sort((a, b) => {

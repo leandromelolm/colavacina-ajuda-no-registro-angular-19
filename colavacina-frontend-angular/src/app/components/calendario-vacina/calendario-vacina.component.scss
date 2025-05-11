@@ -29,7 +29,7 @@
 .button-container button {
   margin: 2px;
   border-radius: 22px;
-  height: 48px;
+  height: 36px;
 }
 
 .scroll-buttons {
@@ -38,14 +38,11 @@
   overflow-x: auto;
   padding: 0.5rem 0;
   -webkit-overflow-scrolling: touch;
-
   white-space: nowrap; // impedir quebra de linha
-
-  scrollbar-width: none; // Firefox
+  scrollbar-width: thin;
   &::-webkit-scrollbar {
     display: none; // Chrome, Safari
   }
-
   .btn {
     flex: 0 0 auto; 
     min-width: 100px;
