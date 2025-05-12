@@ -486,4 +486,8 @@ export class ListaComponent {
     this.isHiddenDiv = !this.isHiddenDiv;
   }
 
+  onAddItem = () => { // Arrow Function para preservar o contexto do this
+    this.openBottomSheet();
+  };
+
 }

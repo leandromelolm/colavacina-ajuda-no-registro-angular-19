@@ -25,6 +25,7 @@ import { DetalhesVacinaDialogComponent } from './components/detalhes-vacina-dial
 import { AboutComponent } from './pages/about/about';
 import { VaccinesComponent } from './pages/vaccines/vaccines.component';
 import { SidenavContainerComponent } from './shared/sidenav-container/sidenav-container.component';
+import { FabComponent } from './shared/fab/fab.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SidenavContainerComponent } from './shared/sidenav-container/sidenav-co
     DetalhesVacinaDialogComponent,
     AboutComponent,
     VaccinesComponent,
-    SidenavContainerComponent
+    SidenavContainerComponent,
+    FabComponent
   ],
   imports: [
     BrowserModule,
