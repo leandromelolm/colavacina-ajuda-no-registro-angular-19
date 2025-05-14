@@ -1,3 +1,15 @@
-<button mat-fab color="primary" (click)="onClick()" class="fab">
+<!-- <button mat-fab color="primary" (click)="onClick()" class="fab">
     <mat-icon>{{ icon }}</mat-icon>
-</button>
+</button> -->
+
+<div class="fab-container">
+    <div class="fab-actions" *ngIf="isOpen">
+        <button *ngFor="let action of actions" mat-mini-fab (click)="triggerAction(action)">
+            <mat-icon>{{ action.icon }}</mat-icon>
+        </button>
+    </div>
+
+    <button mat-fab color="primary" (click)="toggleFab()">
+        <mat-icon>{{ isOpen ? 'close' : 'add' }}</mat-icon>
+    </button>
+</div>

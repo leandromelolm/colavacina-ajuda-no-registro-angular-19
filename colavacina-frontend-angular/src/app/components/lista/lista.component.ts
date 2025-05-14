@@ -74,6 +74,11 @@ export class ListaComponent {
   private lastScrollTop = 0;
   private threshold = 5; // sensibilidade no scrool
 
+  fabActions = [
+    { icon: 'edit', callback: () => this.editarItem() },
+    { icon: 'info', callback: () => this.informeCalendarioVacinacao() }
+  ];
+
   constructor(
     private bottomSheet: MatBottomSheet,
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -100,9 +105,9 @@ export class ListaComponent {
     const direction = scrollTop > this.lastScrollTop ? 'down' : 'up';
     if (direction === 'down' && scrollTop - this.lastScrollTop > this.threshold) {
       this.menuHidden = true;
-      console.log(direction)
+      // console.log(direction)
     } else if (direction === 'up' && this.lastScrollTop - scrollTop > this.threshold) {
-      console.log(direction)
+      // console.log(direction)
       this.menuHidden = false;
     }
 
@@ -486,8 +491,16 @@ export class ListaComponent {
     this.isHiddenDiv = !this.isHiddenDiv;
   }
 
-  onAddItem = () => { // Arrow Function para preservar o contexto do this
+  triggerFAB = () => { // Arrow Function para preservar o contexto do this
     this.openBottomSheet();
   };
+
+  editarItem() {
+    this.toggleEditMode();
+  }
+
+  informeCalendarioVacinacao() {
+    this.openBottomSheet();
+  }
 
 }
