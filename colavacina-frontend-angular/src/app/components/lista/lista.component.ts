@@ -51,8 +51,8 @@ export class ListaComponent {
     { id: '2', nome: 'D D', descricao: 'Deltoide Direito' },
     { id: '3', nome: 'F D', descricao: 'Face Externa Superior Direito' },
     { id: '4', nome: 'F E', descricao: 'Face Externa Superior Esquerdo' },
-    { id: '5', nome: 'V E', descricao: 'Vasto Lateral Esquerdo' },
-    { id: '6', nome: 'V D', descricao: 'Vasto Lateral Direito' },
+    { id: '5', nome: 'V E', descricao: 'Vasto Lateral da Coxa Esquerdo' },
+    { id: '6', nome: 'V D', descricao: 'Vasto Lateral da Coxa Direito' },
   ];
 
   // letterStates: string[] = ['-', 'BD', 'BE', 'CD', 'CE'];
@@ -158,7 +158,7 @@ export class ListaComponent {
   pegarLocalDeVacinacao(id: string | undefined): any {
     return this.opcoes.find(o => o.id === id) || this.opcoes[0];
   }
-
+  
   onClickLote(text: string) {
     this.copyToClipboard(text);
     this.toggleSelectedLote(text);
