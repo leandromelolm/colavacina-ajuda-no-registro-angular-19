@@ -70,6 +70,11 @@ git  | Comando
 pull de branch diferente   | `git pull origin main`
 logs resumidos             | `git log --oneline`
 _                          | `-`
+_                          | `-`
+listar os projetos no firebase                         | `firebase projects:list`
+alterar para outro projeto existente                   | `firebase use --add PROJECT_ID`
+_                          | `-`
+_                          | `-`
 
 
 
