@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 export interface FabAction {
   icon: string;
+  title: string;
   callback: () => void;
 }
 
@@ -14,6 +15,7 @@ export interface FabAction {
 export class FabComponent {
 
   @Input() icon: string = 'info';
+  @Input() title: string = 'titulo';
   @Input() action: () => void = () => {};
   @Input() actions: FabAction[] = [];
   isOpen = false;

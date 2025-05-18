@@ -21,7 +21,7 @@
                 <mat-icon [ngClass]="{ 'red-icon': isChanged, 'green-icon': !isChanged }">upload</mat-icon>
             </button>
             <button class="btn btn-outline-danger me-1 btn__list" (click)="clearAllChecks()" title="Limpar seleção">
-                <mat-icon>clear</mat-icon>
+                <mat-icon>deselect</mat-icon>
             </button>
             <button type="button" class="btn btn-outline-info me-1 btn__list" (click)="openBottomSheet()" title="Informações do calendário de vacina">
                 <mat-icon>info</mat-icon>
@@ -60,8 +60,11 @@
             </div>
         </div>
 
-        <div [ngClass]="{ 'visible-row': showRow, 'hidden-row': !showRow }" (click)='toggleMenuHidden()'>        
+        <div [ngClass]="{ 'visible-row': showRow, 'hidden-row': !showRow }" (click)='toggleMenuHidden()'>
             <div class="div__info">
+                @if(showFloatingButton) {
+                    <mat-icon class="bg-white me-1 rounded-5">{{ menuHidden ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+                }
                 <div class="text-center div__id no_select me-1" *ngIf="listaVacinasId">
                     Código {{listaVacinasId}}
                 </div>

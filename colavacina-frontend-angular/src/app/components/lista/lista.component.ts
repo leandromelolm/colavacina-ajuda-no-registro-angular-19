@@ -69,14 +69,16 @@ export class ListaComponent {
   isHiddenDiv: boolean = true;
   isBrowser: boolean = false;
   showFloatingButton: boolean = false;
+  keyArrow: string = 'keyboard_arrow_down';
 
   menuHidden = false;
   private lastScrollTop = 0;
-  private threshold = 5; // sensibilidade no scrool
+  private threshold = 15; // sensibilidade no scrool
 
   fabActions = [
-    { icon: 'edit', callback: () => this.editarItem() },
-    { icon: 'info', callback: () => this.informeCalendarioVacinacao() }
+    { icon: 'deselect', title: 'Desmarcar itens selecionados', callback: () => this.limparSelecaoItem() },
+    { icon: 'edit', title: 'Editar lista', callback: () => this.editarItem() },
+    { icon: 'info', title: 'Calendário de vacinação', callback: () => this.informeCalendarioVacinacao() }
   ];
 
   constructor(
@@ -98,10 +100,10 @@ export class ListaComponent {
   onWindowScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
 
-    // 1) mostrar ou esconder botão flutuante
+    // mostrar ou esconder botão flutuante
     this.showFloatingButton = scrollTop > 30;
 
-    // 2) detectar direção para esconder/reexibir o menu
+    // detectar direção para esconder/reexibir o menu
     const direction = scrollTop > this.lastScrollTop ? 'down' : 'up';
     if (direction === 'down' && scrollTop - this.lastScrollTop > this.threshold) {
       this.menuHidden = true;
@@ -494,6 +496,10 @@ export class ListaComponent {
   triggerFAB = () => { // Arrow Function para preservar o contexto do this
     this.openBottomSheet();
   };
+
+  limparSelecaoItem() {
+    this.clearAllChecks();
+  }
 
   editarItem() {
     this.toggleEditMode();
