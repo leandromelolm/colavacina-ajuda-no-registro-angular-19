@@ -48,11 +48,11 @@ export class ListaComponent {
   opcoes = [
     { id: '0', nome: '', descricao: '' }, // tooltip
     { id: '1', nome: 'D E', descricao: 'Deltoide Esquerdo' },
-    { id: '2', nome: 'D D', descricao: 'Deltoide Direito' },
-    { id: '3', nome: 'F D', descricao: 'Face Externa Superior Direito' },
     { id: '4', nome: 'F E', descricao: 'Face Externa Superior Esquerdo' },
     { id: '5', nome: 'V E', descricao: 'Vasto Lateral da Coxa Esquerdo' },
-    { id: '6', nome: 'V D', descricao: 'Vasto Lateral da Coxa Direito' },
+    { id: '2', nome: 'D D', descricao: 'Deltoide Direito' },
+    { id: '3', nome: 'F D', descricao: 'Face Externa Superior Direito' },
+    { id: '6', nome: 'V D', descricao: 'Vasto Lateral da Coxa Direito' }
   ];
 
   // letterStates: string[] = ['-', 'BD', 'BE', 'CD', 'CE'];
@@ -477,7 +477,7 @@ export class ListaComponent {
       `width=${windowWidth}`,
       `height=${screenHeight}`,
       'top=0',  // distância do topo da tela
-      `left=${left}`,
+      `left=${screenWidth}`, // left
       'resizable=yes',  // permite redimensionar
       'scrollbars=yes', // habilita barras de rolagem
       'toolbar=no',     // esconde barra de ferramentas
