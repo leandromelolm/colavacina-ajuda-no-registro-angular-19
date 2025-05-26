@@ -124,7 +124,16 @@
                 <td>{{ vaccine.vacina }}</td>
                 <td>{{ vaccine.dose || 'N/A' }}</td>
                 <td>{{ vaccine.faixa }}</td>
-                <td>{{ vaccine.observacao }}</td>
+                <div *ngIf="vaccine.observacao && vaccine.observacao.startsWith('[')">
+                  <ul>
+                      <li *ngFor="let item of parseJsonArray(vaccine.observacao)">
+                          {{ item }}
+                      </li>
+                  </ul>
+              </div>
+              <div *ngIf="!vaccine.observacao || !vaccine.observacao.startsWith('[')">
+                  {{ vaccine.observacao }}
+              </div>
                 <td>{{ vaccine.informacoes_complementares }}</td>
             </tr>
         </tbody>

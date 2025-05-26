@@ -12,4 +12,18 @@ export class DetalhesVacinaDialogComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public vacina: VacinaCompleta) {}
 
+  parseJsonArray(jsonString: string): string[] {
+    try {
+      const result = JSON.parse(jsonString);
+      if (Array.isArray(result)) {
+        return result;
+      } else {
+        return [jsonString];
+      }
+    } catch (e) {
+      console.error("Erro ao analisar JSON:", e);
+      return [jsonString];
+    }
+  }
+
 }

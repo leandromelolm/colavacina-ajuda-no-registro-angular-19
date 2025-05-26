@@ -134,5 +134,19 @@ export class CalendarioVacinaComponent {
     });
   }
 
+  parseJsonArray(jsonString: string): string[] {
+    try {
+      const result = JSON.parse(jsonString);
+      if (Array.isArray(result)) {
+        return result;
+      } else {
+        return [jsonString];
+      }
+    } catch (e) {
+      console.error("Erro ao analisar JSON:", e);
+      return [jsonString];
+    }
+  }
+
 }
 

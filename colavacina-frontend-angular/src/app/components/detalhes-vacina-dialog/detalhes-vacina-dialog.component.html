@@ -13,7 +13,17 @@
     </div>    
     <div class="d-grid my-2">
         @if(vacina.observacao){<b>Observação:</b>}
-        <div>{{ vacina.observacao }}</div>
+        <div>
+            @if(vacina.observacao && vacina.observacao.startsWith('[')){
+                <ul>
+                    @for(item of parseJsonArray(vacina.observacao); track item){
+                        <li>{{ item }}</li>
+                    }
+                </ul>
+            }@else {
+                {{ vacina.observacao }}
+            }
+        </div>
     </div>
     <div class="d-grid my-2">
         @if(vacina.informacoes_complementares){<b>Informações:</b>}
