@@ -200,6 +200,8 @@ export class ListaComponent {
   }
 
   clearAllChecks() {
+    if(this.rows.length === 0)
+      return this.toastService.show({ text: 'Carregue a lista antes de limpar', type: 'warning' });
     this.rows.forEach(row => row.checked = false);
     localStorage.setItem('planilhaData', JSON.stringify(this.rows));
     this.resetTodosSelects();
@@ -210,7 +212,8 @@ export class ListaComponent {
   updateList() {
     this.listaVacinasId = localStorage.getItem('listaVacinasId') || '';
     const saved = localStorage.getItem('planilhaData');
-    // console.log(saved);
+    if (!saved || saved === '[]')
+      return this.toastService.show({ text: 'Lista local vazia!', type: 'warning' });
 
     const rawRows = saved ? JSON.parse(saved) : [];
 
