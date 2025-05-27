@@ -82,7 +82,7 @@
           *ngFor="let row of rows; let i = index" 
           cdkDrag
           cdkDragLockAxis="y"
-          [cdkDragDisabled]="isEditMode">
+          [cdkDragDisabled]="!isEditMode">
             <div class="div__itens">
                 <button class="btn btn-link btn__check_box d-none" (click)="toggleCheck(i)">
                     <mat-icon>{{ row.checked ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
@@ -156,11 +156,15 @@
                     >
                         {{ getLetterState(row.opcaoSelecionada).nome }}
                     </button>
-
-                    <button class="btn btn__drag btn__list bg-transparent" cdkDragHandle title="Arrastar para mover" arial-label="Arrastar para mover linha">
-                        <mat-icon>drag_indicator</mat-icon>
-                    </button>
                 }
+                <button
+                     class="btn btn__drag btn__list bg-transparent"
+                     cdkDragHandle title="Arrastar para mover"
+                     arial-label="Arrastar para mover linha"
+                     [ngClass]="{'d-none': !isEditMode}"
+                     >
+                        <mat-icon>drag_indicator</mat-icon>
+                </button>
             </div>
         </div>
     </div>
