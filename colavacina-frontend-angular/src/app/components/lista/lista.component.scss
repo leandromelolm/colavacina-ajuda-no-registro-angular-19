@@ -97,12 +97,17 @@ app-row {
     color: #d4edda;
 }
 
+input {
+    height: 27px;
+    border: 1px solid #fff6e7 !important;
+}
+
 .input__size-row {
     width: 60px;
 }
 
 .input__id {
-    height: clamp(36px, 6vw, 48px);    
+    height: clamp(32px, 6vw, 36px);    
     width: clamp(90px, 6vw, 120px);
 }
 
@@ -164,6 +169,8 @@ app-row {
     justify-content: space-evenly;
     align-items: center;
     cursor: default;
+    height: 28px;
+    border-bottom: 1px solid lightgrey;
 }
 
 .btn__check_box {
@@ -200,7 +207,10 @@ app-row {
 
 .div__text {
     align-content: center;
-    min-width:  10%;
+    min-width:  14%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .curso_copy {
@@ -209,7 +219,7 @@ app-row {
 
 select {
     border-radius: 10px;
-    height: 32px;
+    height: 26px;
     border: lightgrey solid 1px;
     background-color: #FAF9FD;
 }
@@ -220,6 +230,7 @@ select {
 
 .btn__delete {
     border: none;
+    padding: 0px;
 }
 
 .btn__letter {

@@ -17,8 +17,8 @@ body {
 .btn__list {
     background-color: #f0f0f5;
     border-radius: 15px !important;
-    height: clamp(36px, 6vw, 48px);
-    width: clamp(36px, 6vw, 48px);
+    height: clamp(32px, 6vw, 36px);
+    width: clamp(32px, 6vw, 36px);
     padding: 0px !important;
 }
 
@@ -34,8 +34,8 @@ input {
     padding: 0 0 0 5px;
     margin: 1px 0 1px 0;
     border: 1px solid transparent;
-    height: clamp(36px, 6vw, 48px);
-    width: clamp(36px, 6vw, 48px);
+    height: clamp(32px, 6vw, 36px);
+    width: clamp(32px, 6vw, 36px);
 }
 
 .btn__confirm {
