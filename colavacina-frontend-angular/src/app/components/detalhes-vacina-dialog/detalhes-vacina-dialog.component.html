@@ -12,15 +12,21 @@
         <div>{{ vacina.faixa }}</div>
     </div>    
     <div class="d-grid my-2">
-        @if(vacina.observacao){<b>Observação:</b>}
+        @if(vacina.observacao) {<b>Observação:</b>}
         <div>
-            @if(vacina.observacao && vacina.observacao.startsWith('[')){
+            @if(vacina.observacao && vacina.observacao.startsWith('{')) {
+                <ul>
+                    @for(item of jsonParse(vacina.observacao) | keyvalue; track item) {
+                        <li>{{ item.key }}: {{ item.value }}</li>
+                    }
+                </ul>
+            } @else if(vacina.observacao && vacina.observacao.startsWith('[')){
                 <ul>
                     @for(item of parseJsonArray(vacina.observacao); track item){
                         <li>{{ item }}</li>
                     }
                 </ul>
-            }@else {
+            } @else {
                 {{ vacina.observacao }}
             }
         </div>
