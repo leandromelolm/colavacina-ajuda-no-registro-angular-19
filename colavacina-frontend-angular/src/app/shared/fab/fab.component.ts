@@ -15,7 +15,7 @@ export interface FabAction {
 export class FabComponent {
 
   @Input() icon: string = 'info';
-  @Input() title: string = 'titulo';
+  @Input() title: string = 'Menu';
   @Input() action: () => void = () => {};
   @Input() actions: FabAction[] = [];
   isOpen = false;
