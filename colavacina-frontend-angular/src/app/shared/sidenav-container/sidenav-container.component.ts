@@ -1,10 +1,7 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { isPlatformBrowser } from '@angular/common';
 import { Component, ElementRef, HostListener, Inject, Input, PLATFORM_ID, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { log } from 'console';
-import { fromEvent, throttleTime } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav-container',
@@ -57,7 +54,7 @@ export class SidenavContainerComponent {
   onWindowScroll() {
     if (this.isBrowser) {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
-      this.showFloatingButton = this.isSmallScreen && scrollTop > 60;
+      this.showFloatingButton = this.isSmallScreen && scrollTop > 180;
     }
   }
 
