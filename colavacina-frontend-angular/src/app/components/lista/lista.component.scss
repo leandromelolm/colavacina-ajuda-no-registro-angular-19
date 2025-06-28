@@ -169,7 +169,8 @@ input {
     justify-content: space-evenly;
     align-items: center;
     cursor: default;
-    height: 28px;
+    // height: 28px;
+    min-height: 28px;
     border-bottom: 1px solid lightgrey;
 }
 
