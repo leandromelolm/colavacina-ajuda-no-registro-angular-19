@@ -13,18 +13,30 @@
     </mat-sidenav>
 
     <mat-sidenav-content #contentContainer>
-        <mat-toolbar color="primary" 
-          [ngClass]="{ 'menu__fixed': isSmallScreen && showFloatingButton }" >
+        <mat-toolbar color="primary">
+            <!-- [ngClass]="{ 'menu__fixed': isSmallScreen && showFloatingButton }" -->
             <button
               class="btn menu__button"
               (click)="sidenav.toggle()" >
                 <mat-icon class="mat-icon__menu">menu</mat-icon>
             </button>
-            <span class="sidenav_titulo"
-                [ngClass]="{ 'd-none': isSmallScreen && showFloatingButton }" >
+            <span class="sidenav_titulo">
                 {{title}}
             </span>
         </mat-toolbar>
+
+        @if(isSmallScreen && showFloatingButton) {
+            <mat-toolbar color="primary" class="menu__fixed">
+                <button
+                class="btn menu__button"
+                (click)="sidenav.toggle()" >
+                    <mat-icon class="mat-icon__menu">menu</mat-icon>
+                </button>
+                <span class="sidenav_titulo">
+                    {{title}}
+                </span>
+            </mat-toolbar>
+        }
 
         <!-- Projeção do conteúdo <router-outlet />-->
         <ng-content></ng-content>
