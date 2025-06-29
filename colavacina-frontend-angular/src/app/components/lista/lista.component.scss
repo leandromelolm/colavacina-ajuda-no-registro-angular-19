@@ -125,6 +125,8 @@ input {
 
 .div_vacina {
     width: 40%;
+    
+    padding: 3px 2px;
 }
 
 .div_lote {
@@ -185,25 +187,28 @@ input {
 }
 
 .div_vacina.selecionado {
-    background-color: #abc7ff;
+    background-color: #0d6efd;
+    color: #fff !important;
     border-radius: 8px;
-    padding: 3px 4px;
     transition: background-color 0.3s ease;
+    padding: 3px 2px;
 }
 
 .selecionado-lote {
     background-color:#DCDCDC;
     border-radius: 8px;
-    padding: 3px 4px;
+    padding: 3px 2px;
     transition: background-color 0.3s ease;
 }
 
 .copied {
-    background-color: #7edf77;
+    // background-color: #7edf77;
+    background-color: #198754;
+    color: #dee2e6;
     border-radius: 8px;
     transition: background-color 0.3s ease;
     animation: pulseCopy 0.4s ease;
-    padding: 4px 4px;
+    padding: 3px 2px;
 }
 
 .div__text {
