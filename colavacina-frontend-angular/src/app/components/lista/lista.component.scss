@@ -204,7 +204,7 @@ input {
 .copied {
     // background-color: #7edf77;
     background-color: #198754;
-    color: #dee2e6;
+    color: #dee2e6 !important;
     border-radius: 8px;
     transition: background-color 0.3s ease;
     animation: pulseCopy 0.4s ease;

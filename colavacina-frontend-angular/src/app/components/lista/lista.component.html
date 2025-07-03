@@ -123,7 +123,7 @@
                     <div
                         class="text-body-secondary div__text div_validade curso_copy"
                         (click)="copyToClipboard(row.validade)"
-                        [ngClass]="{ 'copied': copiedValue === row.validade }"
+                        [ngClass]="{ 'copied': copiedValue === row.validade && !!row.validade }"
                         [title]="row.validade"
                     >
                         <!-- {{ row.validade | slice:0:8 }} -->
