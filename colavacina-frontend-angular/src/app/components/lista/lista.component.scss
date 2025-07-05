@@ -130,7 +130,7 @@ input {
 }
 
 .div_lote {
-    width: 40%;
+    width: 35%;
 }
 
 .div_validade {
@@ -339,3 +339,12 @@ mat-spinner {
     align-items: center;
     padding: 4px 0px;
 }
+
+.text__area {
+    border-radius: 5px;
+    height: 24px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+    width: 40px;
+    margin-right: 10px;
+  }

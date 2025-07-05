@@ -130,7 +130,11 @@
                         {{ row.validade | truncate:8 }}
                     </div>
 
-                    <div class="div__select">
+                    <div class="d-block">
+                        <textarea class="text__area" name="" id="textArea" cols="3" rows="1">{{ row.opcaoSelecionada }}</textarea>
+                    </div>
+
+                    <div class="div__select  d-none">
                         <select
                           [(ngModel)]="row.opcaoSelecionada" 
                           [title]="pegarLocalDeVacinacao(row.opcaoSelecionada).descricao">
@@ -143,7 +147,7 @@
                         </select>
                     </div>
 
-                    <button class="btn btn-outline-secondary btn__letter me-1 btn__list d-none" 
+                    <button class="btn btn-outline-secondary btn__letter me-1 btn__list  d-none" 
                         (click)="toggleLetter(i)"
                         [title]="getLetterState(row.opcaoSelecionada).descricao"
                         [ngClass]="{

@@ -203,10 +203,17 @@ export class ListaComponent {
     if(this.rows.length === 0)
       return this.toastService.show({ text: 'Carregue a lista antes de limpar', type: 'warning' });
     this.rows.forEach(row => row.checked = false);
+    this.rows.forEach(row => row.opcaoSelecionada = "");
     localStorage.setItem('planilhaData', JSON.stringify(this.rows));
     this.resetTodosSelects();
     this.clearAllSelelectedVacina();
     this.clearAllSelectedLote();
+    this.limparTodasTextareas();
+  }
+
+  limparTodasTextareas() {
+    const textareas = document.querySelectorAll('textarea');
+    textareas.forEach(t => t.value = '');
   }
 
   updateList() {
