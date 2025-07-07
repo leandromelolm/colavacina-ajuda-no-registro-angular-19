@@ -157,6 +157,10 @@ export class ListaComponent {
     return this.letterStates.find(ls => ls.id === id) || this.letterStates[0];
   }
 
+  onRowChangeTextArea() {
+    localStorage.setItem('planilhaData', JSON.stringify(this.rows));
+  }
+
   pegarLocalDeVacinacao(id: string | undefined): any {
     return this.opcoes.find(o => o.id === id) || this.opcoes[0];
   }

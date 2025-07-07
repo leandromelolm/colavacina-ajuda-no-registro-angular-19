@@ -131,7 +131,11 @@
                     </div>
 
                     <div class="d-block">
-                        <textarea class="text__area" name="" id="textArea" cols="3" rows="1">{{ row.opcaoSelecionada }}</textarea>
+                        <textarea class="text__area" name="" id="textArea" cols="3" rows="1"
+                        [(ngModel)]="row.opcaoSelecionada"
+                        (ngModelChange)="onRowChangeTextArea()">
+                            {{ row.opcaoSelecionada }}
+                        </textarea>
                     </div>
 
                     <div class="div__select  d-none">
