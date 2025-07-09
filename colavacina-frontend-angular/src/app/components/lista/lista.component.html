@@ -20,8 +20,8 @@
             <button class="btn btn-outline-primary me-1 btn__list btn__upload" (click)="saveListAlert()" title="Salvar lista">
                 <mat-icon [ngClass]="{ 'red-icon': isChanged, 'green-icon': !isChanged }">upload</mat-icon>
             </button>
-            <button class="btn btn-outline-danger me-1 btn__list" (click)="clearAllChecks()" title="Limpar seleção">
-                <mat-icon>deselect</mat-icon>
+            <button class="btn btn-outline-danger me-1 btn__list" (click)="clearAllChecks()" title="Desmarcar itens e limpar campos">
+                <mat-icon>close</mat-icon>
             </button>
             <button type="button" class="btn btn-outline-info me-1 btn__list" (click)="openBottomSheet()" title="Informações do calendário de vacina">
                 <mat-icon>info</mat-icon>

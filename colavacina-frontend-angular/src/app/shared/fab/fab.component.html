@@ -2,8 +2,8 @@
     <mat-icon>{{ icon }}</mat-icon>
 </button> -->
 
-<div class="fab-container">
-    <div class="fab-actions" *ngIf="isOpen">
+<div class="fab-container" [ngClass]="flexDirection">
+    <div class="fab-actions" [ngClass]="flexDirection" *ngIf="isOpen">
         <button *ngFor="let action of actions" mat-mini-fab (click)="triggerAction(action)" [title]="action.title">
             <mat-icon>{{ action.icon }}</mat-icon>
         </button>

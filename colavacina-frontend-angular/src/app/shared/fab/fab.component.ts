@@ -19,6 +19,11 @@ export class FabComponent {
   @Input() action: () => void = () => {};
   @Input() actions: FabAction[] = [];
   isOpen = false;
+  flexDirection: string = 'flex-direction-row';
+
+  ngOnInit() {
+    this.flexDirection = localStorage.getItem('menu-flex-direction') || 'flex-direction-row';
+  }
 
   onClick() {
     this.action();
@@ -30,7 +35,12 @@ export class FabComponent {
 
   triggerAction(action: FabAction) {
     action.callback();
-    // this.isOpen = false;
+    console.log(action)
+    
+    if (action.title == 'Rotacionar menu') {
+      this.flexDirection = localStorage.getItem('menu-flex-direction') || 'flex-direction-row';
+      this.isOpen = false;
+    }
   }
 
 }

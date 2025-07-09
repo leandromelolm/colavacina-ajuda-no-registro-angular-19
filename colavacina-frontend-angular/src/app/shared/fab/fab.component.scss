@@ -10,16 +10,22 @@
     bottom: 16px;
     right: 16px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     gap: 10px;
     z-index: 9999;
   
     .fab-actions {
       display: flex;
-      flex-direction: column;
       gap: 10px;
     }
+}
+
+.flex-direction-row {
+  flex-direction: row;
+}
+
+.flex-direction-column {
+  flex-direction: column;
 }
 
 .btn__fab {

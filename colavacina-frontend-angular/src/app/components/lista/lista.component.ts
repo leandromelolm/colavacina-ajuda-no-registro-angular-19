@@ -76,9 +76,10 @@ export class ListaComponent {
   private threshold = 15; // sensibilidade no scrool
 
   fabActions = [
-    { icon: 'deselect', title: 'Desmarcar itens selecionados', callback: () => this.limparSelecaoItem() },
+    { icon: 'close', title: 'Desmarcar itens e limpar campos', callback: () => this.limparSelecaoItem() },
     { icon: 'edit', title: 'Editar lista', callback: () => this.editarItem() },
-    { icon: 'info', title: 'Calendário de vacinação', callback: () => this.informeCalendarioVacinacao() }
+    { icon: 'info', title: 'Calendário de vacinação', callback: () => this.informeCalendarioVacinacao() },
+    { icon: 'screen_rotation_alt', title: 'Rotacionar menu', callback: () => this.rotacionarMenu()}
   ];
 
   constructor(
@@ -521,6 +522,13 @@ export class ListaComponent {
 
   informeCalendarioVacinacao() {
     this.openBottomSheet();
+  }
+
+  rotacionarMenu() {
+    if(localStorage.getItem('menu-flex-direction') === "flex-direction-row")
+      localStorage.setItem('menu-flex-direction', 'flex-direction-column')
+    else
+      localStorage.setItem('menu-flex-direction', 'flex-direction-row')
   }
 
 }
