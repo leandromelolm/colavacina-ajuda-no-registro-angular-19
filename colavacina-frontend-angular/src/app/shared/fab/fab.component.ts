@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, Input, PLATFORM_ID } from '@angular/core';
 
 export interface FabAction {
   icon: string;
@@ -21,8 +22,13 @@ export class FabComponent {
   isOpen = false;
   flexDirection: string = 'flex-direction-row';
 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
   ngOnInit() {
-    this.flexDirection = localStorage.getItem('menu-flex-direction') || 'flex-direction-row';
+    if (isPlatformBrowser(this.platformId)) {
+      this.flexDirection = localStorage.getItem('menu-flex-direction') || 'flex-direction-row';
+    }
+    
   }
 
   onClick() {
