@@ -411,6 +411,8 @@ export class ListaComponent {
       if (res.success) {
         this.toastService.show({ text: res.message, type: 'success' });
         this.isChanged = false;
+        this.listaVacinasId = data.id;
+        localStorage.setItem('listaVacinasId', data.id);
         Swal.fire('Salvo!', res.message, 'success');
       } else {
         this.toastService.show({ text: "Falha ao salvar. mensagem de erro", type: 'error' });
