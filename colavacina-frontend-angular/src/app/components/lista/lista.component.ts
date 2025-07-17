@@ -338,45 +338,46 @@ export class ListaComponent {
     }
   } 
 
-  async getList(id: string) {    
-
+  async getList(id: string) {
     const url = `https://script.google.com/macros/s/${environment.idSheetLista}/exec?action=list&id=${id}`;
     this.isLoading = true;
     try {
       const response = await fetch(url);
       const data = await response.json();
-      localStorage.setItem('planilhaData', JSON.stringify(data.content.vacinas));
-      localStorage.setItem('listaVacinasId', data.message);
-      this.updateList()
-      this.isLoading = false;
-      this.isChanged = false;
-      console.log('Resposta:', data.content);
-      this.toastService.show({ text: 'Itens baixados com sucesso!', type: 'success' });
+      if(data.content.foundId) {
+        localStorage.setItem('planilhaData', JSON.stringify(data.content.vacinas));
+        localStorage.setItem('listaVacinasId', data.message);
+        console.log("Id de lista encontrada: "+data.content.foundId);
+        this.updateList();
+        this.isLoading = false;
+        this.isChanged = false;
+        console.log('Resposta:', data.content);
+        this.toastService.show({ text: 'Itens baixados com sucesso!', type: 'success' });
+      } else {
+        this.isLoading = false;
+        this.toastService.show({ text: `Nenhuma lista com esse código! Codigo ${id}`, type: 'error' });
+      }
     } catch (error) {
       this.isLoading = false;
+      this.toastService.show({ text: `Nenhuma lista com esse código! Codigo ${id}`, type: 'error' });
     }
   }
 
   async saveList() {
-
     const lista = localStorage.getItem('planilhaData');
-
     const data = {
       lista: lista,
       id: this.txtId,
       action: 'saveList'
     }
-
     this.send(data);
   }
 
   saveListAlert() {
-
     if (this.txtId === '') {
       this.toastService.show({ text: 'Preencha o campo Código!', type: 'error' });
       return;
     }
-
     Swal.fire({
       title: `Confirma salvar Código ${this.txtId}?`,
       text: 'Confirme se deseja salvar as alterações.',

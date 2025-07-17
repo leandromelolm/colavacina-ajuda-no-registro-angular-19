@@ -9,7 +9,7 @@
         'hidden-toolbar': menuHidden
       }">
         <div class="scrollx__buttons">
-            <input class="input__id ms-1 me-1" type="search" [(ngModel)]="txtId" placeholder="Código" title="Inserir código da lista">
+            <input class="input__id ms-1 me-1" type="search" [(ngModel)]="txtId" placeholder="Código" title="Inserir código da lista" (keydown.enter)="downloadList(txtId)">
             <button class="btn btn-outline-primary me-1 btn__list" (click)="downloadList(txtId)" title="Baixar lista">
                 @if(!isLoading) {
                     <mat-icon>download</mat-icon>
